@@ -1,0 +1,109 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = 'arfi_settings/version.py'
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/README.md",
+    "/CHANGELOG.md",
+    "/Makefile",
+    "/arfi_settings",
+    "/tests",
+]
+
+[project]
+# PEP 621 project metadata
+# See https://www.python.org/dev/peps/pep-0621/
+name = "arfi-settings"
+description = "Flexible application settings management using pydantic."
+authors = [
+    {name = "Artur Filin", email = "filartur@yandex.ru"},
+]
+dynamic = ["version"]
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "pydantic>=2.3.0",
+    "python-dotenv>=0.21.0",
+]
+
+readme = "README.md"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Framework :: Pydantic",
+    "Framework :: Pydantic :: 2",
+]
+
+[project.urls]
+Homepage = "https://github.com/py-art/arfi-settings"
+Repository = "https://github.com/py-art/arfi-settings"
+
+[project.optional-dependencies]
+yaml = ["pyyaml>=6.0.1"]
+toml = ["tomli>=2.0.1"]
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "pre-commit>=2.21.0",
+    "ruff>=0.3.3",
+]
+testing = [
+    "coverage[toml]",
+    "pytest",
+    "pytest-mock",
+
+]
+neovim = [
+    "pynvim>=0.5.0",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+
+[tool.ruff.lint.isort]
+known-first-party = ['arfi_settings', 'tests']
+combine-as-imports = true
+split-on-trailing-comma = true
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false
+
+[tool.ruff.lint.per-file-ignores]
+"arfi_settings/__init__.py" = ["F401"]
+
+[tool.black]
+line-length=120
+preview = true
+
+[tool.pytest.ini_options]
+testpaths = "tests"
+xfail_strict = true
+filterwarnings = [
+    "error",
+    "ignore::Warning",
+]
+[tool.coverage.run]
+source = ['arfi_settings']
+branch = true
+context = '${CONTEXT}'
+
+[tool.coverage.report]
+precision = 2
+exclude_lines = [
+    'pragma: no cover',
+    'raise NotImplementedError',
+    'raise NotImplemented',
+    'if TYPE_CHECKING:',
+    '@overload',
+]
+
+[tool.coverage.paths]
+source = [
+    'arfi_settings/',
+]
