@@ -17,6 +17,7 @@ Required: Python >= 3.11. Earlier versions of Python have not been tested.
     - [Reading order of settings](#reading-order-of-settings)
     - [File `pyproject.toml`](#file-pyprojecttoml)
   - [A Simple Example](#a-simple-example)
+  - [Roadmap](#roadmap)
 <!--toc:end-->
 
 ## Installation
