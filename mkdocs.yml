@@ -1,14 +1,15 @@
 site_name: ArFiSettings
 site_url: https://py-art.github.io/arfi-settings
 repo_url: https://github.com/py-art/arfi-settings
-# edit_uri: blob/main/docs
+edit_uri: blob/main/docs
 
-# docs_dir: docs/
+docs_dir: docs/
 exclude_docs: overrides/
 
 theme:
   name: material
   custom_dir: docs/overrides
+  language: ru
   features:
     - content.action.edit
     - content.code.copy
@@ -21,14 +22,16 @@ theme:
     - navigation.tabs.sticky
   palette:
     - media: '(prefers-color-scheme: light)'
-      scheme: default
+      # scheme: default
+      scheme: slate
       primary: teal
       accent: amber
       toggle:
         icon: material/lightbulb
         name: Switch to dark mode
     - media: '(prefers-color-scheme: dark)'
-      scheme: slate
+      # scheme: slate
+      scheme: default
       primary: teal
       accent: amber
       toggle:
@@ -38,7 +41,11 @@ theme:
 nav:
   - ArFiSettings:
     - Introduction: index.md
-    - installation.md
+    - Why and what's next: about/why.md
+    - Installation: about/installation.md
+  - Usage:
+    - usage/config.md
+    - usage/pyproject.md
   - Changelog: changelog.md
 
 plugins:
@@ -46,17 +53,18 @@ plugins:
   - i18n:
       docs_structure: folder
       languages:
-        - locale: en
-          name: English
-          build: true
-          extra:
-            missing_translation: 'This page has not yet been translated.'
         - locale: ru
           default: true
           name: Russian
           build: true
           nav_translations:
             Introduction: Введение
+            Why and what's next: Почему, зачем и что дальше
+            Installation: Установка
+            Usage: Применение
+        - locale: en
+          name: English
+          build: true
 
 markdown_extensions:
   - abbr
@@ -64,8 +72,6 @@ markdown_extensions:
   - pymdownx.snippets
 
 extra:
-  announcement: 'This page has not yet been translated into English, therefore it is displayed in Russian.'
-  missing_translation: 'This page has not yet been translated.'
   analytics:
     provider: google
     property: G-RP4PM5PGLN
