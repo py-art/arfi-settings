@@ -80,6 +80,11 @@ tc:
 tvc:
 	clear && pytest -vvs -m current
 
+.PHONY: docs  ## Run docs http://127.0.0.1:8008
+docs: .pdm
+	pdm run mkdocs serve -a 127.0.0.1:8008
+
+
 .PHONY: help  ## Display this message
 help:
 	@grep -E \
