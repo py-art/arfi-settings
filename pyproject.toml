@@ -14,6 +14,12 @@ include = [
     "/tests",
 ]
 
+[tool.hatch.envs.doc]
+# for building docs
+dependencies = [
+    "mkdocs-material>=9.2.5"
+]
+
 [project]
 # PEP 621 project metadata
 # See https://www.python.org/dev/peps/pep-0621/
@@ -48,6 +54,11 @@ yaml = ["pyyaml>=6.0.1"]
 toml = ["tomli>=2.0.1"]
 
 [tool.pdm.dev-dependencies]
+docs = [
+  "mkdocs",
+  "mkdocs-material",
+  "mkdocs-static-i18n[material]",
+]
 dev = [
     "pre-commit>=2.21.0",
     "ruff>=0.3.3",
