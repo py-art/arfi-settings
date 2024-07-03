@@ -21,22 +21,24 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
   palette:
-    - media: '(prefers-color-scheme: light)'
-      # scheme: default
-      scheme: slate
-      primary: teal
-      accent: amber
-      toggle:
-        icon: material/lightbulb
-        name: Switch to dark mode
     - media: '(prefers-color-scheme: dark)'
-      # scheme: slate
       scheme: default
       primary: teal
       accent: amber
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: slate
+      primary: teal
+      accent: amber
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+  icon:
+    repo: fontawesome/brands/github-alt
+  favicon: assets/images/favicon.ico
+  logo: assets/images/logo-white.png
 
 nav:
   - ArFiSettings:
@@ -61,7 +63,7 @@ plugins:
             Introduction: Введение
             Why and what's next: Почему, зачем и что дальше
             Installation: Установка
-            Usage: Применение
+            Usage: Использование
         - locale: en
           name: English
           build: true
@@ -69,7 +71,10 @@ plugins:
 markdown_extensions:
   - abbr
   - attr_list
+  - md_in_html
   - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
 
 extra:
   analytics:

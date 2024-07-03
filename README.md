@@ -1,8 +1,12 @@
+![ArFiSettings](docs/assets/images/github-logo.png)
 # arfi-settings
 
 Flexible application settings management using [Pydantic](https://github.com/pydantic/pydantic).
 
 Required: Python >= 3.11. Earlier versions of Python have not been tested.
+
+Documentation: [https://py-art.github.io/arfi-settings](https://py-art.github.io/arfi-settings)
+
 
 <!--toc:start-->
 - [arfi-settings](#arfi-settings)
@@ -638,3 +642,7 @@ print(config.db.DATABASE)
 - [ ] Reading encrypted settings with key specification
 - [ ] Extend the usability for python versions `3.8`, `3.9`, `3.10`
 - [ ] Expand debugging mode.
+
+
+## Logo
+Logo courtesy of [Alex Zalevski](https://github.com/zalexstudios)
