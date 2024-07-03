@@ -18,6 +18,7 @@ include = [
 # for building docs
 dependencies = [
     "mkdocs-material>=9.2.5",
+    "mkdocs-static-i18n[material]",
 ]
 
 [project]
