@@ -22,6 +22,7 @@ Documentation: [https://py-art.github.io/arfi-settings](https://py-art.github.io
     - [File `pyproject.toml`](#file-pyprojecttoml)
   - [A Simple Example](#a-simple-example)
   - [Roadmap](#roadmap)
+  - [Logo](#logo)
 <!--toc:end-->
 
 ## Installation
