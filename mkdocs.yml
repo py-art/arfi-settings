@@ -44,7 +44,9 @@ nav:
   - ArFiSettings:
     - Introduction: index.md
     - Why and what's next: about/why.md
+    - Library Goals: about/library_goals.md
     - Installation: about/installation.md
+    - Reverse inheritance: about/reverse_inheritance.md
   - Usage:
     - usage/config.md
     - usage/pyproject.md
@@ -62,7 +64,9 @@ plugins:
           nav_translations:
             Introduction: Введение
             Why and what's next: Почему, зачем и что дальше
+            Library Goals: Цели библиотеки
             Installation: Установка
+            Reverse inheritance: Обратное наследование
             Usage: Использование
         - locale: en
           name: English
@@ -75,6 +79,8 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.tasklist:
       custom_checkbox: true
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
 
 extra:
   analytics:
