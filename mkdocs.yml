@@ -15,6 +15,8 @@ theme:
     - content.code.copy
     - content.tabs.link
     - content.tooltips
+    - content.code.annotate
+    - content.code.select
     - navigation.expand
     - navigation.footer
     - navigation.sections
@@ -47,6 +49,7 @@ nav:
     - Library Goals: about/library_goals.md
     - Installation: about/installation.md
     - Reverse inheritance: about/reverse_inheritance.md
+    - Debug mode: about/debug_mode.md
   - Usage:
     - usage/config.md
     - usage/pyproject.md
@@ -67,6 +70,7 @@ plugins:
             Library Goals: Цели библиотеки
             Installation: Установка
             Reverse inheritance: Обратное наследование
+            Debug mode: Режим отладки
             Usage: Использование
         - locale: en
           name: English
@@ -77,10 +81,14 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.snippets
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.tasklist:
       custom_checkbox: true
-  - pymdownx.highlight
-  - pymdownx.inlinehilite
 
 extra:
   analytics:
