@@ -1016,8 +1016,8 @@
 
 <h1 id="_1">Основные настройки</h1>
 <h2 id="read_config">read_config</h2>
-<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Включает или отключает чтение конфигурации из всех источников, кроме <code>init_kwargs</code></p>
 <blockquote>
@@ -1038,8 +1038,8 @@
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">(</span><span class="n">_read_config</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span></code></pre></div></p>
 <h2 id="read_config_force">read_config_force</h2>
-<p>Тип: <code class="language-python highlight"><span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">None</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">bool</span> <span class="o">|</span> <span class="kc">None</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">None</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Принудительно включает или отключает чтение конфигурации из всех источников, кроме <code>init_kwargs</code>. Имеет приоритет над <a href="#read_config">read_config</a>.</p>
 <p><strong>Использование</strong>:</p>
@@ -1057,8 +1057,8 @@
 </span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">(</span><span class="n">_read_config_force</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span></code></pre></div></p>
 <h2 id="read_pyproject_toml">read_pyproject_toml</h2>
-<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Включает или отключает чтение собственных настроек <code>arfi-settings</code> по умолчанию из файла <code>pyproject.toml</code>.</p>
 <p><strong>Использование</strong>:</p>
@@ -1076,8 +1076,8 @@
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">(</span><span class="n">_read_pyproject_toml</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </span></code></pre></div></p>
 <h2 id="mode_dir">mode_dir</h2>
-<p>Тип: <code class="language-python highlight"><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">str</span> <span class="o">|</span> <span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <ol>
 <li>При чтении из файлов указывает из какой поддиректории читать настройки, а точнее участвует в создании пути до этой поддиректории.</li>
@@ -1132,8 +1132,8 @@
 </span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="c1">#&gt; [PosixPath(&#39;config/config&#39;)]</span>
 </span></code></pre></div>
 <h2 id="mode_dir_inherit_nested">mode_dir_inherit_nested</h2>
-<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Включает или отключает наследование атрибута <code>mode_dir</code> у подклассов. Настраивается именно в подклассах.</p>
 <p><strong>Использование</strong>:</p>
@@ -1155,7 +1155,7 @@
 </span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="c1">#&gt; [PosixPath(&#39;config/db/postgres/config&#39;)]</span>
 </span></code></pre></div>
 <p>Отключаем наследование:</p>
-<p><div class="language-py highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">class</span> <span class="nc">Database</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
 </span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">mode_dir</span> <span class="o">=</span> <span class="s2">&quot;db&quot;</span>
@@ -1173,13 +1173,13 @@
 </span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">database</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
 </span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="c1">#&gt; [PosixPath(&#39;config/postgres/config&#39;)]</span>
 </span></code></pre></div>
-Файл <code>pyproject.toml</code>:</p>
+<p>Файл <code>pyproject.toml</code>:</p>
 <div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">[tool.arfi_settings]</span>
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">mode_dir_inherit_nested</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 </span></code></pre></div>
 <h2 id="mode_dir_inherit_parent">mode_dir_inherit_parent</h2>
-<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Включает или отключает наследование атрибута <code>mode_dir</code> от класса-родителя в концепции обратного наследования.
 Настраивается в классах-детях.</p>
@@ -1220,8 +1220,8 @@
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">mode_dir_inherit_parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
 </span></code></pre></div>
 <h2 id="file_config">file_config</h2>
-<p>Тип: <code class="language-python highlight"><span class="n">arfi_settings</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">FileConfig</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="n">arfi_settings</span><span class="o">.</span><span class="n">schemes</span><span class="o">.</span><span class="n">FileConfigSchema</span><span class="p">()</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">()</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="n">arfi_settings</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">FileConfig</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="n">arfi_settings</span><span class="o">.</span><span class="n">schemes</span><span class="o">.</span><span class="n">FileConfigSchema</span><span class="p">()</span><span class="o">.</span><span class="n">conf_dict</span><span class="p">()</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Настройки, которые описывают правила чтения из файлов конфигурации.</p>
 <p><strong>Использование</strong>:</p>
@@ -1233,8 +1233,8 @@
 </span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="p">)</span>
 </span></code></pre></div>
 <h3 id="conf_dir">conf_dir</h3>
-<p>Тип: <code class="language-python highlight"><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="s2">&quot;config&quot;</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="s2">&quot;config&quot;</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Указывает из какой директории или директорий читать файлы с настройками.
 Если указан список директорий, то настройки, расположенные в последней директории, будут переопределять все настройки из предыдущих.</p>
@@ -1271,8 +1271,8 @@
 <li>Здесь устанавливается по умолчанию для всех классов, если это не переопределено в самом классе.</li>
 </ol>
 <h3 id="conf_file">conf_file</h3>
-<p>Тип: <code class="language-python highlight"><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="s2">&quot;config&quot;</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="o">...</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="s2">&quot;config&quot;</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Определяет название файла из которого будут читаться настройки по умолчанию в заданных директориях <code>conf_dir</code>.
 При чтении настроек к этому имени файла добавляется расширение из <code>arfi_settingd.constants.CONFIG_EXT_DEFAULT</code>.
@@ -1337,8 +1337,8 @@
 <li>Отменяет чтение из файлов для всех классов, но Значение, заданное в классе отменяет значение по умолчанию, заданное здесь, в <code>pyproject.toml</code></li>
 </ol>
 <h3 id="conf_ext">conf_ext</h3>
-<p>Тип: <code class="language-python highlight"><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="p">[</span><span class="s2">&quot;toml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yml&quot;</span> <span class="s2">&quot;json&quot;</span><span class="p">]</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="p">[</span><span class="s2">&quot;toml&quot;</span><span class="p">,</span> <span class="s2">&quot;yaml&quot;</span><span class="p">,</span> <span class="s2">&quot;yml&quot;</span> <span class="s2">&quot;json&quot;</span><span class="p">]</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Добавляет указанные расширения к названию файла <a href="#conffile">conf_file</a> при поиске файла с настройками.
 Можно указывать как список с расширениями, так и строку вида <code>"ini, toml, cfg"</code>
@@ -1362,8 +1362,8 @@
 Значения заданные в классе - переопределяют значения по умолчания из файла <code>pyproject.toml</code></li>
 </ol>
 <h3 id="conf_custom_ext_handler">conf_custom_ext_handler</h3>
-<p>Тип: <code class="language-python highlight"><span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">None</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">str</span> <span class="o">|</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">None</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Переопределяет обработчик для расширения или задаёт определённый обработчик для файлов без расширения.
 Имя обработчика должно заканчиваться на <code>_ext_handler</code></p>
@@ -1408,54 +1408,45 @@
 <li>Здесь указываем обработчик для файлов без расширения. Вместо длинного названия <code>my_empty_ext_handler</code> можно написать коротко - <code>my_empty</code>.</li>
 <li>Здесь указываем, что все файлы с расширением <code>*.asd</code> должны быть обработаны как <code>toml</code>.</li>
 </ol>
+<p>Файл <code>pyproject.toml</code>:</p>
+<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">[tool.arfi_settings]</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">conf_custom_ext_handler</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;yaml&quot;</span><span class="w">  </span><span class="c1"># (1)!</span>
+</span></code></pre></div>
+<ol>
+<li>Здесь говорим, что все файлы без расширения читать как <code>yaml</code>-файлы.</li>
+</ol>
 <h3 id="conf_file_encoding">conf_file_encoding</h3>
-<p>Тип: <code class="language-python highlight"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">None</span>  <span class="c1"># utf-8</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">None</span>  <span class="c1"># utf-8</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Задаёт кодировку при чтении файлов конфигурации. Применяется сразу ко всем файлам, указанным в <a href="#conf_file">conf_file</a></p>
 <p><strong>Использование</strong>:
-<div class="language-py highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
-</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>        <span class="n">conf_file_encoding</span><span class="o">=</span><span class="s2">&quot;cp1251&quot;</span><span class="p">,</span>
-</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>    <span class="p">)</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>        <span class="n">conf_file_encoding</span><span class="o">=</span><span class="s2">&quot;cp1251&quot;</span><span class="p">,</span>
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>    <span class="p">)</span>
 </span></code></pre></div></p>
+<p>Файл <code>pyproject.toml</code>:</p>
+<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">[tool.arfi_settings]</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">conf_file_encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;cp1251&quot;</span><span class="w">  </span><span class="c1"># (1)!</span>
+</span></code></pre></div>
+<ol>
+<li>Задаём кодировку <code>cp1251</code> для всех файлов конфигурации</li>
+</ol>
 <h3 id="conf_case_sensitive">conf_case_sensitive</h3>
-<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">False</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">False</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>По умолчанию при чтении из файлов конфигурации параметры читаются как регистро-независимые. Но сначала ищется точное совпадение. Если точное совпадение не найдено, то возвращается найденное значение в нижнем регистре, если и оно не найдено, то возвращается первое найденное значение, приведённое к нижнему регистру.</p>
 <p><strong>Использование</strong>:</p>
 <ul>
 <li>Поведение по умолчанию</li>
 </ul>
-<div class="language-toml highlight"><span class="filename">config/config.toml</span><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">MY_PARAM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MY_PARAM_UPPER&quot;</span>
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">My_Param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;My_Param_exactly_match&quot;</span>
-</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">my_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_param_lower&quot;</span>
-</span></code></pre></div>
-<div class="language-py highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
-</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
-</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>    <span class="n">My_Param</span><span class="p">:</span> <span class="nb">str</span>
-</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>        <span class="n">conf_case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># (1)!</span>
-</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>    <span class="p">)</span>
-</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>
-</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
-</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">My_Param</span><span class="p">)</span>
-</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="c1">#&gt; My_Param_exactly_match</span>
-</span></code></pre></div>
-<ol>
-<li>
-<p>Значение по умолчанию</p>
-</li>
-<li>
-<p>Если отсутствует точное совпадение</p>
-</li>
-</ol>
 <div class="language-toml highlight"><span class="filename">config/config.toml</span><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">MY_PARAM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MY_PARAM_UPPER&quot;</span>
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">my_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_param_lower&quot;</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">My_Param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;My_Param_exactly_match&quot;</span>
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">my_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_param_lower&quot;</span>
 </span></code></pre></div>
 <div class="language-py highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
 </span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>
@@ -1467,14 +1458,14 @@
 </span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>
 </span><span id="__span-31-9"><a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
 </span><span id="__span-31-10"><a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">My_Param</span><span class="p">)</span>
-</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="c1">#&gt; my_param_lower</span>
+</span><span id="__span-31-11"><a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a><span class="c1">#&gt; My_Param_exactly_match</span>
 </span></code></pre></div>
 <ol>
 <li>
 <p>Значение по умолчанию</p>
 </li>
 <li>
-<p>Если отсутствует точное совпадение, но поиск чувствительный к регистру</p>
+<p>Если отсутствует точное совпадение</p>
 </li>
 </ol>
 <div class="language-toml highlight"><span class="filename">config/config.toml</span><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">MY_PARAM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MY_PARAM_UPPER&quot;</span>
@@ -1485,308 +1476,356 @@
 </span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
 </span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>    <span class="n">My_Param</span><span class="p">:</span> <span class="nb">str</span>
 </span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>        <span class="n">conf_case_sensitive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># (1)!</span>
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>        <span class="n">conf_case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># (1)!</span>
 </span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>    <span class="p">)</span>
 </span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>
 </span><span id="__span-33-9"><a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
 </span><span id="__span-33-10"><a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">My_Param</span><span class="p">)</span>
-</span><span id="__span-33-11"><a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-33-12"><a id="__codelineno-33-12" name="__codelineno-33-12" href="#__codelineno-33-12"></a><span class="sd">Traceback (most recent call last):</span>
-</span><span id="__span-33-13"><a id="__codelineno-33-13" name="__codelineno-33-13" href="#__codelineno-33-13"></a><span class="sd">  ...</span>
-</span><span id="__span-33-14"><a id="__codelineno-33-14" name="__codelineno-33-14" href="#__codelineno-33-14"></a><span class="sd">pydantic_core._pydantic_core.ValidationError: 1 validation error for AppConfig</span>
-</span><span id="__span-33-15"><a id="__codelineno-33-15" name="__codelineno-33-15" href="#__codelineno-33-15"></a><span class="sd">My_Param</span>
-</span><span id="__span-33-16"><a id="__codelineno-33-16" name="__codelineno-33-16" href="#__codelineno-33-16"></a><span class="sd">  Field required [type=missing, input_value={}, input_type=dict]</span>
-</span><span id="__span-33-17"><a id="__codelineno-33-17" name="__codelineno-33-17" href="#__codelineno-33-17"></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-33-11"><a id="__codelineno-33-11" name="__codelineno-33-11" href="#__codelineno-33-11"></a><span class="c1">#&gt; my_param_lower</span>
+</span></code></pre></div>
+<ol>
+<li>
+<p>Значение по умолчанию</p>
+</li>
+<li>
+<p>Если отсутствует точное совпадение, но поиск чувствительный к регистру</p>
+</li>
+</ol>
+<div class="language-toml highlight"><span class="filename">config/config.toml</span><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">MY_PARAM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;MY_PARAM_UPPER&quot;</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="n">my_param</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_param_lower&quot;</span>
+</span></code></pre></div>
+<div class="language-py highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>    <span class="n">My_Param</span><span class="p">:</span> <span class="nb">str</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>        <span class="n">conf_case_sensitive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># (1)!</span>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>    <span class="p">)</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
+</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">My_Param</span><span class="p">)</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="sd">Traceback (most recent call last):</span>
+</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="sd">  ...</span>
+</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="sd">pydantic_core._pydantic_core.ValidationError: 1 validation error for AppConfig</span>
+</span><span id="__span-35-15"><a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="sd">My_Param</span>
+</span><span id="__span-35-16"><a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="sd">  Field required [type=missing, input_value={}, input_type=dict]</span>
+</span><span id="__span-35-17"><a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a><span class="sd">&quot;&quot;&quot;</span>
 </span></code></pre></div>
 <ol>
 <li>Чувствительный к регистру поиск. Требуется точное совпадение</li>
 </ol>
+<p>Файл <code>pyproject.toml</code>:</p>
+<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">[tool.arfi_settings]</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="n">conf_case_sensitive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="w">  </span><span class="c1"># (1)!</span>
+</span></code></pre></div>
+<ol>
+<li>Читать только точное совпадение имён (чувствительное к регистру) во всех файлах конфигурации</li>
+</ol>
 <h3 id="conf_ignore_missing">conf_ignore_missing</h3>
-<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">True</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>По умолчанию, если файлы, заданные в <a href="#conf_file">conf_file</a> не существуют, то их чтение игнорируется.  Но если требуется, чтоб файл или файлы обязательно присутствовали, то необходимо параметр <code>conf_ignore_missing</code> установить в значение <code>False</code>.
 Так же можно использовать в качестве своеобразного отладчика - в сообщении об ошибке будет указано какой именно файл и по какому пути отсутствует.</p>
 <p><strong>Использование</strong>:</p>
 <p>Поведение по умолчанию. Отсутствие файла <code>config/appconfig.yml</code> не приводит к ошибке
-<div class="language-py highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
-</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
-</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>
-</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>    <span class="n">my_param</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default_param&quot;</span>
-</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig.yml&quot;</span><span class="p">,</span>
-</span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>        <span class="n">conf_ignore_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># (1)!</span>
-</span><span id="__span-34-9"><a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a>    <span class="p">)</span>
-</span><span id="__span-34-10"><a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>
-</span><span id="__span-34-11"><a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a>
-</span><span id="__span-34-12"><a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
-</span><span id="__span-34-13"><a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">my_param</span><span class="p">)</span>
-</span><span id="__span-34-14"><a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a><span class="c1">#&gt; default_param</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>    <span class="n">my_param</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default_param&quot;</span>
+</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig.yml&quot;</span><span class="p">,</span>
+</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>        <span class="n">conf_ignore_missing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># (1)!</span>
+</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>    <span class="p">)</span>
+</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>
+</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a>
+</span><span id="__span-37-12"><a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
+</span><span id="__span-37-13"><a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">my_param</span><span class="p">)</span>
+</span><span id="__span-37-14"><a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a><span class="c1">#&gt; default_param</span>
 </span></code></pre></div></p>
 <ol>
 <li>Значение по умолчанию. Отсутствие файлов игнорируется.</li>
 </ol>
 <p>При отсутствии файла <code>config/appconfig.yml</code> возбуждается ошибка
-<div class="language-py highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>    <span class="n">my_param</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default_param&quot;</span>
-</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig.yml&quot;</span><span class="p">,</span>
-</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>        <span class="n">conf_ignore_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># (1)!</span>
-</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>    <span class="p">)</span>
-</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>
-</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>
-</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
-</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">my_param</span><span class="p">)</span>
-</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="__span-35-15"><a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a><span class="sd">Traceback (most recent call last):</span>
-</span><span id="__span-35-16"><a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="sd">    ...</span>
-</span><span id="__span-35-17"><a id="__codelineno-35-17" name="__codelineno-35-17" href="#__codelineno-35-17"></a><span class="sd">arfi_settings.errors.ArFiSettingsError: File not found: `/home/user/my_awesome_project/config/appconfig.yml`</span>
-</span><span id="__span-35-18"><a id="__codelineno-35-18" name="__codelineno-35-18" href="#__codelineno-35-18"></a><span class="sd">&quot;&quot;&quot;</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="k">class</span> <span class="nc">AppConfig</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a>    <span class="n">my_param</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default_param&quot;</span>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig.yml&quot;</span><span class="p">,</span>
+</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a>        <span class="n">conf_ignore_missing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># (1)!</span>
+</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a>    <span class="p">)</span>
+</span><span id="__span-38-10"><a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a>
+</span><span id="__span-38-11"><a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a>
+</span><span id="__span-38-12"><a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="n">config</span> <span class="o">=</span> <span class="n">AppConfig</span><span class="p">()</span>
+</span><span id="__span-38-13"><a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">my_param</span><span class="p">)</span>
+</span><span id="__span-38-14"><a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="__span-38-15"><a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a><span class="sd">Traceback (most recent call last):</span>
+</span><span id="__span-38-16"><a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a><span class="sd">    ...</span>
+</span><span id="__span-38-17"><a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a><span class="sd">arfi_settings.errors.ArFiSettingsError: File not found: `/home/user/my_awesome_project/config/appconfig.yml`</span>
+</span><span id="__span-38-18"><a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a><span class="sd">&quot;&quot;&quot;</span>
 </span></code></pre></div></p>
 <ol>
 <li>Требуется обязательное наличие всех файлов, указанных в <code>conf_file</code>!</li>
 </ol>
+<p>Файл <code>pyproject.toml</code>:</p>
+<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="k">[tool.arfi_settings]</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">conf_ignore_missing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="w">  </span><span class="c1"># (1)!</span>
+</span></code></pre></div>
+<ol>
+<li>Все файлы конфигурации должны существовать</li>
+</ol>
 <h3 id="conf_exclude_inherit_parent">conf_exclude_inherit_parent</h3>
-<p>Тип: <code class="language-python highlight"><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="p">[]</span></code></p>
+<p>Тип: <code class="language-python highlight"><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="p">[]</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>В концепции обратного наследования запрещает наследование определённых собственных настроек от класса-родителя
 Применяется только для чтения файлов.</p>
 <p><strong>Использование</strong>:</p>
 <p>Например мы хотим унаследовать от родителя все настройки, кроме <code>conf_dir</code> и <code>conf_file</code>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
-</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
-</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>
-</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>            <span class="s2">&quot;conf_dir&quot;</span><span class="p">,</span>
-</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>            <span class="s2">&quot;conf_file&quot;</span><span class="p">,</span>
-</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>        <span class="p">],</span>
-</span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>    <span class="p">)</span>
-</span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>
-</span><span id="__span-36-12"><a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>
-</span><span id="__span-36-13"><a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-36-14"><a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
-</span><span id="__span-36-15"><a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>
-</span><span id="__span-36-16"><a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-36-17"><a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a>        <span class="n">conf_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-36-18"><a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig.yml&quot;</span><span class="p">,</span>
-</span><span id="__span-36-19"><a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>    <span class="p">)</span>
-</span><span id="__span-36-20"><a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a>
-</span><span id="__span-36-21"><a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a>
-</span><span id="__span-36-22"><a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
-</span><span id="__span-36-23"><a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_dir</span><span class="p">)</span>
-</span><span id="__span-36-24"><a id="__codelineno-36-24" name="__codelineno-36-24" href="#__codelineno-36-24"></a><span class="c1">#&gt; None</span>
-</span><span id="__span-36-25"><a id="__codelineno-36-25" name="__codelineno-36-25" href="#__codelineno-36-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file</span><span class="p">)</span>
-</span><span id="__span-36-26"><a id="__codelineno-36-26" name="__codelineno-36-26" href="#__codelineno-36-26"></a><span class="c1">#&gt; appconfig.yml</span>
-</span><span id="__span-36-27"><a id="__codelineno-36-27" name="__codelineno-36-27" href="#__codelineno-36-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
-</span><span id="__span-36-28"><a id="__codelineno-36-28" name="__codelineno-36-28" href="#__codelineno-36-28"></a><span class="c1">#&gt; [PosixPath(&#39;appconfig.yml&#39;)]</span>
-</span><span id="__span-36-29"><a id="__codelineno-36-29" name="__codelineno-36-29" href="#__codelineno-36-29"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_dir</span><span class="p">)</span>
-</span><span id="__span-36-30"><a id="__codelineno-36-30" name="__codelineno-36-30" href="#__codelineno-36-30"></a><span class="c1">#&gt; config</span>
-</span><span id="__span-36-31"><a id="__codelineno-36-31" name="__codelineno-36-31" href="#__codelineno-36-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file</span><span class="p">)</span>
-</span><span id="__span-36-32"><a id="__codelineno-36-32" name="__codelineno-36-32" href="#__codelineno-36-32"></a><span class="c1">#&gt; config</span>
-</span><span id="__span-36-33"><a id="__codelineno-36-33" name="__codelineno-36-33" href="#__codelineno-36-33"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
-</span><span id="__span-36-34"><a id="__codelineno-36-34" name="__codelineno-36-34" href="#__codelineno-36-34"></a><span class="c1">#&gt; [PosixPath(&#39;config/child/config&#39;)]</span>
-</span></code></pre></div></p>
-<blockquote>
-<p><strong>Важно</strong>: Так как "обратно" наследуются абсолютно все параметры, то и <code>conf_exclude_inherit_parent</code> не сработает для <code class="language-python highlight"><span class="n">Child</span></code>, если в классе <code class="language-python highlight"><span class="n">Parent</span></code> тоже указан параметр <code>conf_exclude_inherit_parent</code>!!! Для этого его тоже нужно исключить из наследования. Пример:</p>
-</blockquote>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>            <span class="s2">&quot;conf_dir&quot;</span><span class="p">,</span>
-</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>            <span class="s2">&quot;conf_file&quot;</span><span class="p">,</span>
-</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a>            <span class="s2">&quot;conf_exclude_inherit_parent&quot;</span><span class="p">,</span>
-</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>        <span class="p">],</span>
-</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a>    <span class="p">)</span>
-</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a>
-</span><span id="__span-37-10"><a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a>
-</span><span id="__span-37-11"><a id="__codelineno-37-11" name="__codelineno-37-11" href="#__codelineno-37-11"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-37-12"><a id="__codelineno-37-12" name="__codelineno-37-12" href="#__codelineno-37-12"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
-</span><span id="__span-37-13"><a id="__codelineno-37-13" name="__codelineno-37-13" href="#__codelineno-37-13"></a>
-</span><span id="__span-37-14"><a id="__codelineno-37-14" name="__codelineno-37-14" href="#__codelineno-37-14"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-37-15"><a id="__codelineno-37-15" name="__codelineno-37-15" href="#__codelineno-37-15"></a>        <span class="n">conf_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-37-16"><a id="__codelineno-37-16" name="__codelineno-37-16" href="#__codelineno-37-16"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig.yml&quot;</span><span class="p">,</span>
-</span><span id="__span-37-17"><a id="__codelineno-37-17" name="__codelineno-37-17" href="#__codelineno-37-17"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-37-18"><a id="__codelineno-37-18" name="__codelineno-37-18" href="#__codelineno-37-18"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
-</span><span id="__span-37-19"><a id="__codelineno-37-19" name="__codelineno-37-19" href="#__codelineno-37-19"></a>        <span class="p">],</span>
-</span><span id="__span-37-20"><a id="__codelineno-37-20" name="__codelineno-37-20" href="#__codelineno-37-20"></a>    <span class="p">)</span>
-</span><span id="__span-37-21"><a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a>
-</span><span id="__span-37-22"><a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
-</span></code></pre></div>
-<blockquote>
-<p><strong>Полезно</strong>: Для просмотра всех унаследованных параметров (собственных настроек) используйте свойство <a href="#inherited_params">inherited_params</a> - <code class="language-python highlight"><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">inherited_params</span><span class="p">)</span></code></p>
-</blockquote>
-<h3 id="conf_include_inherit_parent">conf_include_inherit_parent</h3>
-<p>Тип: <code class="language-python highlight"><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
-Значение по умолчанию: <code class="language-python highlight"><span class="p">[]</span></code></p>
-<p><strong>Что делает</strong>:</p>
-<p>В концепции обратного наследования запрещает наследование от класса-родителя всех собственных настроек, кроме указанных
-Применяется только для чтения файлов.</p>
-<p><strong>Использование</strong>:</p>
-<p>Например мы хотим унаследовать от родителя только расширения при чтении файлов:
-<div class="language-py highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
-</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>
-</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>
-</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
-</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a>        <span class="p">],</span>
-</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a>    <span class="p">)</span>
-</span><span id="__span-38-10"><a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a>
-</span><span id="__span-38-11"><a id="__codelineno-38-11" name="__codelineno-38-11" href="#__codelineno-38-11"></a>
-</span><span id="__span-38-12"><a id="__codelineno-38-12" name="__codelineno-38-12" href="#__codelineno-38-12"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-38-13"><a id="__codelineno-38-13" name="__codelineno-38-13" href="#__codelineno-38-13"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
-</span><span id="__span-38-14"><a id="__codelineno-38-14" name="__codelineno-38-14" href="#__codelineno-38-14"></a>
-</span><span id="__span-38-15"><a id="__codelineno-38-15" name="__codelineno-38-15" href="#__codelineno-38-15"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-38-16"><a id="__codelineno-38-16" name="__codelineno-38-16" href="#__codelineno-38-16"></a>        <span class="n">conf_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span><span id="__span-38-17"><a id="__codelineno-38-17" name="__codelineno-38-17" href="#__codelineno-38-17"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig&quot;</span><span class="p">,</span>
-</span><span id="__span-38-18"><a id="__codelineno-38-18" name="__codelineno-38-18" href="#__codelineno-38-18"></a>        <span class="n">conf_ext</span><span class="o">=</span><span class="s2">&quot;toml, json&quot;</span><span class="p">,</span>
-</span><span id="__span-38-19"><a id="__codelineno-38-19" name="__codelineno-38-19" href="#__codelineno-38-19"></a>    <span class="p">)</span>
-</span><span id="__span-38-20"><a id="__codelineno-38-20" name="__codelineno-38-20" href="#__codelineno-38-20"></a>
-</span><span id="__span-38-21"><a id="__codelineno-38-21" name="__codelineno-38-21" href="#__codelineno-38-21"></a>
-</span><span id="__span-38-22"><a id="__codelineno-38-22" name="__codelineno-38-22" href="#__codelineno-38-22"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
-</span><span id="__span-38-23"><a id="__codelineno-38-23" name="__codelineno-38-23" href="#__codelineno-38-23"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_dir</span><span class="p">)</span>
-</span><span id="__span-38-24"><a id="__codelineno-38-24" name="__codelineno-38-24" href="#__codelineno-38-24"></a><span class="c1">#&gt; None</span>
-</span><span id="__span-38-25"><a id="__codelineno-38-25" name="__codelineno-38-25" href="#__codelineno-38-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file</span><span class="p">)</span>
-</span><span id="__span-38-26"><a id="__codelineno-38-26" name="__codelineno-38-26" href="#__codelineno-38-26"></a><span class="c1">#&gt; appconfig</span>
-</span><span id="__span-38-27"><a id="__codelineno-38-27" name="__codelineno-38-27" href="#__codelineno-38-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
-</span><span id="__span-38-28"><a id="__codelineno-38-28" name="__codelineno-38-28" href="#__codelineno-38-28"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
-</span><span id="__span-38-29"><a id="__codelineno-38-29" name="__codelineno-38-29" href="#__codelineno-38-29"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
-</span><span id="__span-38-30"><a id="__codelineno-38-30" name="__codelineno-38-30" href="#__codelineno-38-30"></a><span class="c1">#&gt; [PosixPath(&#39;appconfig&#39;)]</span>
-</span><span id="__span-38-31"><a id="__codelineno-38-31" name="__codelineno-38-31" href="#__codelineno-38-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_dir</span><span class="p">)</span>
-</span><span id="__span-38-32"><a id="__codelineno-38-32" name="__codelineno-38-32" href="#__codelineno-38-32"></a><span class="c1">#&gt; config</span>
-</span><span id="__span-38-33"><a id="__codelineno-38-33" name="__codelineno-38-33" href="#__codelineno-38-33"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file</span><span class="p">)</span>
-</span><span id="__span-38-34"><a id="__codelineno-38-34" name="__codelineno-38-34" href="#__codelineno-38-34"></a><span class="c1">#&gt; config</span>
-</span><span id="__span-38-35"><a id="__codelineno-38-35" name="__codelineno-38-35" href="#__codelineno-38-35"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
-</span><span id="__span-38-36"><a id="__codelineno-38-36" name="__codelineno-38-36" href="#__codelineno-38-36"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
-</span><span id="__span-38-37"><a id="__codelineno-38-37" name="__codelineno-38-37" href="#__codelineno-38-37"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
-</span><span id="__span-38-38"><a id="__codelineno-38-38" name="__codelineno-38-38" href="#__codelineno-38-38"></a><span class="c1">#&gt; [PosixPath(&#39;config/child/config&#39;)]</span>
-</span></code></pre></div></p>
-<blockquote>
-<p><strong>Важно</strong>: Так как "обратно" наследуются абсолютно все параметры, то и <code>conf_include_inherit_parent</code> не сработает для <code class="language-python highlight"><span class="n">Child</span></code>, если в классе <code class="language-python highlight"><span class="n">Parent</span></code> тоже указан параметр <code>conf_include_inherit_parent</code>!!! Для этого его нужно исключить из наследования. Пример:</p>
-</blockquote>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
-</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>        <span class="p">],</span>
-</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a>            <span class="s2">&quot;conf_include_inherit_parent&quot;</span><span class="p">,</span>
-</span><span id="__span-39-8"><a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a>        <span class="p">],</span>
-</span><span id="__span-39-9"><a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a>    <span class="p">)</span>
-</span><span id="__span-39-10"><a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a>
-</span><span id="__span-39-11"><a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a>
-</span><span id="__span-39-12"><a id="__codelineno-39-12" name="__codelineno-39-12" href="#__codelineno-39-12"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-39-13"><a id="__codelineno-39-13" name="__codelineno-39-13" href="#__codelineno-39-13"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
-</span><span id="__span-39-14"><a id="__codelineno-39-14" name="__codelineno-39-14" href="#__codelineno-39-14"></a>
-</span><span id="__span-39-15"><a id="__codelineno-39-15" name="__codelineno-39-15" href="#__codelineno-39-15"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-39-16"><a id="__codelineno-39-16" name="__codelineno-39-16" href="#__codelineno-39-16"></a>        <span class="n">conf_file_encoding</span><span class="o">=</span><span class="s2">&quot;cp1251&quot;</span><span class="p">,</span>
-</span><span id="__span-39-17"><a id="__codelineno-39-17" name="__codelineno-39-17" href="#__codelineno-39-17"></a>        <span class="n">conf_ext</span><span class="o">=</span><span class="s2">&quot;toml, json&quot;</span><span class="p">,</span>
-</span><span id="__span-39-18"><a id="__codelineno-39-18" name="__codelineno-39-18" href="#__codelineno-39-18"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-39-19"><a id="__codelineno-39-19" name="__codelineno-39-19" href="#__codelineno-39-19"></a>            <span class="s2">&quot;conf_file_encoding&quot;</span><span class="p">,</span>
-</span><span id="__span-39-20"><a id="__codelineno-39-20" name="__codelineno-39-20" href="#__codelineno-39-20"></a>        <span class="p">],</span>
-</span><span id="__span-39-21"><a id="__codelineno-39-21" name="__codelineno-39-21" href="#__codelineno-39-21"></a>    <span class="p">)</span>
-</span><span id="__span-39-22"><a id="__codelineno-39-22" name="__codelineno-39-22" href="#__codelineno-39-22"></a>
-</span><span id="__span-39-23"><a id="__codelineno-39-23" name="__codelineno-39-23" href="#__codelineno-39-23"></a>
-</span><span id="__span-39-24"><a id="__codelineno-39-24" name="__codelineno-39-24" href="#__codelineno-39-24"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
-</span><span id="__span-39-25"><a id="__codelineno-39-25" name="__codelineno-39-25" href="#__codelineno-39-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
-</span><span id="__span-39-26"><a id="__codelineno-39-26" name="__codelineno-39-26" href="#__codelineno-39-26"></a><span class="c1">#&gt; cp1251</span>
-</span><span id="__span-39-27"><a id="__codelineno-39-27" name="__codelineno-39-27" href="#__codelineno-39-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
-</span><span id="__span-39-28"><a id="__codelineno-39-28" name="__codelineno-39-28" href="#__codelineno-39-28"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
-</span><span id="__span-39-29"><a id="__codelineno-39-29" name="__codelineno-39-29" href="#__codelineno-39-29"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
-</span><span id="__span-39-30"><a id="__codelineno-39-30" name="__codelineno-39-30" href="#__codelineno-39-30"></a><span class="c1">#&gt; None</span>
-</span><span id="__span-39-31"><a id="__codelineno-39-31" name="__codelineno-39-31" href="#__codelineno-39-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
-</span><span id="__span-39-32"><a id="__codelineno-39-32" name="__codelineno-39-32" href="#__codelineno-39-32"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
-</span></code></pre></div>
-<blockquote>
-<p><strong>Важно</strong>: Параметр <code>conf_exclude_inherit_parent</code> имеет приоритет над <code>conf_include_inherit_parent</code> и тоже наследуется! Если какой-либо параметр указан и там и там, то этот параметр НЕ будет включен в список наследуемых:
 <div class="language-py highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
 </span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>
 </span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>
 </span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
 </span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
-</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a>        <span class="p">],</span>
-</span><span id="__span-40-9"><a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-40-10"><a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a>            <span class="s2">&quot;conf_include_inherit_parent&quot;</span><span class="p">,</span>
-</span><span id="__span-40-11"><a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a>        <span class="p">],</span>
-</span><span id="__span-40-12"><a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a>    <span class="p">)</span>
-</span><span id="__span-40-13"><a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a>
-</span><span id="__span-40-14"><a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a>
-</span><span id="__span-40-15"><a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-40-16"><a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
-</span><span id="__span-40-17"><a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a>
-</span><span id="__span-40-18"><a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-40-19"><a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a>        <span class="n">conf_file_encoding</span><span class="o">=</span><span class="s2">&quot;cp1251&quot;</span><span class="p">,</span>
-</span><span id="__span-40-20"><a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a>        <span class="n">conf_ext</span><span class="o">=</span><span class="s2">&quot;toml, json&quot;</span><span class="p">,</span>
-</span><span id="__span-40-21"><a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-40-22"><a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a>            <span class="s2">&quot;conf_file_encoding&quot;</span><span class="p">,</span>
-</span><span id="__span-40-23"><a id="__codelineno-40-23" name="__codelineno-40-23" href="#__codelineno-40-23"></a>        <span class="p">],</span>
-</span><span id="__span-40-24"><a id="__codelineno-40-24" name="__codelineno-40-24" href="#__codelineno-40-24"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-40-25"><a id="__codelineno-40-25" name="__codelineno-40-25" href="#__codelineno-40-25"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
-</span><span id="__span-40-26"><a id="__codelineno-40-26" name="__codelineno-40-26" href="#__codelineno-40-26"></a>        <span class="p">],</span>
-</span><span id="__span-40-27"><a id="__codelineno-40-27" name="__codelineno-40-27" href="#__codelineno-40-27"></a>    <span class="p">)</span>
-</span><span id="__span-40-28"><a id="__codelineno-40-28" name="__codelineno-40-28" href="#__codelineno-40-28"></a>
-</span><span id="__span-40-29"><a id="__codelineno-40-29" name="__codelineno-40-29" href="#__codelineno-40-29"></a>
-</span><span id="__span-40-30"><a id="__codelineno-40-30" name="__codelineno-40-30" href="#__codelineno-40-30"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
-</span><span id="__span-40-31"><a id="__codelineno-40-31" name="__codelineno-40-31" href="#__codelineno-40-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
-</span><span id="__span-40-32"><a id="__codelineno-40-32" name="__codelineno-40-32" href="#__codelineno-40-32"></a><span class="c1">#&gt; cp1251</span>
-</span><span id="__span-40-33"><a id="__codelineno-40-33" name="__codelineno-40-33" href="#__codelineno-40-33"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
-</span><span id="__span-40-34"><a id="__codelineno-40-34" name="__codelineno-40-34" href="#__codelineno-40-34"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
-</span><span id="__span-40-35"><a id="__codelineno-40-35" name="__codelineno-40-35" href="#__codelineno-40-35"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
-</span><span id="__span-40-36"><a id="__codelineno-40-36" name="__codelineno-40-36" href="#__codelineno-40-36"></a><span class="c1">#&gt; cp1251</span>
-</span><span id="__span-40-37"><a id="__codelineno-40-37" name="__codelineno-40-37" href="#__codelineno-40-37"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
-</span><span id="__span-40-38"><a id="__codelineno-40-38" name="__codelineno-40-38" href="#__codelineno-40-38"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;yaml&#39;, &#39;yml&#39;, &#39;json&#39;]</span>
+</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>            <span class="s2">&quot;conf_dir&quot;</span><span class="p">,</span>
+</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a>            <span class="s2">&quot;conf_file&quot;</span><span class="p">,</span>
+</span><span id="__span-40-9"><a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a>        <span class="p">],</span>
+</span><span id="__span-40-10"><a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a>    <span class="p">)</span>
+</span><span id="__span-40-11"><a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a>
+</span><span id="__span-40-12"><a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a>
+</span><span id="__span-40-13"><a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-40-14"><a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
+</span><span id="__span-40-15"><a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a>
+</span><span id="__span-40-16"><a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-40-17"><a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a>        <span class="n">conf_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-40-18"><a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig.yml&quot;</span><span class="p">,</span>
+</span><span id="__span-40-19"><a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a>    <span class="p">)</span>
+</span><span id="__span-40-20"><a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a>
+</span><span id="__span-40-21"><a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a>
+</span><span id="__span-40-22"><a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
+</span><span id="__span-40-23"><a id="__codelineno-40-23" name="__codelineno-40-23" href="#__codelineno-40-23"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_dir</span><span class="p">)</span>
+</span><span id="__span-40-24"><a id="__codelineno-40-24" name="__codelineno-40-24" href="#__codelineno-40-24"></a><span class="c1">#&gt; None</span>
+</span><span id="__span-40-25"><a id="__codelineno-40-25" name="__codelineno-40-25" href="#__codelineno-40-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file</span><span class="p">)</span>
+</span><span id="__span-40-26"><a id="__codelineno-40-26" name="__codelineno-40-26" href="#__codelineno-40-26"></a><span class="c1">#&gt; appconfig.yml</span>
+</span><span id="__span-40-27"><a id="__codelineno-40-27" name="__codelineno-40-27" href="#__codelineno-40-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
+</span><span id="__span-40-28"><a id="__codelineno-40-28" name="__codelineno-40-28" href="#__codelineno-40-28"></a><span class="c1">#&gt; [PosixPath(&#39;appconfig.yml&#39;)]</span>
+</span><span id="__span-40-29"><a id="__codelineno-40-29" name="__codelineno-40-29" href="#__codelineno-40-29"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_dir</span><span class="p">)</span>
+</span><span id="__span-40-30"><a id="__codelineno-40-30" name="__codelineno-40-30" href="#__codelineno-40-30"></a><span class="c1">#&gt; config</span>
+</span><span id="__span-40-31"><a id="__codelineno-40-31" name="__codelineno-40-31" href="#__codelineno-40-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file</span><span class="p">)</span>
+</span><span id="__span-40-32"><a id="__codelineno-40-32" name="__codelineno-40-32" href="#__codelineno-40-32"></a><span class="c1">#&gt; config</span>
+</span><span id="__span-40-33"><a id="__codelineno-40-33" name="__codelineno-40-33" href="#__codelineno-40-33"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
+</span><span id="__span-40-34"><a id="__codelineno-40-34" name="__codelineno-40-34" href="#__codelineno-40-34"></a><span class="c1">#&gt; [PosixPath(&#39;config/child/config&#39;)]</span>
+</span></code></pre></div></p>
+<blockquote>
+<p><strong>Важно</strong>: Так как "обратно" наследуются абсолютно все параметры, то и <code>conf_exclude_inherit_parent</code> не сработает для <code class="language-python highlight"><span class="n">Child</span></code>, если в классе <code class="language-python highlight"><span class="n">Parent</span></code> тоже указан параметр <code>conf_exclude_inherit_parent</code>!!! Для этого его тоже нужно исключить из наследования. Пример:</p>
+</blockquote>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>            <span class="s2">&quot;conf_dir&quot;</span><span class="p">,</span>
+</span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>            <span class="s2">&quot;conf_file&quot;</span><span class="p">,</span>
+</span><span id="__span-41-6"><a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>            <span class="s2">&quot;conf_exclude_inherit_parent&quot;</span><span class="p">,</span>
+</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>        <span class="p">],</span>
+</span><span id="__span-41-8"><a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>    <span class="p">)</span>
+</span><span id="__span-41-9"><a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>
+</span><span id="__span-41-10"><a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>
+</span><span id="__span-41-11"><a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-41-12"><a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
+</span><span id="__span-41-13"><a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a>
+</span><span id="__span-41-14"><a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-41-15"><a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a>        <span class="n">conf_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-41-16"><a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig.yml&quot;</span><span class="p">,</span>
+</span><span id="__span-41-17"><a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-41-18"><a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
+</span><span id="__span-41-19"><a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a>        <span class="p">],</span>
+</span><span id="__span-41-20"><a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a>    <span class="p">)</span>
+</span><span id="__span-41-21"><a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a>
+</span><span id="__span-41-22"><a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
+</span></code></pre></div>
+<blockquote>
+<p><strong>Полезно</strong>: Для просмотра всех унаследованных параметров (собственных настроек) используйте свойство <a href="#inherited_params">inherited_params</a> - <code class="language-python highlight"><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">inherited_params</span><span class="p">)</span></code></p>
+</blockquote>
+<p>Файл <code>pyproject.toml</code>:</p>
+<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="k">[tool.arfi_settings]</span>
+</span><span id="__span-42-2"><a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-42-3"><a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="w">    </span><span class="s2">&quot;conf_file&quot;</span><span class="p">,</span><span class="w">                    </span><span class="c1"># (1)!</span>
+</span><span id="__span-42-4"><a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="w">    </span><span class="s2">&quot;conf_exclude_inherit_parent&quot;</span><span class="p">,</span><span class="w">  </span><span class="c1"># (2)!</span>
+</span><span id="__span-42-5"><a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="p">]</span>
+</span></code></pre></div>
+<ol>
+<li>Не наследовать название файла, из которого происходит чтение настроек по умолчанию</li>
+<li>Не наследовать исключённые параметры</li>
+</ol>
+<h3 id="conf_include_inherit_parent">conf_include_inherit_parent</h3>
+<p>Тип: <code class="language-python highlight"><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="p">[]</span></code></p>
+<p><strong>Что делает</strong>:</p>
+<p>В концепции обратного наследования запрещает наследование от класса-родителя всех собственных настроек, кроме указанных
+Применяется только для чтения файлов.</p>
+<p><strong>Использование</strong>:</p>
+<p>Например мы хотим унаследовать от родителя только расширения при чтении файлов:
+<div class="language-py highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
+</span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>
+</span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>
+</span><span id="__span-43-4"><a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-43-5"><a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-43-6"><a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-43-7"><a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
+</span><span id="__span-43-8"><a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a>        <span class="p">],</span>
+</span><span id="__span-43-9"><a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a>    <span class="p">)</span>
+</span><span id="__span-43-10"><a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>
+</span><span id="__span-43-11"><a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a>
+</span><span id="__span-43-12"><a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-43-13"><a id="__codelineno-43-13" name="__codelineno-43-13" href="#__codelineno-43-13"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
+</span><span id="__span-43-14"><a id="__codelineno-43-14" name="__codelineno-43-14" href="#__codelineno-43-14"></a>
+</span><span id="__span-43-15"><a id="__codelineno-43-15" name="__codelineno-43-15" href="#__codelineno-43-15"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-43-16"><a id="__codelineno-43-16" name="__codelineno-43-16" href="#__codelineno-43-16"></a>        <span class="n">conf_dir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-43-17"><a id="__codelineno-43-17" name="__codelineno-43-17" href="#__codelineno-43-17"></a>        <span class="n">conf_file</span><span class="o">=</span><span class="s2">&quot;appconfig&quot;</span><span class="p">,</span>
+</span><span id="__span-43-18"><a id="__codelineno-43-18" name="__codelineno-43-18" href="#__codelineno-43-18"></a>        <span class="n">conf_ext</span><span class="o">=</span><span class="s2">&quot;toml, json&quot;</span><span class="p">,</span>
+</span><span id="__span-43-19"><a id="__codelineno-43-19" name="__codelineno-43-19" href="#__codelineno-43-19"></a>    <span class="p">)</span>
+</span><span id="__span-43-20"><a id="__codelineno-43-20" name="__codelineno-43-20" href="#__codelineno-43-20"></a>
+</span><span id="__span-43-21"><a id="__codelineno-43-21" name="__codelineno-43-21" href="#__codelineno-43-21"></a>
+</span><span id="__span-43-22"><a id="__codelineno-43-22" name="__codelineno-43-22" href="#__codelineno-43-22"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
+</span><span id="__span-43-23"><a id="__codelineno-43-23" name="__codelineno-43-23" href="#__codelineno-43-23"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_dir</span><span class="p">)</span>
+</span><span id="__span-43-24"><a id="__codelineno-43-24" name="__codelineno-43-24" href="#__codelineno-43-24"></a><span class="c1">#&gt; None</span>
+</span><span id="__span-43-25"><a id="__codelineno-43-25" name="__codelineno-43-25" href="#__codelineno-43-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file</span><span class="p">)</span>
+</span><span id="__span-43-26"><a id="__codelineno-43-26" name="__codelineno-43-26" href="#__codelineno-43-26"></a><span class="c1">#&gt; appconfig</span>
+</span><span id="__span-43-27"><a id="__codelineno-43-27" name="__codelineno-43-27" href="#__codelineno-43-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
+</span><span id="__span-43-28"><a id="__codelineno-43-28" name="__codelineno-43-28" href="#__codelineno-43-28"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
+</span><span id="__span-43-29"><a id="__codelineno-43-29" name="__codelineno-43-29" href="#__codelineno-43-29"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
+</span><span id="__span-43-30"><a id="__codelineno-43-30" name="__codelineno-43-30" href="#__codelineno-43-30"></a><span class="c1">#&gt; [PosixPath(&#39;appconfig&#39;)]</span>
+</span><span id="__span-43-31"><a id="__codelineno-43-31" name="__codelineno-43-31" href="#__codelineno-43-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_dir</span><span class="p">)</span>
+</span><span id="__span-43-32"><a id="__codelineno-43-32" name="__codelineno-43-32" href="#__codelineno-43-32"></a><span class="c1">#&gt; config</span>
+</span><span id="__span-43-33"><a id="__codelineno-43-33" name="__codelineno-43-33" href="#__codelineno-43-33"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file</span><span class="p">)</span>
+</span><span id="__span-43-34"><a id="__codelineno-43-34" name="__codelineno-43-34" href="#__codelineno-43-34"></a><span class="c1">#&gt; config</span>
+</span><span id="__span-43-35"><a id="__codelineno-43-35" name="__codelineno-43-35" href="#__codelineno-43-35"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
+</span><span id="__span-43-36"><a id="__codelineno-43-36" name="__codelineno-43-36" href="#__codelineno-43-36"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
+</span><span id="__span-43-37"><a id="__codelineno-43-37" name="__codelineno-43-37" href="#__codelineno-43-37"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">conf_path</span><span class="p">)</span>
+</span><span id="__span-43-38"><a id="__codelineno-43-38" name="__codelineno-43-38" href="#__codelineno-43-38"></a><span class="c1">#&gt; [PosixPath(&#39;config/child/config&#39;)]</span>
+</span></code></pre></div></p>
+<blockquote>
+<p><strong>Важно</strong>: Так как "обратно" наследуются абсолютно все параметры, то и <code>conf_include_inherit_parent</code> не сработает для <code class="language-python highlight"><span class="n">Child</span></code>, если в классе <code class="language-python highlight"><span class="n">Parent</span></code> тоже указан параметр <code>conf_include_inherit_parent</code>!!! Для этого его нужно исключить из наследования. Пример:</p>
+</blockquote>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-44-1"><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-44-2"><a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-44-3"><a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-44-4"><a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
+</span><span id="__span-44-5"><a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a>        <span class="p">],</span>
+</span><span id="__span-44-6"><a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-44-7"><a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a>            <span class="s2">&quot;conf_include_inherit_parent&quot;</span><span class="p">,</span>
+</span><span id="__span-44-8"><a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a>        <span class="p">],</span>
+</span><span id="__span-44-9"><a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a>    <span class="p">)</span>
+</span><span id="__span-44-10"><a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a>
+</span><span id="__span-44-11"><a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a>
+</span><span id="__span-44-12"><a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-44-13"><a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
+</span><span id="__span-44-14"><a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a>
+</span><span id="__span-44-15"><a id="__codelineno-44-15" name="__codelineno-44-15" href="#__codelineno-44-15"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-44-16"><a id="__codelineno-44-16" name="__codelineno-44-16" href="#__codelineno-44-16"></a>        <span class="n">conf_file_encoding</span><span class="o">=</span><span class="s2">&quot;cp1251&quot;</span><span class="p">,</span>
+</span><span id="__span-44-17"><a id="__codelineno-44-17" name="__codelineno-44-17" href="#__codelineno-44-17"></a>        <span class="n">conf_ext</span><span class="o">=</span><span class="s2">&quot;toml, json&quot;</span><span class="p">,</span>
+</span><span id="__span-44-18"><a id="__codelineno-44-18" name="__codelineno-44-18" href="#__codelineno-44-18"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-44-19"><a id="__codelineno-44-19" name="__codelineno-44-19" href="#__codelineno-44-19"></a>            <span class="s2">&quot;conf_file_encoding&quot;</span><span class="p">,</span>
+</span><span id="__span-44-20"><a id="__codelineno-44-20" name="__codelineno-44-20" href="#__codelineno-44-20"></a>        <span class="p">],</span>
+</span><span id="__span-44-21"><a id="__codelineno-44-21" name="__codelineno-44-21" href="#__codelineno-44-21"></a>    <span class="p">)</span>
+</span><span id="__span-44-22"><a id="__codelineno-44-22" name="__codelineno-44-22" href="#__codelineno-44-22"></a>
+</span><span id="__span-44-23"><a id="__codelineno-44-23" name="__codelineno-44-23" href="#__codelineno-44-23"></a>
+</span><span id="__span-44-24"><a id="__codelineno-44-24" name="__codelineno-44-24" href="#__codelineno-44-24"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
+</span><span id="__span-44-25"><a id="__codelineno-44-25" name="__codelineno-44-25" href="#__codelineno-44-25"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
+</span><span id="__span-44-26"><a id="__codelineno-44-26" name="__codelineno-44-26" href="#__codelineno-44-26"></a><span class="c1">#&gt; cp1251</span>
+</span><span id="__span-44-27"><a id="__codelineno-44-27" name="__codelineno-44-27" href="#__codelineno-44-27"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
+</span><span id="__span-44-28"><a id="__codelineno-44-28" name="__codelineno-44-28" href="#__codelineno-44-28"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
+</span><span id="__span-44-29"><a id="__codelineno-44-29" name="__codelineno-44-29" href="#__codelineno-44-29"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
+</span><span id="__span-44-30"><a id="__codelineno-44-30" name="__codelineno-44-30" href="#__codelineno-44-30"></a><span class="c1">#&gt; None</span>
+</span><span id="__span-44-31"><a id="__codelineno-44-31" name="__codelineno-44-31" href="#__codelineno-44-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
+</span><span id="__span-44-32"><a id="__codelineno-44-32" name="__codelineno-44-32" href="#__codelineno-44-32"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
+</span></code></pre></div>
+<blockquote>
+<p><strong>Важно</strong>: Параметр <code>conf_exclude_inherit_parent</code> имеет приоритет над <code>conf_include_inherit_parent</code> и тоже наследуется! Если какой-либо параметр указан и там и там, то этот параметр НЕ будет включен в список наследуемых:
+<div class="language-py highlight"><pre><span></span><code><span id="__span-45-1"><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
+</span><span id="__span-45-2"><a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>
+</span><span id="__span-45-3"><a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>
+</span><span id="__span-45-4"><a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-45-5"><a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-45-6"><a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-45-7"><a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
+</span><span id="__span-45-8"><a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a>        <span class="p">],</span>
+</span><span id="__span-45-9"><a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-45-10"><a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a>            <span class="s2">&quot;conf_include_inherit_parent&quot;</span><span class="p">,</span>
+</span><span id="__span-45-11"><a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a>        <span class="p">],</span>
+</span><span id="__span-45-12"><a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a>    <span class="p">)</span>
+</span><span id="__span-45-13"><a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a>
+</span><span id="__span-45-14"><a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a>
+</span><span id="__span-45-15"><a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-45-16"><a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
+</span><span id="__span-45-17"><a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a>
+</span><span id="__span-45-18"><a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-45-19"><a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a>        <span class="n">conf_file_encoding</span><span class="o">=</span><span class="s2">&quot;cp1251&quot;</span><span class="p">,</span>
+</span><span id="__span-45-20"><a id="__codelineno-45-20" name="__codelineno-45-20" href="#__codelineno-45-20"></a>        <span class="n">conf_ext</span><span class="o">=</span><span class="s2">&quot;toml, json&quot;</span><span class="p">,</span>
+</span><span id="__span-45-21"><a id="__codelineno-45-21" name="__codelineno-45-21" href="#__codelineno-45-21"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-45-22"><a id="__codelineno-45-22" name="__codelineno-45-22" href="#__codelineno-45-22"></a>            <span class="s2">&quot;conf_file_encoding&quot;</span><span class="p">,</span>
+</span><span id="__span-45-23"><a id="__codelineno-45-23" name="__codelineno-45-23" href="#__codelineno-45-23"></a>        <span class="p">],</span>
+</span><span id="__span-45-24"><a id="__codelineno-45-24" name="__codelineno-45-24" href="#__codelineno-45-24"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-45-25"><a id="__codelineno-45-25" name="__codelineno-45-25" href="#__codelineno-45-25"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
+</span><span id="__span-45-26"><a id="__codelineno-45-26" name="__codelineno-45-26" href="#__codelineno-45-26"></a>        <span class="p">],</span>
+</span><span id="__span-45-27"><a id="__codelineno-45-27" name="__codelineno-45-27" href="#__codelineno-45-27"></a>    <span class="p">)</span>
+</span><span id="__span-45-28"><a id="__codelineno-45-28" name="__codelineno-45-28" href="#__codelineno-45-28"></a>
+</span><span id="__span-45-29"><a id="__codelineno-45-29" name="__codelineno-45-29" href="#__codelineno-45-29"></a>
+</span><span id="__span-45-30"><a id="__codelineno-45-30" name="__codelineno-45-30" href="#__codelineno-45-30"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
+</span><span id="__span-45-31"><a id="__codelineno-45-31" name="__codelineno-45-31" href="#__codelineno-45-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
+</span><span id="__span-45-32"><a id="__codelineno-45-32" name="__codelineno-45-32" href="#__codelineno-45-32"></a><span class="c1">#&gt; cp1251</span>
+</span><span id="__span-45-33"><a id="__codelineno-45-33" name="__codelineno-45-33" href="#__codelineno-45-33"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
+</span><span id="__span-45-34"><a id="__codelineno-45-34" name="__codelineno-45-34" href="#__codelineno-45-34"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
+</span><span id="__span-45-35"><a id="__codelineno-45-35" name="__codelineno-45-35" href="#__codelineno-45-35"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
+</span><span id="__span-45-36"><a id="__codelineno-45-36" name="__codelineno-45-36" href="#__codelineno-45-36"></a><span class="c1">#&gt; cp1251</span>
+</span><span id="__span-45-37"><a id="__codelineno-45-37" name="__codelineno-45-37" href="#__codelineno-45-37"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
+</span><span id="__span-45-38"><a id="__codelineno-45-38" name="__codelineno-45-38" href="#__codelineno-45-38"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;yaml&#39;, &#39;yml&#39;, &#39;json&#39;]</span>
 </span></code></pre></div></p>
 </blockquote>
 <p>Чтоб отключить такое поведение и добиться того же результата, что и в примере выше, нужно сделать следующее:</p>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
-</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>
-</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>
-</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-41-6"><a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
-</span><span id="__span-41-8"><a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>        <span class="p">],</span>
-</span><span id="__span-41-9"><a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-41-10"><a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>            <span class="s2">&quot;conf_include_inherit_parent&quot;</span><span class="p">,</span>
-</span><span id="__span-41-11"><a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a>            <span class="s2">&quot;conf_exclude_inherit_parent&quot;</span><span class="p">,</span>  <span class="c1"># (1)!</span>
-</span><span id="__span-41-12"><a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>        <span class="p">],</span>
-</span><span id="__span-41-13"><a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a>    <span class="p">)</span>
-</span><span id="__span-41-14"><a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a>
-</span><span id="__span-41-15"><a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a>
-</span><span id="__span-41-16"><a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
-</span><span id="__span-41-17"><a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
-</span><span id="__span-41-18"><a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a>
-</span><span id="__span-41-19"><a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
-</span><span id="__span-41-20"><a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a>        <span class="n">conf_file_encoding</span><span class="o">=</span><span class="s2">&quot;cp1251&quot;</span><span class="p">,</span>
-</span><span id="__span-41-21"><a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a>        <span class="n">conf_ext</span><span class="o">=</span><span class="s2">&quot;toml, json&quot;</span><span class="p">,</span>
-</span><span id="__span-41-22"><a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-41-23"><a id="__codelineno-41-23" name="__codelineno-41-23" href="#__codelineno-41-23"></a>            <span class="s2">&quot;conf_file_encoding&quot;</span><span class="p">,</span>
-</span><span id="__span-41-24"><a id="__codelineno-41-24" name="__codelineno-41-24" href="#__codelineno-41-24"></a>        <span class="p">],</span>
-</span><span id="__span-41-25"><a id="__codelineno-41-25" name="__codelineno-41-25" href="#__codelineno-41-25"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
-</span><span id="__span-41-26"><a id="__codelineno-41-26" name="__codelineno-41-26" href="#__codelineno-41-26"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
-</span><span id="__span-41-27"><a id="__codelineno-41-27" name="__codelineno-41-27" href="#__codelineno-41-27"></a>        <span class="p">],</span>
-</span><span id="__span-41-28"><a id="__codelineno-41-28" name="__codelineno-41-28" href="#__codelineno-41-28"></a>    <span class="p">)</span>
-</span><span id="__span-41-29"><a id="__codelineno-41-29" name="__codelineno-41-29" href="#__codelineno-41-29"></a>
-</span><span id="__span-41-30"><a id="__codelineno-41-30" name="__codelineno-41-30" href="#__codelineno-41-30"></a>
-</span><span id="__span-41-31"><a id="__codelineno-41-31" name="__codelineno-41-31" href="#__codelineno-41-31"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
-</span><span id="__span-41-32"><a id="__codelineno-41-32" name="__codelineno-41-32" href="#__codelineno-41-32"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
-</span><span id="__span-41-33"><a id="__codelineno-41-33" name="__codelineno-41-33" href="#__codelineno-41-33"></a><span class="c1">#&gt; cp1251</span>
-</span><span id="__span-41-34"><a id="__codelineno-41-34" name="__codelineno-41-34" href="#__codelineno-41-34"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
-</span><span id="__span-41-35"><a id="__codelineno-41-35" name="__codelineno-41-35" href="#__codelineno-41-35"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
-</span><span id="__span-41-36"><a id="__codelineno-41-36" name="__codelineno-41-36" href="#__codelineno-41-36"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
-</span><span id="__span-41-37"><a id="__codelineno-41-37" name="__codelineno-41-37" href="#__codelineno-41-37"></a><span class="c1">#&gt; None</span>
-</span><span id="__span-41-38"><a id="__codelineno-41-38" name="__codelineno-41-38" href="#__codelineno-41-38"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
-</span><span id="__span-41-39"><a id="__codelineno-41-39" name="__codelineno-41-39" href="#__codelineno-41-39"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-46-1"><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">FileConfigDict</span>
+</span><span id="__span-46-2"><a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a>
+</span><span id="__span-46-3"><a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>
+</span><span id="__span-46-4"><a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-46-5"><a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-46-6"><a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-46-7"><a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
+</span><span id="__span-46-8"><a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a>        <span class="p">],</span>
+</span><span id="__span-46-9"><a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-46-10"><a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a>            <span class="s2">&quot;conf_include_inherit_parent&quot;</span><span class="p">,</span>
+</span><span id="__span-46-11"><a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>            <span class="s2">&quot;conf_exclude_inherit_parent&quot;</span><span class="p">,</span>  <span class="c1"># (1)!</span>
+</span><span id="__span-46-12"><a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>        <span class="p">],</span>
+</span><span id="__span-46-13"><a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a>    <span class="p">)</span>
+</span><span id="__span-46-14"><a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a>
+</span><span id="__span-46-15"><a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>
+</span><span id="__span-46-16"><a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
+</span><span id="__span-46-17"><a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
+</span><span id="__span-46-18"><a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a>
+</span><span id="__span-46-19"><a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a>    <span class="n">file_config</span> <span class="o">=</span> <span class="n">FileConfigDict</span><span class="p">(</span>
+</span><span id="__span-46-20"><a id="__codelineno-46-20" name="__codelineno-46-20" href="#__codelineno-46-20"></a>        <span class="n">conf_file_encoding</span><span class="o">=</span><span class="s2">&quot;cp1251&quot;</span><span class="p">,</span>
+</span><span id="__span-46-21"><a id="__codelineno-46-21" name="__codelineno-46-21" href="#__codelineno-46-21"></a>        <span class="n">conf_ext</span><span class="o">=</span><span class="s2">&quot;toml, json&quot;</span><span class="p">,</span>
+</span><span id="__span-46-22"><a id="__codelineno-46-22" name="__codelineno-46-22" href="#__codelineno-46-22"></a>        <span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-46-23"><a id="__codelineno-46-23" name="__codelineno-46-23" href="#__codelineno-46-23"></a>            <span class="s2">&quot;conf_file_encoding&quot;</span><span class="p">,</span>
+</span><span id="__span-46-24"><a id="__codelineno-46-24" name="__codelineno-46-24" href="#__codelineno-46-24"></a>        <span class="p">],</span>
+</span><span id="__span-46-25"><a id="__codelineno-46-25" name="__codelineno-46-25" href="#__codelineno-46-25"></a>        <span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-46-26"><a id="__codelineno-46-26" name="__codelineno-46-26" href="#__codelineno-46-26"></a>            <span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span>
+</span><span id="__span-46-27"><a id="__codelineno-46-27" name="__codelineno-46-27" href="#__codelineno-46-27"></a>        <span class="p">],</span>
+</span><span id="__span-46-28"><a id="__codelineno-46-28" name="__codelineno-46-28" href="#__codelineno-46-28"></a>    <span class="p">)</span>
+</span><span id="__span-46-29"><a id="__codelineno-46-29" name="__codelineno-46-29" href="#__codelineno-46-29"></a>
+</span><span id="__span-46-30"><a id="__codelineno-46-30" name="__codelineno-46-30" href="#__codelineno-46-30"></a>
+</span><span id="__span-46-31"><a id="__codelineno-46-31" name="__codelineno-46-31" href="#__codelineno-46-31"></a><span class="n">config</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">()</span>
+</span><span id="__span-46-32"><a id="__codelineno-46-32" name="__codelineno-46-32" href="#__codelineno-46-32"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
+</span><span id="__span-46-33"><a id="__codelineno-46-33" name="__codelineno-46-33" href="#__codelineno-46-33"></a><span class="c1">#&gt; cp1251</span>
+</span><span id="__span-46-34"><a id="__codelineno-46-34" name="__codelineno-46-34" href="#__codelineno-46-34"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
+</span><span id="__span-46-35"><a id="__codelineno-46-35" name="__codelineno-46-35" href="#__codelineno-46-35"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
+</span><span id="__span-46-36"><a id="__codelineno-46-36" name="__codelineno-46-36" href="#__codelineno-46-36"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_file_encoding</span><span class="p">)</span>
+</span><span id="__span-46-37"><a id="__codelineno-46-37" name="__codelineno-46-37" href="#__codelineno-46-37"></a><span class="c1">#&gt; None</span>
+</span><span id="__span-46-38"><a id="__codelineno-46-38" name="__codelineno-46-38" href="#__codelineno-46-38"></a><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">settings_config</span><span class="o">.</span><span class="n">conf_ext</span><span class="p">)</span>
+</span><span id="__span-46-39"><a id="__codelineno-46-39" name="__codelineno-46-39" href="#__codelineno-46-39"></a><span class="c1">#&gt; [&#39;toml&#39;, &#39;json&#39;]</span>
 </span></code></pre></div>
 <ol>
 <li>Исключаем из наследования <code>conf_exclude_inherit_parent</code> параметр.</li>
@@ -1794,6 +1833,18 @@
 <blockquote>
 <p><strong>Полезно</strong>: Для просмотра всех унаследованных параметров (собственных настроек) используйте свойство <a href="#inherited_params">inherited_params</a> - <code class="language-python highlight"><span class="nb">print</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">inherited_params</span><span class="p">)</span></code></p>
 </blockquote>
+<p>Файл <code>pyproject.toml</code>:</p>
+<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-47-1"><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="k">[tool.arfi_settings]</span>
+</span><span id="__span-47-2"><a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="n">conf_include_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-47-3"><a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="w">    </span><span class="s2">&quot;conf_ext&quot;</span><span class="p">,</span><span class="w">                    </span><span class="c1"># (1)!</span>
+</span><span id="__span-47-4"><a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="p">]</span>
+</span><span id="__span-47-5"><a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="n">conf_exclude_inherit_parent</span><span class="o">=</span><span class="p">[</span>
+</span><span id="__span-47-6"><a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="w">    </span><span class="s2">&quot;conf_include_inherit_parent&quot;</span><span class="p">,</span>
+</span><span id="__span-47-7"><a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a><span class="p">]</span>
+</span></code></pre></div>
+<ol>
+<li>Наследовать только расширения файлов</li>
+</ol>
 
 
 
