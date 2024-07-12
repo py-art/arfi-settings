@@ -51,16 +51,6 @@
     <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
-
-
-  
-  
-
-<script id="__analytics">function __md_analytics(){function n(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],n("js",new Date),n("config","G-RP4PM5PGLN"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){this.value&&n("event","search",{search_term:this.value})}),document$.subscribe(function(){var a=document.forms.feedback;if(void 0!==a)for(var e of a.querySelectorAll("[type=submit]"))e.addEventListener("click",function(e){e.preventDefault();var t=document.location.pathname,e=this.getAttribute("data-md-value");n("event","feedback",{page:t,data:e}),a.firstElementChild.disabled=!0;e=a.querySelector(".md-feedback__note [data-md-value='"+e+"']");e&&(e.hidden=!1)}),a.hidden=!1}),location$.subscribe(function(e){n("config","G-RP4PM5PGLN",{page_path:e.pathname})})});var e=document.createElement("script");e.async=!0,e.src="https://www.googletagmanager.com/gtag/js?id=G-RP4PM5PGLN",document.getElementById("__analytics").insertAdjacentElement("afterEnd",e)}</script>
-  
-    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
-  
 
     
     
@@ -549,6 +539,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#arfi_debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      arfi_debug
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pyprojecttoml" class="md-nav__link">
     <span class="md-ellipsis">
       Включение в файле pyproject.toml
@@ -720,6 +719,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#arfi_debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      arfi_debug
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pyprojecttoml" class="md-nav__link">
     <span class="md-ellipsis">
       Включение в файле pyproject.toml
@@ -764,6 +772,9 @@
 <blockquote>
 <p>На данный момент имеет минимальный функционал. Находится на стадии разработки.</p>
 </blockquote>
+<h2 id="arfi_debug">arfi_debug</h2>
+<p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code>
+Значение по умолчанию: <code class="language-python highlight"><span class="kc">False</span></code></p>
 <h2 id="pyprojecttoml">Включение в файле <code>pyproject.toml</code></h2>
 <div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[tool.arfi_settings]</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">arfi_debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
@@ -789,8 +800,6 @@
 
 
 
-
-  
 
 
 
