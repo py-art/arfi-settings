@@ -6,6 +6,7 @@
 ## arfi_debug
 
 Тип: `#!python bool`
+
 Значение по умолчанию: `#!python False`
 
 ## Включение в файле `pyproject.toml`
