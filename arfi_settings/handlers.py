@@ -718,7 +718,7 @@ class ArFiBaseHandler(ABC):
 
         valid_conf_custom_ext_handler = {}
         error_message = (
-            f"{self.settings_class.__class__.__name__}: `conf_ext` contains empty string, "
+            f"{self.settings_class.__class__.__name__}: `conf_ext` contains empty extension, "
             f"but `conf_custom_ext_handler` is not defined"
         )
         if conf_custom_ext_handler is None or conf_custom_ext_handler == "":
