@@ -3,6 +3,7 @@
 ## read_config
 
 Тип: `#!python bool`
+
 Значение по умолчанию: `#!python True`
 
 **Что делает**:
@@ -32,6 +33,7 @@ config = AppConfig(_read_config=False)
 ## read_config_force
 
 Тип: `#!python bool | None`
+
 Значение по умолчанию: `#!python None`
 
 **Что делает**:
@@ -59,6 +61,7 @@ config = AppConfig(_read_config_force=False)
 ## read_pyproject_toml
 
 Тип: `#!python bool`
+
 Значение по умолчанию: `#!python True`
 
 **Что делает**:
@@ -86,6 +89,7 @@ config = AppConfig(_read_pyproject_toml=False)
 ## mode_dir
 
 Тип: `#!python str | Path | None`
+
 Значение по умолчанию: `#!python Path('')`
 
 **Что делает**:
@@ -155,6 +159,7 @@ print(config.app.conf_path)
 ## mode_dir_inherit_nested
 
 Тип: `#!python bool`
+
 Значение по умолчанию: `#!python True`
 
 **Что делает**:
@@ -203,6 +208,7 @@ print(config.database.mode_dir)
 print(config.database.conf_path)
 #> [PosixPath('config/postgres/config')]
 ```
+
 Файл `pyproject.toml`:
 
 ```toml title="pyproject.toml"
@@ -214,6 +220,7 @@ mode_dir_inherit_nested = false
 ## mode_dir_inherit_parent
 
 Тип: `#!python bool`
+
 Значение по умолчанию: `#!python True`
 
 **Что делает**:
@@ -269,6 +276,7 @@ mode_dir_inherit_parent = false
 ## file_config
 
 Тип: `#!python arfi_settings.types.FileConfig`
+
 Значение по умолчанию: `#!python arfi_settings.schemes.FileConfigSchema().conf_dict()`
 
 **Что делает**:
@@ -289,6 +297,7 @@ class AppConfig(ArFiSettings):
 ### conf_dir
 
 Тип: `#!python Union[Path, str, List[Union[Path, str]], Tuple[Union[Path, str], ...], None]`
+
 Значение по умолчанию: `#!python "config"`
 
 **Что делает**:
@@ -340,6 +349,7 @@ conf_dir = "settings/config"  # (1)!
 ### conf_file
 
 Тип: `#!python Union[Path, str, List[Union[Path, str]], Tuple[Union[Path, str], ...], None]`
+
 Значение по умолчанию: `#!python "config"`
 
 **Что делает**:
@@ -422,6 +432,7 @@ conf_file = ""  # (1)!
 ### conf_ext
 
 Тип: `#!python str | list[str]`
+
 Значение по умолчанию: `#!python ["toml", "yaml", "yml" "json"]`
 
 **Что делает**:
@@ -458,6 +469,7 @@ conf_ext = ["json"]  # (1)!
 ### conf_custom_ext_handler
 
 Тип: `#!python str | dict[str, str] | None`
+
 Значение по умолчанию: `#!python None`
 
 **Что делает**:
@@ -508,10 +520,20 @@ print(config.file_config)
 3. Здесь указываем обработчик для файлов без расширения. Вместо длинного названия `my_empty_ext_handler` можно написать коротко - `my_empty`.
 4. Здесь указываем, что все файлы с расширением `*.asd` должны быть обработаны как `toml`.
 
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+conf_custom_ext_handler = "yaml"  # (1)!
+```
+
+1. Здесь говорим, что все файлы без расширения читать как `yaml`-файлы.
+
 
 ### conf_file_encoding
 
 Тип: `#!python str | None`
+
 Значение по умолчанию: `#!python None  # utf-8`
 
 **Что делает**:
@@ -528,10 +550,20 @@ class AppConfig(ArFiSettings):
     )
 ```
 
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+conf_file_encoding = "cp1251"  # (1)!
+```
+
+1. Задаём кодировку `cp1251` для всех файлов конфигурации
+
 
 ### conf_case_sensitive
 
 Тип: `#!python bool`
+
 Значение по умолчанию: `#!python False`
 
 **Что делает**:
@@ -616,10 +648,20 @@ My_Param
 
 1. Чувствительный к регистру поиск. Требуется точное совпадение
 
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+conf_case_sensitive = true  # (1)!
+```
+
+1. Читать только точное совпадение имён (чувствительное к регистру) во всех файлах конфигурации
+
 
 ### conf_ignore_missing
 
 Тип: `#!python bool`
+
 Значение по умолчанию: `#!python True`
 
 **Что делает**:
@@ -673,10 +715,20 @@ arfi_settings.errors.ArFiSettingsError: File not found: `/home/user/my_awesome_p
 
 1. Требуется обязательное наличие всех файлов, указанных в `conf_file`!
 
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+conf_ignore_missing = false  # (1)!
+```
+
+1. Все файлы конфигурации должны существовать
+
 
 ### conf_exclude_inherit_parent
 
 Тип: `#!python list[str]`
+
 Значение по умолчанию: `#!python []`
 
 **Что делает**:
@@ -753,10 +805,24 @@ config = Parent()
 
 > **Полезно**: Для просмотра всех унаследованных параметров (собственных настроек) используйте свойство [inherited_params](#inherited_params) - `#!python print(config.inherited_params)`
 
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+conf_exclude_inherit_parent=[
+    "conf_file",                    # (1)!
+    "conf_exclude_inherit_parent",  # (2)!
+]
+```
+
+1. Не наследовать название файла, из которого происходит чтение настроек по умолчанию
+2. Не наследовать исключённые параметры
+
 
 ### conf_include_inherit_parent
 
 Тип: `#!python list[str]`
+
 Значение по умолчанию: `#!python []`
 
 **Что делает**:
@@ -935,3 +1001,17 @@ print(config.child.settings_config.conf_ext)
 1. Исключаем из наследования `conf_exclude_inherit_parent` параметр.
 
 > **Полезно**: Для просмотра всех унаследованных параметров (собственных настроек) используйте свойство [inherited_params](#inherited_params) - `#!python print(config.inherited_params)`
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+conf_include_inherit_parent=[
+    "conf_ext",                    # (1)!
+]
+conf_exclude_inherit_parent=[
+    "conf_include_inherit_parent",
+]
+```
+
+1. Наследовать только расширения файлов
