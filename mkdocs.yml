@@ -90,9 +90,4 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
 
-extra:
-  analytics:
-    provider: google
-    property: G-RP4PM5PGLN
-
 copyright: Copyright &copy; 2024 Artur Filin
