@@ -43,6 +43,7 @@ from .types import (
     PathType,
     SettingsConfigDict,
 )
+from .utils import is_descriptor
 
 
 class ArFiSettings(BaseModel):
@@ -245,6 +246,10 @@ class ArFiSettings(BaseModel):
         cls.read_config_force = ReadConfigForceDeskriptor(cls._read_config_force)
         cls._read_pyproject_toml = cls.read_pyproject_toml
         cls.read_pyproject_toml = ReadPyProjectTomlDeskriptor(cls._read_pyproject_toml)
+        if is_descriptor(cls, "mode_dir"):
+            # The classic inheritance of the `mode_dir` parameter is disabled,
+            # since it participates in reverse inheritance.
+            cls.mode_dir = DEFAULT_PATH_SENTINEL
         cls._mode_dir = cls.mode_dir
         cls.mode_dir = ModeDirDescriptor(cls._mode_dir)
         cls.mode_dir_inherit_parent = ModeDirInheritParentDescriptor(cls._mode_dir_inherit_parent)

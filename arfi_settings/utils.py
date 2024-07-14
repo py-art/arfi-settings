@@ -26,6 +26,7 @@ __all__ = [
     "allow_json_parse_failure",
     "validate_cli_reader",
     "clean_value",
+    "is_descriptor",
 ]
 
 
@@ -216,3 +217,12 @@ def clean_value(data: dict[str, Any] | list[Any]) -> dict[str, Any]:
             v = str(v)
         new_data[k] = v
     return new_data
+
+
+def is_descriptor(obj, name: str):
+    """Simple check if an attribute is a descriptor."""
+
+    value = inspect.getattr_static(obj, name)
+    if getattr(type(value), "__get__", None):
+        return True
+    return False
