@@ -1,5 +1,78 @@
 # Основные настройки
 
+
+## BASE_DIR
+
+Тип: `#!python Path | str | None`
+
+Значение по умолчанию: `#!python None`
+
+**Что делает**:
+
+Указывает на базовую директорию проекта. Автоматически определяется один раз для всего проекта. Не наследуется в концепции обратного наследования. Есть возможность указать вручную для конкретного класса.
+
+**Принцип автоматического определения**:
+
+При первой инициализации любого подкласса `ArFiSettings` происходит поиск в текущей директории файл `__init__.py`. Если этот файл найден, то поднимаемся на директорию выше и снова ищем файл `__init__.py`. Если такого файла нет, то поиск останавливается. Последняя директория, в которой был найден файл `__init__.py` - это будет базовая директория проекта.
+
+**Использование**:
+
+Структура проекта
+```
+~/my-awesome-project
+├── src
+│  └── my_awesome_project
+│     ├── settings
+│     │  ├── __init__.py
+│     │  └── settings.py
+│     ├── __init__.py
+│     └── main.py
+└── pyproject.toml
+```
+
+Автоматическое определение
+
+```py title="my-awesome-project/src/my_awesome_project/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+```
+
+```py title="my-awesome-project/src/my_awesome_project/main.py"
+from settings.settings import config
+
+
+print(config.BASE_DIR)
+#> /home/user/my-awesome-project/src/my_awesome_project
+```
+
+Ручное указание
+
+```py title="my-awesome-project/src/my_awesome_project/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    BASE_DIR = "~/my-awesome-project/src/my_awesome_project"
+
+
+config = AppConfig()
+```
+
+```py title="my-awesome-project/src/my_awesome_project/main.py"
+from settings.settings import config
+
+
+print(config.BASE_DIR)
+#> /home/user/my-awesome-project/src/my_awesome_project
+```
+
+
 ## read_config
 
 Тип: `#!python bool`
@@ -98,6 +171,10 @@ config = AppConfig(_read_pyproject_toml=False)
 2. При чтении переменных окружения может использоваться как префикс.
 
 Если не задано в явном виде, то определяется автоматически по имени атрибута в классе-родителе в концепции обратного наследования.
+
+> **Заметка**: Не наследуется классическим способом, потому что участвует в обратном наследовании.
+
+Для более глубокого понимания назначения можно почитать описание параметров [conf_path](#conf_path) и [env_prefix_as_source_mode_dir](#env_prefix_as_source_mode_dir)
 
 **Использование**:
 
@@ -275,7 +352,7 @@ mode_dir_inherit_parent = false
 
 ## file_config
 
-Тип: `#!python arfi_settings.types.FileConfig`
+Тип: `#!python arfi_settings.types.FileConfigDict`
 
 Значение по умолчанию: `#!python arfi_settings.schemes.FileConfigSchema().conf_dict()`
 
@@ -286,10 +363,10 @@ mode_dir_inherit_parent = false
 **Использование**:
 
 ```py
-from arfi_settings import ArFiSettings, FileConfig
+from arfi_settings import ArFiSettings, FileConfigDict
 
 class AppConfig(ArFiSettings):
-    file_config = FileConfig(
+    file_config = FileConfigDict(
         conf_dir = "settings/config",
     )
 ```
@@ -362,7 +439,7 @@ conf_dir = "settings/config"  # (1)!
 **Использование**:
 
 ```py
-from arfi_settings import ArFiSettings, FileConfigDict
+from arfi_settings import ArFiSettings, FFileConfigDictileConfigDict
 
 class AppConfig(ArFiSettings):
     file_config = FileConfigDict(
@@ -734,7 +811,7 @@ conf_ignore_missing = false  # (1)!
 **Что делает**:
 
 В концепции обратного наследования запрещает наследование определённых собственных настроек от класса-родителя
-Применяется только для чтения файлов.
+Применяется только при чтении файлов конфигурации.
 
 **Использование**:
 
@@ -827,8 +904,8 @@ conf_exclude_inherit_parent=[
 
 **Что делает**:
 
-В концепции обратного наследования запрещает наследование от класса-родителя всех собственных настроек, кроме указанных
-Применяется только для чтения файлов.
+В концепции обратного наследования запрещает наследование от класса-родителя всех собственных настроек, кроме указанных.
+Применяется только при чтении файлов конфигураций.
 
 **Использование**:
 
@@ -912,6 +989,7 @@ print(config.child.settings_config.conf_ext)
 ```
 
 > **Важно**: Параметр `conf_exclude_inherit_parent` имеет приоритет над `conf_include_inherit_parent` и тоже наследуется! Если какой-либо параметр указан и там и там, то этот параметр НЕ будет включен в список наследуемых:
+
 ```py
 from arfi_settings import ArFiSettings, FileConfigDict
 
@@ -952,7 +1030,6 @@ print(config.child.settings_config.conf_file_encoding)
 print(config.child.settings_config.conf_ext)
 #> ['toml', 'yaml', 'yml', 'json']
 ```
-
 
 Чтоб отключить такое поведение и добиться того же результата, что и в примере выше, нужно сделать следующее:
 
@@ -1015,3 +1092,1179 @@ conf_exclude_inherit_parent=[
 ```
 
 1. Наследовать только расширения файлов
+
+
+## env_config
+
+Тип: `#!python arfi_settings.types.EnvConfigDict`
+
+Значение по умолчанию: `#!python arfi_settings.schemes.EnvConfigSchema().env_dict()`
+
+**Что делает**:
+
+Настройки, которые описывают правила чтения переменных окружения.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+class AppConfig(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_nested_delimiter = "__",
+    )
+```
+
+### env_file
+
+Тип: `#!python Union[Path, str, List[Union[Path, str]], Tuple[Union[Path, str], ...], None]`
+
+Значение по умолчанию: `#!python ".env"`
+
+**Что делает**:
+
+Файл или список файлов из которых будут читаться переменные окружения. Если указан список файлов, то значения, указанные в последнем файле из этого списка, будут переопределять переменные, указанные в предыдущих файлах. Файлы можно указывать строкой, через запятую.
+
+**Поиск файлов**:
+
+Сначала происходит поиск файла в главной директории проекта [root_dir](#root_dir). Если файл не найден, то поиск происходит в базовой директории проекта [BASE_DIR](#BASE_DIR)
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class AppConfig(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_file = ".env, .env.prod",
+    )
+```
+
+
+Файл `pyproject.toml`:
+
+- Указание нескольких файлов
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_file = [".env", ".env.local", ".env.production"]
+```
+- Отключение чтения переменных окружения из файла
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_file = ""
+```
+
+
+### env_prefix
+
+Тип: `#!python str`
+
+Значение по умолчанию: `#!python ""`
+
+**Что делает**:
+
+При поиске переменных окружение подставляет указанное значение в начало имени переменной.
+
+**Использование**:
+
+```txt title=".env"
+APP_NAME="My Awesome App"
+```
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+class AppConfig(ArFiSettings):
+    NAME: str
+    env_config = EnvConfigDict(
+        env_prefix = "APP_",
+    )
+
+config = AppConfig()
+print(config.NAME)
+#> My Awesome App
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_prefix = "MyPrefix--"
+```
+
+
+### env_prefix_as_mode_dir
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python False`
+
+**Что делает**:
+
+При поиске переменных окружение подставляет [computed_mode_dir](#computed_mode_dir) - вычисляемое значение параметра [mode_dir](#mode_dir) в начало имени переменной.
+
+> **Внимание**: Переопределяет значение, указанное в [env_prefix](#env_prefix) !!!
+
+**Использование**:
+
+```txt title=".env"
+PARENT_NESTED_APP_NAME="My Application Name"
+```
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class NestedConfig(ArFiSettings):
+    mode_dir = "nested"
+
+
+class AppSettings(NestedConfig):
+    name: str
+
+
+class AppConfig(ArFiSettings):
+    app: AppSettings
+
+    mode_dir = "parent"
+    env_config = EnvConfigDict(
+        env_prefix_as_mode_dir = True,
+    )
+
+
+config = AppConfig()
+print(config.app.mode_dir)
+#> nested/app
+print(config.app.computed_mode_dir)
+#> parent/nested/app
+print(config.app.settings_config.env_prefix)
+#> parent_nested_app_
+print(config.app.name)
+#> My Application Name
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_prefix_as_mode_dir = true
+```
+
+### env_prefix_as_nested_mode_dir
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python False`
+
+**Что делает**:
+
+При поиске переменных окружение подставляет [mode_dir](#mode_dir) в начало имени переменной.
+
+> **Внимание**: Переопределяет значение, указанное в [env_prefix](#env_prefix) и в [env_prefix_as_mode_dir](#env_prefix_as_mode_dir) !!!
+
+**Использование**:
+
+```txt title=".env"
+NESTED_APP_NAME="My Application Name"
+```
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class NestedConfig(ArFiSettings):
+    mode_dir = "nested"
+
+
+class AppSettings(NestedConfig):
+    name: str
+
+
+class AppConfig(ArFiSettings):
+    app: AppSettings
+
+    mode_dir = "parent"
+    env_config = EnvConfigDict(
+        env_prefix_as_nested_mode_dir = True,
+    )
+
+
+config = AppConfig()
+print(config.app.mode_dir)
+#> nested/app
+print(config.app.nested_mode_dir)
+#> nested
+print(config.app.settings_config.env_prefix)
+#> nested_app_
+print(config.app.name)
+#> My Application Name
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_prefix_as_nested_mode_dir = true
+```
+
+### env_prefix_as_source_mode_dir
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python False`
+
+**Что делает**:
+
+При поиске переменных окружение подставляет [mode_dir](#mode_dir) в начало имени переменной.
+
+> **Внимание**: Переопределяет значение, указанное в [env_prefix](#env_prefix), [env_prefix_as_mode_dir](#env_prefix_as_mode_dir) и в [env_prefix_as_nested_mode_dir](#env_prefix_as_nested_mode_dir)!!!
+
+**Использование**:
+
+```txt title=".env"
+APP_NAME="My Application Name"
+```
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class NestedConfig(ArFiSettings):
+    mode_dir = "nested"
+
+
+class AppSettings(NestedConfig):
+    name: str
+
+
+class AppConfig(ArFiSettings):
+    app: AppSettings
+
+    mode_dir = "parent"
+    env_config = EnvConfigDict(
+        env_prefix_as_source_mode_dir = True,
+    )
+
+
+config = AppConfig()
+print(config.app.mode_dir)
+#> nested/app
+print(config.app.source_mode_dir)
+#> app
+print(config.app.settings_config.env_prefix)
+#> app_
+print(config.app.name)
+#> My Application Name
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_prefix_as_source_mode_dir = true
+```
+
+### env_nested_delimiter
+Тип: `#!python str`
+
+Значение по умолчанию: `#!python ""`
+
+**Что делает**:
+
+При классическом наследовании если классы наследуются от `#!python pydantic.BaseModel` - то в названии переменной окружения при множественном вложении используется разделитель `__`, который отделяет имена атрибутов или их алиасы друг от друга.
+
+**Использование**:
+
+```txt title=".env"
+NAME="Travel map"
+COUNTRY__NAME="Russia"
+COUNTRY__CITY__NAME="Moscow"
+COUNTRY__CITY__STREET__NAME="Arbat Street"
+```
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+from pydantic import AliasChoices, BaseModel, Field
+
+
+class Street(BaseModel):
+    short_name: str = Field(..., validation_alias=AliasChoices("Name", "StName", "street_name"))
+
+
+class City(BaseModel):
+    name: str
+    street: Street
+
+
+class Country(ArFiSettings):
+    name: str
+    city: City
+
+    env_config = EnvConfigDict(
+        env_nested_delimiter="--*--",
+        env_exclude_inherit_parent=[
+            "env_nested_delimiter",
+        ],
+    )
+
+
+class AppConfig(ArFiSettings):
+    PROJECT_NAME: str = Field(..., alias="name")
+    country: Country
+
+    mode_dir = "parent"
+    env_config = EnvConfigDict(
+        env_nested_delimiter = "__",
+    )
+
+
+config = AppConfig()
+print(config.PROJECT_NAME)
+#> Travel map
+print(config.country.name)
+#> Russia
+print(config.country.city.name)
+#> Moscow
+print(config.country.city.street.short_name)
+#> Arbat Street
+```
+
+Прелесть обратного наследования заключается в том, что для классов-детей можно переопределять или задавать собственные настройки и они также будут работать.
+Например здесь в классах `#!python AppConfig` и `#!python Country` указан совершенно разный `env_nested_delimiter`. По умолчанию главнее те настройки, которые указаны в самом классе.
+По этому мы можем дописать файл `.env`, как показано ниже, и получим совершенно другой результат.
+
+```txt title=".env"
+NAME="Travel map"
+COUNTRY__NAME="Russia"
+COUNTRY__CITY__NAME="Moscow"
+COUNTRY__CITY__STREET__NAME="Arbat Street"
+
+COUNTRY--*--NAME="Belarus"
+COUNTRY--*--CITY--*--NAME="Minsk"
+COUNTRY--*--CITY--*--STREET--*--NAME="Niamiha Street"
+```
+```py
+config = AppConfig()
+print(config.PROJECT_NAME)
+#> Travel map
+print(config.country.name)
+#> Belarus
+print(config.country.city.name)
+#> Minsk
+print(config.country.city.street.short_name)
+#> Niamiha Street
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_nested_delimiter = "__"
+```
+
+### env_file_encoding
+
+Тип: `#!python str | None`
+
+Значение по умолчанию: `#!python None  # utf-8`
+
+**Что делает**:
+
+Задаёт кодировку при чтении переменных окружения из файлов. Применяется сразу ко всем файлам, указанным в [env_file](#env_file)
+
+**Использование**:
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+class AppConfig(ArFiSettings):
+    env_config = FileConfigDict(
+        env_file_encoding="cp1251",
+    )
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_file_encoding = "cp1251"
+```
+
+### env_case_sensitive
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python False`
+
+**Что делает**:
+
+Указывает нужно ли обращать внимание на регистр имени при чтении переменных окружения.
+Хотя по умолчанию переменные читаются как регистронезависимые, но приоритет всегда отдаётся точному совпадению, даже при множественной вложенности моделей!
+
+Никаких ошибок возбуждаться НЕ будет, даже если вы ошиблись в написании имени переменной! Все имена переменных, не соответствующие критериям поиска будут проигнорированы!
+
+**Использование**:
+
+На самом деле это достаточно сложная тема, так как алгоритмы поиска немного отличаются друг от друга в зависимости от вариантов вложенности моделей. Возможно позже в документации будет создана отдельная тема, посвящённая этому. В дальнейшем, в обязательном порядке, это будет включено в режим отладки. А пока постараюсь объяснить вкратце.
+
+Есть всего 3 варианта условий множественной вложенности моделей:
+
+1. Все вложенные модели наследуются от класса `#!python pydantic.BaseModel`. Это самый простой классический вариант.
+2. Все вложенные модели наследуются от класса `#!python arfi_settings.ArFiSettings`.
+3. Комбинация первых двух вариантов.
+
+Сложность заключается в том, что если вложенные модели наследуются от `#!python arfi_settings.ArFiSettings`, то у каждой такой модели могут быть свои собственные настройки для чтения переменных окружения, которые имеют приоритет, но при этом так же будут применяться настройки, указанные в классе-родителе в парадигме обратного наследования.
+
+При таком поведении значение для одного и того же атрибута класса можно указать множеством имён переменных окружения. А если у этого атрибута есть ещё и несколько алиасов, то при регисторонезависимом поиске количество вариантов имён переменных окружения возрастает в несколько раз.
+
+Все эти алгоритмы поиска уже реализованы. Ниже будут рассмотрены первые 2 варианта.
+
+1. Все вложенные модели наследуются от класса `#!python pydantic.BaseModel`.
+
+    * **Исходная модель**:
+
+    ```py title="settings.py"
+    from arfi_settings import ArFiSettings, EnvConfigDict
+    from pydantic import BaseModel
+
+
+    class Street(BaseModel):
+        Name: str
+
+
+    class City(BaseModel):
+        Street: Street
+
+
+    class Country(BaseModel):
+        City: City
+
+
+    class AppConfig(ArFiSettings):
+        Country: Country
+
+        env_config = EnvConfigDict(
+            env_case_sensitive=False,   # by default
+            env_nested_delimiter="__",
+        )
+    ```
+
+    * **Задача**:
+
+    Нужно указать переменную окружения для `#!python Street.Name`.
+
+    * **Решение**:
+
+    Самое простое решение, которое сработает только при `#!pyhton env_case_sensitive=False`, которое установлено по умолчанию:
+    ```txt title=".env"
+    COUNTRY__CITY__STREET__NAME="Awesome Street"
+    ```
+    ```py title="settings.py"
+    config = AppConfig()
+    print(config.Country.City.Street.Name)
+    #> Awesome Street
+    ```
+
+    Вариант, который ОДИНАКОВО сработает и при `#!pyhton env_case_sensitive=True` и при `#!pyhton env_case_sensitive=False`:
+    ```txt title=".env"
+    COUNTRY__CITY__STREET__NAME="Awesome Street"
+    Country__City__Street__Name="Awesome Street exactly match aliases names"
+    ```
+    ```py title="settings.py"
+    config = AppConfig()
+    print(config.Country.City.Street.Name)
+    #> Awesome Street exactly match aliases names
+    ```
+
+    При `#!pyhton env_case_sensitive=True` будет произведён поиск только по имени переменной `Country__City__Street__Name`, остальные переменные будут проигнорированы.
+
+    Ниже приведены примеры всех возможных вариантов имён переменных окружения при регистронезависимом поиске, `#!pyhton env_case_sensitive=False`, указанные в порядке возрастания приоритета поиска. Где 0 - имеет самый низший приоритет, а 16 - наивысший.
+
+    > **Заметка**: В приведённом конкретном примере у каждого атрибута есть 2 алиаса, по которым производится поиск - это его имя и его имя в нижнем регистре.
+
+    ```txt title=".env"
+    # Не имеют приоритета, потому что не совпадают ни с одним вариантом поиска,
+    # но будут прочитаны, если нет совпадений с вариантами поиска
+    COUNTRY__CITY__STREET__NAME="Awesome Street - 0"
+    couNTry__citY__StreeT__nAMe="Awesome Street - 0"
+    country__city__street__NAME="Awesome Street - 0"
+
+    # Ниже варианты, по которым происходит поиск, в порядке повышения приоритета
+    country__city__street__name="Awesome Street - 1"
+    country__city__street__Name="Awesome Street - 2"
+    country__city__street__Name="Awesome Street - 3"
+    country__city__Street__Name="Awesome Street - 4"
+    country__City__street__name="Awesome Street - 5"
+    country__City__street__Name="Awesome Street - 6"
+    country__City__Street__name="Awesome Street - 7"
+    country__City__Street__Name="Awesome Street - 8"
+    Country__city__street__name="Awesome Street - 9"
+    Country__city__street__Name="Awesome Street - 10"
+    Country__city__street__Name="Awesome Street - 11"
+    Country__city__Street__Name="Awesome Street - 12"
+    Country__City__street__name="Awesome Street - 13"
+    Country__City__street__Name="Awesome Street - 14"
+    Country__City__Street__name="Awesome Street - 15"
+    Country__City__Street__Name="Awesome Street - 16"
+    ```
+
+    ```py title="settings.py"
+    config = AppConfig()
+    print(config.Country.City.Street.Name)
+    #> Awesome Street - 16
+    ```
+
+2. Все вложенные модели наследуются от класса `#!python arfi_settings.ArFiSettings`.
+
+    * **Исходная модель**:
+
+    > **Заметка**: Разделители выбраны чисто из соображения наглядности.
+
+    ```py title="settings.py"
+    from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+    class Street(ArFiSettings):
+        Name: str
+
+        env_config = EnvConfigDict(
+            env_case_sensitive=False,   # by default
+            env_nested_delimiter="--*--",
+        )
+
+
+    class City(ArFiSettings):
+        Street: Street
+
+        env_config = EnvConfigDict(
+            env_case_sensitive=False,   # by default
+            env_nested_delimiter="--^--",
+        )
+
+
+    class Country(ArFiSettings):
+        City: City
+
+        env_config = EnvConfigDict(
+            env_case_sensitive=False,   # by default
+            env_nested_delimiter="--@--",
+            env_exclude_inherit_parent=[
+                "env_nested_delimiter",
+            ],
+        )
+
+
+    class AppConfig(ArFiSettings):
+        Country: Country
+
+        env_config = EnvConfigDict(
+            env_case_sensitive=False,   # by default
+            env_nested_delimiter="__",
+        )
+    ```
+
+    * **Задача**:
+
+    Нужно указать переменную окружения для `#!python Street.Name`.
+
+    * **Решение**:
+
+    Самое простое решение, которое сработает только при `#!pyhton env_case_sensitive=False`, которое установлено по умолчанию:
+    ```txt title=".env"
+    COUNTRY__CITY__STREET__NAME="Awesome Street"
+    ```
+    ```py title="settings.py"
+    config = AppConfig()
+    print(config.Country.City.Street.Name)
+    #> Awesome Street
+    ```
+
+    Вариант, который ОДИНАКОВО сработает и при `#!pyhton env_case_sensitive=True` и при `#!pyhton env_case_sensitive=False`:
+    ```txt title=".env"
+    COUNTRY__CITY__STREET__NAME="Awesome Street"
+    Country--*--City--*--Street--*--Name="Awesome Street exactly match aliases names"
+    ```
+
+    ```py title="settings.py"
+    config = AppConfig()
+    print(config.Country.City.Street.Name)
+    #> Awesome Street exactly match aliases names
+    ```
+
+    * **Отличия от первого варианта**:
+
+    Здесь для каждой вложенной модели указан свой собственный разделитель.
+    Порядок разрешения имён будет точно таким же как и в первом варианте при наследовании всех вложенных моделей от `#!python pydantic.BaseModel`.
+    Но порядок приоритета разделителей определяется правилами обратного наследования. То есть чтоб указать имя переменной среды окружения для атрибута `#!python Street.Name` можно использовать любой разделитель из "`__`", "`--@--`", "`--^--`", "`--*--`", но разделитель "`--*--`" будет иметь наивысший приоритет, так как он указан непосредственно в классе `Street` и атрибут `Name` принадлежит именно к этому классу, а разделитель "`__`" будет иметь самый низший приоритет, так как он принадлежит классу-родителю в иерархии обратного наследование.
+
+    Такое поведение реализуется в силу того, что ВСЕ вложенные модели наследуются от `#!python arfi_settings.ArFiSettings`, а значит для каждой вложенной модели происходить поиск переменных окружения и каждое найденное значение передаётся по иерархии выше от класса-родителя к классу-ребёнку в концепции обратного наследования!
+
+    В приведённом ниже примере в именах переменных окружения порядок алиасов имеет наивысший приоритет не зависимо от выставленного значения чувствительности к регистру. Но здесь уже вступает в силу правило обратного наследования, которое задаёт приоритет разделителю:
+    ```txt title=".env"
+
+    Country__City__Street__Name="Awesome Street exactly match aliases names - 1"
+    Country--@--City--@--Street--@--Name="Awesome Street exactly match aliases names - 2"
+    Country--^--City--^--Street--^--Name="Awesome Street exactly match aliases names - 3"
+    Country--*--City--*--Street--*--Name="Awesome Street exactly match aliases names - 4"
+    ```
+
+    ```py title="settings.py"
+    config = AppConfig()
+    print(config.Country.City.Street.Name)
+    #> Awesome Street exactly match aliases names - 4
+    ```
+
+    Данное поведение можно отключить, просто запретив читать переменные окружения для класса `Country` и всех его потомков в концепции обратного наследования. То есть, чтоб переменные окружения читались только для класса `AppConfig`.
+
+    Это можно сделать следующим образом, при наличии тех же самых переменных окружения, что указаны выше:
+    ```py title="settings.py"
+    class Country(ArFiSettings):
+        City: City
+
+        ordered_settings = [
+            "cli",
+            "init_kwargs",
+            "secrets",
+            "conf_file",
+        ]
+
+
+    config = AppConfig()
+    print(config.Country.City.Street.Name)
+    #> Awesome Street exactly match aliases names - 1
+    ```
+
+    Вариантов использования настолько много, что можно запутаться. По этому и планируется дальнейшее развитие режима отладки, чтоб хотя бы можно было посмотреть, какие варианты ожидает получить программа и какой вариант будет приоритетнее.
+
+
+> **Важно**: Не стоит забывать, что в приведённых выше примерах, переменную окружения можно задать следующего вида:
+`Country='{"City": {"Street": {"Name": "Awesome Street"}}}'` и на неё будут распространятся те же правила разрешения имён в зависимости от регистра!!!
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_case_sensitive = true
+```
+
+### env_ignore_missing
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python True`
+
+**Что делает**:
+
+По умолчанию, если файлы, заданные в [env_file](#env_file) не существуют, то их чтение игнорируется.  Но если требуется, чтоб файл или файлы обязательно присутствовали, то необходимо параметр `env_ignore_missing` установить в значение `False`.
+Так же можно использовать в качестве своеобразного отладчика - в сообщении об ошибке будет указано какой именно файл и по какому пути отсутствует.
+
+**Использование**:
+
+Поведение по умолчанию. Отсутствие файла `.env` не приводит к ошибке
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class AppConfig(ArFiSettings):
+    my_param: str = "default_param"
+    env_config = EnvConfigDict(
+        env_file=".env",            # by default
+        env_ignore_missing=True,    # by default
+    )
+
+
+config = AppConfig()
+print(config.my_param)
+#> default_param
+```
+
+При отсутствии файла `.env` возбуждается ошибка
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class AppConfig(ArFiSettings):
+    my_param: str = "default_param"
+    env_config = EnvConfigDict(
+        env_file=".env",            # by default
+        env_ignore_missing=False,
+    )
+
+
+config = AppConfig()
+print(config.my_param)
+"""
+Traceback (most recent call last):
+    ...
+arfi_settings.errors.ArFiSettingsError: File not found: `/home/user/my_awesome_project/.env`
+"""
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_ignore_missing = false
+```
+
+
+### env_exclude_inherit_parent
+
+Тип: `#!python list[str]`
+
+Значение по умолчанию: `#!python []`
+
+**Что делает**:
+
+В концепции обратного наследования запрещает наследование определённых собственных настроек от класса-родителя
+Применяется только при чтении переменных окружения
+
+**Использование**:
+
+Например мы хотим унаследовать от родителя все настройки, кроме `env_file_encoding` и `env_nested_delimiter`
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class Child(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_exclude_inherit_parent=[
+            "env_file_encoding",
+            "env_nested_delimiter",
+        ],
+    )
+
+class Parent(ArFiSettings):
+    child: Child
+
+    env_config = EnvConfigDict(
+        env_file=".env, .env.prod",
+        env_prefix="APP_",
+        env_file_encoding="cp1251",
+        env_nested_delimiter="__",
+    )
+
+config = Parent()
+print(config.settings_config.env_file_encoding)
+#> cp1251
+print(config.settings_config.env_nested_delimiter)
+#> "__"
+print(config.child.settings_config.env_file_encoding)
+#> None
+print(config.child.settings_config.env_nested_delimiter)
+#> ""
+```
+
+> **Важно**: Так как "обратно" наследуются абсолютно все параметры, то и `env_exclude_inherit_parent` не сработает для `#!python Child`, если в классе `#!python Parent` тоже указан параметр `env_exclude_inherit_parent`!!! Для этого его тоже нужно исключить из наследования. Пример:
+
+```py
+class Child(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_exclude_inherit_parent=[
+            "env_file_encoding",
+            "env_nested_delimiter",
+            "env_exclude_inherit_parent",
+        ],
+    )
+
+class Parent(ArFiSettings):
+    child: Child
+
+    env_config = EnvConfigDict(
+        env_file=".env, .env.prod",
+        env_prefix="APP_",
+        env_file_encoding="cp1251",
+        env_nested_delimiter="__",
+        env_exclude_inherit_parent=[
+            "env_file",
+        ],
+    )
+
+config = Parent()
+```
+
+> **Полезно**: Для просмотра всех унаследованных параметров (собственных настроек) используйте свойство [inherited_params](#inherited_params) - `#!python print(config.inherited_params)`
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_exclude_inherit_parent=[
+    "env_prefix",
+    "env_exclude_inherit_parent",
+]
+```
+
+
+### env_include_inherit_parent
+
+Тип: `#!python list[str]`
+
+Значение по умолчанию: `#!python []`
+
+**Что делает**:
+
+В концепции обратного наследования запрещает наследование от класса-родителя всех собственных настроек, кроме указанных.
+Применяется только при чтении переменных окружения.
+
+**Использование**:
+
+Например мы хотим унаследовать от родителя только префикс:
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class Child(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_include_inherit_parent=[
+            "env_prefix",
+        ],
+    )
+
+
+class Parent(ArFiSettings):
+    child: Child
+
+    env_config = EnvConfigDict(
+        env_file=".env, .env.prod",
+        env_prefix="APP_",
+        env_file_encoding="cp1251",
+        env_nested_delimiter="__",
+    )
+
+config = Parent()
+print(config.settings_config.env_file)
+#> .env, .env.prod
+print(config.settings_config.env_prefix)
+#> APP_
+print(config.settings_config.env_file_encoding)
+#> cp1251
+print(config.settings_config.env_nested_delimiter)
+#> "__"
+print(config.child.settings_config.env_file)
+#> .env
+print(config.child.settings_config.env_prefix)
+#> APP_
+print(config.child.settings_config.env_file_encoding)
+#> None
+print(config.child.settings_config.env_nested_delimiter)
+#> ""
+```
+
+> **Важно**: Так как "обратно" наследуются абсолютно все параметры, то и `env_include_inherit_parent` не сработает для `#!python Child`, если в классе `#!python Parent` тоже указан параметр `env_include_inherit_parent`!!! Для этого его нужно исключить из наследования. Пример:
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class Child(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_include_inherit_parent=[
+            "env_prefix",
+        ],
+        env_exclude_inherit_parent=[
+            "env_include_inherit_parent",
+        ],
+    )
+
+
+class Parent(ArFiSettings):
+    child: Child
+
+    env_config = EnvConfigDict(
+        env_file=".env, .env.prod",
+        env_prefix="APP_",
+        env_file_encoding="cp1251",
+        env_nested_delimiter="__",
+        env_include_inherit_parent=[
+            "env_file",
+        ],
+    )
+
+config = Parent()
+print(config.settings_config.env_file)
+#> .env, .env.prod
+print(config.settings_config.env_prefix)
+#> APP_
+print(config.settings_config.env_file_encoding)
+#> cp1251
+print(config.settings_config.env_nested_delimiter)
+#> "__"
+print(config.child.settings_config.env_file)
+#> .env
+print(config.child.settings_config.env_prefix)
+#> APP_
+print(config.child.settings_config.env_file_encoding)
+#> None
+print(config.child.settings_config.env_nested_delimiter)
+#> ""
+```
+
+> **Важно**: Параметр `env_exclude_inherit_parent` имеет приоритет над `env_include_inherit_parent` и тоже наследуется! Если какой-либо параметр указан и там и там, то этот параметр НЕ будет включен в список наследуемых:
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class Child(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_include_inherit_parent=[
+            "env_prefix",
+        ],
+        env_exclude_inherit_parent=[
+            "env_include_inherit_parent",
+        ],
+    )
+
+
+class Parent(ArFiSettings):
+    child: Child
+
+    env_config = EnvConfigDict(
+        env_file=".env, .env.prod",
+        env_prefix="APP_",
+        env_include_inherit_parent=[
+            "env_file",
+        ],
+        env_exclude_inherit_parent=[
+            "env_prefix",
+        ],
+    )
+
+config = Parent()
+print(config.settings_config.env_file)
+#> .env, .env.prod
+print(config.settings_config.env_prefix)
+#> APP_
+print(config.child.settings_config.env_file)
+#> .env, .env.prod
+print(config.child.settings_config.env_prefix)
+#> ""
+```
+
+Чтоб отключить такое поведение и добиться того же результата, что и в примере выше, нужно сделать следующее:
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class Child(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_include_inherit_parent=[
+            "env_prefix",
+        ],
+        env_exclude_inherit_parent=[
+            "env_include_inherit_parent",
+            "env_exclude_inherit_parent",   # (1)!
+        ],
+    )
+
+
+class Parent(ArFiSettings):
+    child: Child
+
+    env_config = EnvConfigDict(
+        env_file=".env, .env.prod",
+        env_prefix="APP_",
+        env_include_inherit_parent=[
+            "env_file",
+        ],
+        env_exclude_inherit_parent=[
+            "env_prefix",
+        ],
+    )
+
+config = Parent()
+print(config.settings_config.env_file)
+#> .env, .env.prod
+print(config.settings_config.env_prefix)
+#> APP_
+print(config.child.settings_config.env_file)
+#> .env, .env.prod
+print(config.child.settings_config.env_prefix)
+#> ""
+```
+
+1. Исключаем из наследования `env_exclude_inherit_parent` параметр.
+
+> **Полезно**: Для просмотра всех унаследованных параметров (собственных настроек) используйте свойство [inherited_params](#inherited_params) - `#!python print(config.inherited_params)`
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_include_inherit_parent=[
+    "env_prefix",
+]
+env_exclude_inherit_parent=[
+    "env_include_inherit_parent",
+]
+```
+
+
+## model_config
+
+Тип: `#!python arfi_settings.types.SettingsConfigDict`
+
+Значение по умолчанию: `#!python arfi_settings.schemes.SettingsConfigSchema().config_model_dict()`
+
+**Общая информация**:
+
+Содержит все настройки `#!python pydantic.ConfigDict`, такие как `extra`, `arbitrary_types_allowed` и т.д. Поддерживает все настройки, входящие в `file_config` и `env_config`. А так же имеет дополнительные собственные настройки, относящиеся к `arfi-settings`.
+
+**Что делает**:
+
+Единое пространство для описания всех настроек модели.
+
+> **Важно**: Настройки, указанные в `file_config` и `env_config` будут переопределять те же настройки, указанные в `model_config`.
+
+**Использование**:
+
+### case_sensitive
+### ignore_missing
+### encoding
+### cli
+### secrets_dir
+### exclude_inherit_parent
+### include_inherit_parent
+
+## Свойства (property)
+
+### root_dir
+
+Тип: `#!python Path | str | None`
+
+Значение по умолчанию: `#!python None`
+
+**Что делает**:
+
+Указывает на главную директорию проекта. Автоматически определяется один раз для всего проекта. Нет возможности указать вручную.
+
+**Принцип автоматического определения**:
+
+Сначала происходит поиск файла `pyproject.toml` с максимальной глубиной поиска по умолчанию на 3 директории ВВЕРХ от файла, где происходит инициализация инстанса главных настроек. Если файл `pyproject.toml` найден, главной директорией проекта считается та, в которой лежит этот файл. Если файл `pyproject.toml` не найден, то главной директорией проекта считается родительская директория для [BASE_DIR](#BASE_DIR)
+
+**Использование**:
+
+1. Файл `pyproject.toml` существует
+
+Структура проекта:
+```
+~/my-awesome-project
+├── src
+│  └── my_awesome_project
+│     ├── __init__.py
+│     └── main.py
+└── pyproject.toml
+```
+
+```py title="~/my-awesome-project/src/my_awesome_project/main.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+print(config.root_dir)
+#> /home/user/my-awesome-project
+```
+
+2. Файл `pyproject.toml` отсутствует
+
+Структура проекта:
+```
+~/my-awesome-project
+└── src
+   └── my_awesome_project
+      ├── __init__.py
+      └── main.py
+```
+
+```py title="~/my-awesome-project/src/my_awesome_project/main.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+print(config.root_dir)
+#> /home/user/my-awesome-project/src
+```
+
+### conf_path
+
+Тип: `#!python list[Path]`
+
+Значение по умолчанию: `#!python []`
+
+**Что делает**:
+
+Вычисляемое значение. На основе указанных параметров `conf_dir`, `mode_dir` и `conf_file` вычисляет список путей к конфигурационным файлам для данного класса. При этом значения параметров, указанные в файле по последнему пути из этого списка всегда будут переопределять значения из предыдущих файлов.
+
+Основной принцип построения путей:
+```
+conf_dir/mode_dir/conf_file
+```
+При сложной структуре в концепции обратного наследования пути строятся по следующему принципу:
+```
+conf_dir/parent_mode_dir/nested_mode_dir/source_mode_dir/conf_file
+```
+где:
+
+- conf_dir - путь к директории конфигурации
+- parent_mode_dir - вычисляемое значение `mode_dir` класса-родителя в концепции обратного наследования
+- nested_mode_dir - точное значение `mode_dir` параметра класса, от которого наследуется текущий класс, в концепции классического наследования
+- source_mode_dir - точное значение `mode_dir` параметра исходного класса
+- conf_file - значение `conf_file`, указанное в исходном классе, т.е. имя файла конфигурации
+
+**Использование**:
+
+Простое использование
+```py
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+print(config.conf_path)
+#> [PosixPath('config/config')]
+```
+
+Использование в концепции обратного наследования
+```py
+from arfi_settings import ArFiSettings
+
+
+class NestedConfig(ArFiSettings):
+    mode_dir = "nested_mode_dir"
+
+
+class ChildConfig(NestedConfig):
+    mode_dir = "source_mode_dir"
+
+
+class ParentConfig(ArFiSettings):
+    mode_dir = "parent_mode_dir"
+    child: ChildConfig
+
+
+config = ParentConfig()
+print(config.conf_path)
+#> [PosixPath('config/parent_mode_dir/config')]
+print(config.child.conf_path)
+#> [PosixPath('config/parent_mode_dir/nested_mode_dir/source_mode_dir/config')]
+```
+
+
+### env_path
+
+### computed_mode_dir
