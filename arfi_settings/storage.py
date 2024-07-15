@@ -182,6 +182,7 @@ class InstanceConfig(BaseModel):
             _file_config_inherit_parent,
             _env_config_inherit_parent,
             _ordered_settings_inherit_parent,
+            _handler_inherit_parent,
         )
         if self.mode_dir == DEFAULT_PATH_SENTINEL:
             if self.mode_dir_attr and self.mode_dir_attr != DEFAULT_PATH_SENTINEL:
@@ -199,7 +200,9 @@ class InstanceConfig(BaseModel):
             _read_config=_read_config,
             _read_config_force=_read_config_force,
         )
-        self.handler = _kwargs.pop("_handler")
+        handler = _kwargs.pop("_handler")
+        if handler:
+            self.handler = handler
         if self.values_by_default:
             self.values_by_default.update(values)
             values = self.values_by_default
@@ -241,7 +244,7 @@ class InstanceConfig(BaseModel):
                 )
 
         self.pyproject_toml_path = init_settings.pyproject_toml_path
-        self._setup_class_vars_from_pyproject_toml_or_by_default(instance)
+        self._setup_class_vars_from_pyproject_toml_or_by_default()
         self._setup_config_dict_variables_from_pyproject_toml_or_by_default()
         ################ END PYPROJECT ################
 
@@ -294,6 +297,7 @@ class InstanceConfig(BaseModel):
         _file_config_inherit_parent: bool = None,
         _env_config_inherit_parent: bool = None,
         _ordered_settings_inherit_parent: bool = None,
+        _handler_inherit_parent: bool = None,
     ) -> None:
         """Setup params from handler."""
 
@@ -320,28 +324,34 @@ class InstanceConfig(BaseModel):
         _handler_search_base_dir = values.get("_handler_search_base_dir")
         if _handler_search_base_dir is not None:
             self.search_base_dir = _handler_search_base_dir
+        if _handler_main_handler := values.get("_handler_main_handler"):
+            if self.handler_inherit_parent and _handler_inherit_parent is not False:
+                self.handler = _handler_main_handler
 
-    def _setup_class_vars_from_pyproject_toml_or_by_default(self, instance: "ArFiSettings") -> None:
+    def _setup_class_vars_from_pyproject_toml_or_by_default(self) -> None:
         """Re-reads variables depending on the current path of the pyproject.toml file."""
 
         pyproject_or_default_fields = init_settings.init_params.model_fields
         # Fields explicitly set by the user in the class
-        modified_class_vars = instance._modified_class_vars
+        modified_class_vars = self.instance._modified_class_vars
         # for field_name in self.model_fields.keys():
         for field_name in self.model_fields.keys():
             if field_name in pyproject_or_default_fields:
                 instance_field_name = f"_{field_name}"
-                if hasattr(instance, instance_field_name):
+                if hasattr(self.instance, instance_field_name):
                     if field_name not in modified_class_vars:
                         field_value = getattr(init_settings.init_params, field_name)
                     else:
-                        field_value = getattr(instance, instance_field_name)
+                        field_value = getattr(self.instance, instance_field_name)
+                    if field_name == "handler":
+                        if field_value != self.handler and self.handler != "default_main_handler":
+                            field_value = self.handler
                     setattr(self, field_name, field_value)
 
         self.base_dir = init_settings.base_dir
         self.root_dir = init_settings.root_dir
-        if not self.base_dir and not self.search_base_dir and instance.BASE_DIR:
-            self.base_dir = instance.BASE_DIR
+        if not self.base_dir and not self.search_base_dir and self.instance.BASE_DIR:
+            self.base_dir = self.instance.BASE_DIR
 
     def _setup_config_dict_variables_from_pyproject_toml_or_by_default(self) -> None:
         """Re-reads variables depending on the current path of the pyproject.toml file."""
@@ -530,6 +540,9 @@ class InstanceConfig(BaseModel):
             return
         # setup class constants
         self.instance = instance
+        if isinstance(instance.handler, str):
+            self.handler = instance.handler
+        self.handler_inherit_parent = instance.handler_inherit_parent
         self.handler_class = instance.handler_class
         self.read_config = instance.read_config
         self.read_config_force = instance.read_config_force

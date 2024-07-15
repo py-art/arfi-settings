@@ -823,6 +823,7 @@ def test_prefix_as_mode_dir_with_discriminator_env(monkeypatch, cwd_to_tmp, path
     assert config.db.DATABASE == "postgres_default_database"
 
     monkeypatch.setenv("DB_DIALECT", "mysql")
+
     config = AppConfig()
     assert config.db.mode_dir == "db/mysql"
     assert config.db.DIALECT == "mysql"
@@ -919,6 +920,7 @@ def test_prefix_as_mode_dir_with_discriminator_env(monkeypatch, cwd_to_tmp, path
     assert config.db.DATABASE == "db_postgres_DATABASE"
 
     class PostgresMODIFYED_2222(Postgres):
+        mode_dir = "postgres"
         mode_dir_inherit_nested = False
         env_config_inherit_parent = False
         env_config = EnvConfigDict(
