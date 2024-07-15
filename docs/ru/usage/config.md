@@ -436,6 +436,10 @@ conf_dir = "settings/config"  # (1)!
 То есть, если параметр `conf_file` не имеет расширения, то происходит поиск до первого найденного файла по порядку с раширением из `CONFIG_EXT_DEFAULT` или из переданного параметра [conf_ext](#confext) - `config.toml`, потом `config.yaml`, и т.д.
 Если передано конкретное расширение, например, `conf_file="config.ini"`, то происходит поиск только по этому расширению и остальные расширения игнорируются.
 
+> **Заметка**: Полный путь до файла конфигурации строится следующим образом:
+[BASE_DIR](#BASE_DIR) / [conf_dir](#conf_dir) / [mode_dir_path](#mode_dir_path) / [conf_file](#conf_file)[.[conf_ext](#conf_ext)], где `BASE_DIR /` добавляется в начало пути только если `conf_dir` не является абсолютным путём.
+
+
 **Использование**:
 
 ```py
@@ -2112,7 +2116,7 @@ env_exclude_inherit_parent=[
 
 **Общая информация**:
 
-Содержит все настройки `#!python pydantic.ConfigDict`, такие как `extra`, `arbitrary_types_allowed` и т.д. Поддерживает все настройки, входящие в `file_config` и `env_config`. А так же имеет дополнительные собственные настройки, относящиеся к `arfi-settings`.
+Содержит все стандартные настройки `#!python pydantic.ConfigDict`, такие как `extra`, `arbitrary_types_allowed` и т.д. Поддерживает все настройки, входящие в `file_config` и `env_config`. А так же имеет дополнительные собственные настройки, относящиеся к `arfi-settings`.
 
 **Что делает**:
 
@@ -2122,13 +2126,655 @@ env_exclude_inherit_parent=[
 
 **Использование**:
 
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        conf_dir = "settings/config",
+        env_file = ".env.prod",
+    )
+
+
+config = AppConfig()
+print(config.conf_path)
+#> [PosixPath('settings/config/config')]
+```
+
 ### case_sensitive
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python False`
+
+**Что делает**:
+
+1. Задает значение для [conf_case_sensitive](#conf_case_sensitive), если сама переменная `conf_case_sensitive` не задана ни в [file_config](#file_config) ни в [model_config](#model_config).
+2. Задает значение для [env_case_sensitive](#env_case_sensitive), если сама переменная `env_case_sensitive` не задана ни в [env_config](#env_config) ни в [model_config](#model_config).
+3. Определяет регистрозависимый или регистронезависимый режим чтения имён файлов из секретной директории [secrets_dir](#secrets_dir).
+4. Влияет на передачу переменных обработчиком от класса-родителя к классу-ребёнку в концепции обратного наследования. Так как на данный момент классу-ребёнку не известно откуда именно класс-родитель прочитал конкретную переменную (из файлов, из переменных окружения или из секретной директории), то настройки регистронезависимости, заданные в классе-ребёнке, не могут быть применены по отдельности к именам конкретных переменных, по этому при передаче переменных от одного обработчика к другому в данный момент применяется значение, указанное в общей переменной `case_sensitive`.
+После доработки режима отладки возможно такое поведение изменится, и, при множественной вложенности моделей, при передаче переменных между обработчиками будут применяться точные настройки регистронезависимости, которые указаны в конкретном классе, к каждой переменной.
+
+> **Заметка**: Значение, указанное в переменных `conf_case_sensitive` и `env_case_sensitive` всегда имеет приоритет над значение, указанным в переменной `case_sensitive`.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+print(config.settings_config.case_sensitive)
+#> False
+print(config.settings_config.conf_case_sensitive)
+#> False
+print(config.settings_config.env_case_sensitive)
+#> False
+
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        case_sensitive = True,
+    )
+
+
+config = AppConfig()
+print(config.settings_config.case_sensitive)
+#> True
+print(config.settings_config.conf_case_sensitive)
+#> True
+print(config.settings_config.env_case_sensitive)
+#> True
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+case_sensitive = true
+```
+
+
 ### ignore_missing
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python True`
+
+**Что делает**:
+
+1. Задает значение для [conf_ignore_missing](#conf_ignore_missing), если сама переменная `conf_ignore_missing` не задана ни в [file_config](#file_config) ни в [model_config](#model_config).
+2. Задает значение для [env_ignore_missing](#env_ignore_missing), если сама переменная `env_ignore_missing` не задана ни в [env_config](#env_config) ни в [model_config](#model_config).
+3. Определяет игнорировать или нет отсутствие файлов в секретной директории [secrets_dir](#secrets_dir).
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        ignore_missing = False,
+    )
+
+
+config = AppConfig()
+print(config.settings_config.ignore_missing)  # default True
+#> False
+print(config.settings_config.conf_ignore_missing)  # default True
+#> False
+print(config.settings_config.env_ignore_missing)  # default True
+#> False
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+ignore_missing = false
+```
+
+
 ### encoding
+
+Тип: `#!python str | None`
+
+Значение по умолчанию: `#!python None  # utf-8`
+
+**Что делает**:
+
+1. Задает значение для [conf_file_encoding](#conf_file_encoding), если сама переменная `conf_file_encoding` не задана ни в [file_config](#file_config) ни в [model_config](#model_config).
+2. Задает значение для [env_file_encoding](#env_file_encoding), если сама переменная `env_file_encoding` не задана ни в [env_config](#env_config) ни в [model_config](#model_config).
+3. Определяет кодировку при чтении файлов из секретной директории [secrets_dir](#secrets_dir).
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        encoding = "ISO-8859-1",
+    )
+
+
+config = AppConfig()
+print(config.settings_config.encoding)  # default None
+#> ISO-8859-1
+print(config.settings_config.conf_file_encoding)  # default None
+#> ISO-8859-1
+print(config.settings_config.env_file_encoding)  # default None
+#> ISO-8859-1
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+encoding = "utf-8"
+```
+
+
 ### cli
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python False`
+
+**Что делает**:
+
+Разрешает или запрещает чтение переменных из командной строки. Так как в большинстве случаев чтение переменных из командной строки не требуется, то по умолчание чтение отключено. При обратном наследовании НЕ наследуется, нужно включать для каждого класса отдельно, либо для всех классов сразу в файле `pyproject.toml`.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        cli = True,
+    )
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+cli = true            # (1)!
+```
+
+1. Включаем чтение переменных их командной строки для всех классов
+
+
 ### secrets_dir
+
+Тип: `#!python str | None`
+
+Значение по умолчанию: `#!python None`
+
+**Что делает**:
+
+Задаёт секретную директорию, откуда будут читаться значения для каждого атрибута класса. При этом имена файлов в этой директории должны соответствовать алиасам полей текущей модели. Зависимость от регистра при чтении имён файлов задаётся параметром [case_sensitive](#case_sensitive)
+
+При обратном наследовании НЕ наследуется, нужно указывать для каждого класса отдельно, либо для всех классов сразу в файле `pyproject.toml`.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        secrets_dir = "/var/run/secrets",
+    )
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+secrets_dir = "/var/run/secrets"
+```
+
+
 ### exclude_inherit_parent
+
+Тип: `#!python list[str]`
+
+Значение по умолчанию: `#!python []`
+
+**Что делает**:
+
+Общее место для указания настроек, которые нужно исключить из обратного наследования. Поддерживает все значения которые входят в [conf_exclude_inherit_parent](#conf_exclude_inherit_parent) и [env_exclude_inherit_parent](#env_exclude_inherit_parent).
+При добавлении параметра в `exclude_inherit_parent`, он автоматически добавляется либо в `env_exclude_inherit_parent` либо в `conf_exclude_inherit_parent` в зависимости от того, к каким настройкам этот параметр относится.
+
+При обратном наследовании НЕ наследуется.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        exclude_inherit_parent = [
+            "conf_file",
+            "conf_custom_ext_handler",
+            "conf_exclude_inherit_parent",
+            "env_prefix",
+            "env_include_inherit_parent",
+        ],
+    )
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+exclude_inherit_parent = ["env_prefix_as_source_mode_dir"]
+```
+
+
 ### include_inherit_parent
+
+Тип: `#!python list[str]`
+
+Значение по умолчанию: `#!python []`
+
+**Что делает**:
+
+Общее место для указания только тех настроек, которые нужно наследовать от класса-родителя в концепции обратного наследования.
+Поддерживает все значения которые входят в [conf_include_inherit_parent](#conf_include_inherit_parent) и [env_include_inherit_parent](#env_include_inherit_parent).
+
+При добавлении параметра в `include_inherit_parent`, он автоматически добавляется либо в `env_include_inherit_parent` либо в `conf_include_inherit_parent` в зависимости от того, к каким настройкам этот параметр относится.
+
+При обратном наследовании НЕ наследуется.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        include_inherit_parent = [
+            "conf_file",
+            "conf_custom_ext_handler",
+            "env_prefix",
+            "env_file_encoding",
+        ],
+    )
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+include_inherit_parent = [
+  "env_prefix",
+  "conf_dir",
+  "conf_file"
+]
+```
+
+
+## file_config_inherit_parent
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python True`
+
+**Что делает**:
+
+Включает или отключает обратное наследование всех параметров, относящихся к чтению из файлов конфигураций.
+При отключении наследования все значения параметров устанавливаются по умолчанию, либо в значения, указанные в файле `pyproject.toml`
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, FileConfigDict
+
+
+class Child(ArFiSettings):
+    file_config_inherit_parent = False
+
+
+class Parent(ArFiSettings):
+    child: Child
+
+    file_config = FileConfigDict(
+        conf_dir = None,
+        conf_file = "myconfig.json",
+    )
+
+
+config = Parent()
+print(config.conf_path)
+#> [PosixPath('myconfig.json')]
+print(config.child.conf_path)
+#> [PosixPath('config/child/config')]
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+file_config_inherit_parent = false
+```
+
+
+## env_config_inherit_parent
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python True`
+
+**Что делает**:
+
+Включает или отключает обратное наследование всех параметров, относящихся к чтению из переменных окружения.
+При отключении наследования все значения параметров устанавливаются по умолчанию, либо в значения, указанные в файле `pyproject.toml`
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class Child(ArFiSettings):
+    env_config_inherit_parent = False
+
+
+class Parent(ArFiSettings):
+    child: Child
+
+    env_config = EnvConfigDict(
+        env_file=None,
+        env_prefix="APP_",
+    )
+
+
+config = Parent()
+print(config.env_path)
+#> []
+print(config.env_prefix)
+#> APP_
+print(config.child.env_path)
+#> [PosixPath('.env')]
+print(config.child.env_prefix)
+#> ""
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+env_config_inherit_parent = false
+```
+
+
+## ordered_settings
+
+Тип: `#!python list[str]`
+
+Значение по умолчанию: `#!python ["cli", init_kwargs", "env", "env_file", "secrets", "conf_file"]`
+
+**Что делает**:
+
+Указывает порядок источников чтения настроек. Первый источник в списке наиболее приоритетный.
+На самом деле в этом списке указываются имена обработчиков. Можно указать как короткое имя, как указано в значении по умолчанию, так и полное. Например:
+```py
+[
+  "cli_ordered_settings_handler",
+  "init_kwargs_ordered_settings_handler",
+  "env_ordered_settings_handler",
+  "env_file_ordered_settings_handler",
+  "secrets_ordered_settings_handler",
+  "conf_file_ordered_settings_handler",
+]
+```
+Можно удалять, менять местами и добавлять собственные обработчики.
+
+Как создавать собственные обработчики написано [здесь](handlers.md)
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    ordered_settings = [
+      "init_kwargs",
+      "conf_file"
+    ]
+```
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+ordered_settings = [
+  "init_kwargs",
+  "conf_file"
+]
+```
+
+
+## ordered_settings_inherit_parent
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python True`
+
+**Что делает**:
+
+Включает или отключает обратное наследование источников чтения настроек.
+При отключении наследования значение параметра устанавливается по умолчанию, либо в значения, указанные в файле `pyproject.toml`
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings
+
+
+class Child(ArFiSettings):
+    ordered_settings_inherit_parent = False
+
+
+class Parent(ArFiSettings):
+    child: Child
+
+    ordered_settings = [
+        "init_kwargs",
+        "conf_file",
+    ]
+
+
+config = Parent()
+print(config.ordered_settings)
+#> ['init_kwargs', 'conf_file']
+print(config.child.ordered_settings)
+#> ['cli', 'init_kwargs', 'env', 'env_file', 'secrets', 'conf_file']
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+ordered_settings_inherit_parent = false
+```
+
+## handler_class
+
+Тип: `#!python type(arfi_settings.ArFiHandler)`
+
+Значение по умолчанию: `#!python arfi_settings.ArFiHandler`
+
+**Что делает**:
+
+Класс, который реализует механизм чтения настроек.
+Можно создавать собственные классы наследуясь от `arfi_settings.ArFiHandler`.
+
+Более подробно про обработчики написано [здесь](handlers.md)
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, ArFiHandler
+
+class MyHandler(ArFiHandler):
+    def default_main_handler(self) -> dict[str, Any]:
+        data: dict[str, Any] = {}
+        # Do something ...
+        return data
+
+
+class AppConfig(ArFiSettings):
+    handler_class = MyHandler
+```
+
+
+## handler
+
+Тип: `#!python str`
+
+Значение по умолчанию: `#!python "default_main_handler"`
+
+**Что делает**:
+
+Это главный обработчик настроек, который запускается при инициализации класса и читает все настройки если значение параметра [read_config](#read_config) установлено в `#!python True`
+По сути это название метода класса `arfi_settings.ArFiHandler`. Можно создавать собственные обработчики и назначать их каждому классу индивидуально.
+
+Более подробно про обработчики написано [здесь](handlers.md)
+
+**Использование**:
+
+```txt title=".env"
+PROJECT_NAME="Awesome project"
+MY_PARAM="param_from_env"
+```
+
+```py
+from typing import Any
+from arfi_settings import ArFiSettings, ArFiHandler
+
+
+class MyHandler(ArFiHandler):
+    def awesome_main_handler(self) -> dict[str, Any]:
+        data: dict[str, Any] = {}
+        # Do something ...
+        data["my_param"] = "param_from_awesome_handler"
+        return data
+
+
+ArFiSettings.handler_class = MyHandler
+
+
+class AppSettings(ArFiSettings):
+    my_param: str
+
+    handler = "awesome_main_handler"      # (1)!
+
+
+class AppConfig(ArFiSettings):
+    PROJECT_NAME: str                     # (2)!
+    app: AppSettings
+
+
+config = AppConfig()
+print(config.PROJECT_NAME)
+#> Awesome project
+print(config.app.my_param)
+#> param_from_awesome_handler
+```
+
+1. Используется пользовательский обработчик. Нет доступа к переменным окружения
+2. Используется обработчик по умолчанию
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+handler = "my_awesome_handler"
+```
+
+
+## handler_inherit_parent
+
+Тип: `#!python bool`
+
+Значение по умолчанию: `#!python True`
+
+**Что делает**:
+
+Включает или отключает обратное наследование главного обработчика [handler](#handler)
+
+**Использование**:
+
+```py
+from typing import Any
+from arfi_settings import ArFiSettings, ArFiHandler
+
+
+class MyHandler(ArFiHandler):
+    def awesome_main_handler(self) -> dict[str, Any]:
+        data: dict[str, Any] = {}
+        # Do something ...
+        data["my_param"] = "param_from_awesome_handler"
+        return data
+
+
+ArFiSettings.handler_class = MyHandler
+
+
+class AppSettings(ArFiSettings):
+    pass
+
+
+class AppConfig(ArFiSettings):
+    app: AppSettings
+
+    handler = "awesome_main_handler"
+
+
+config = AppConfig()
+print(config.app.handler)
+#> awesome_main_handler
+
+
+class AppSettings(ArFiSettings):
+    handler_inherit_parent = False
+
+
+config = AppConfig()
+print(config.app.handler)
+#> default_main_handler
+```
+
+
+Файл `pyproject.toml`:
+
+```toml title="pyproject.toml"
+[tool.arfi_settings]
+handler_inherit_parent = false
+```
+
 
 ## Свойства (property)
 
@@ -2205,7 +2851,7 @@ print(config.root_dir)
 
 **Что делает**:
 
-Вычисляемое значение. На основе указанных параметров `conf_dir`, `mode_dir` и `conf_file` вычисляет список путей к конфигурационным файлам для данного класса. При этом значения параметров, указанные в файле по последнему пути из этого списка всегда будут переопределять значения из предыдущих файлов.
+Вычисляемое значение. На основе указанных параметров [conf_dir](#conf_dir), [mode_dir](#mode_dir) и [conf_file](#conf_file) вычисляет список путей к конфигурационным файлам для данного класса. При этом значения параметров, указанные в файле по последнему пути из этого списка всегда будут переопределять значения из предыдущих файлов.
 
 Основной принцип построения путей:
 ```
@@ -2225,21 +2871,6 @@ conf_dir/parent_mode_dir/nested_mode_dir/source_mode_dir/conf_file
 
 **Использование**:
 
-Простое использование
-```py
-from arfi_settings import ArFiSettings
-
-
-class AppConfig(ArFiSettings):
-    pass
-
-
-config = AppConfig()
-print(config.conf_path)
-#> [PosixPath('config/config')]
-```
-
-Использование в концепции обратного наследования
 ```py
 from arfi_settings import ArFiSettings
 
@@ -2267,4 +2898,468 @@ print(config.child.conf_path)
 
 ### env_path
 
+Тип: `#!python list[Path]`
+
+Значение по умолчанию: `#!python []`
+
+**Что делает**:
+
+Вычисляемое значение. На основе заданного параметра [env_file](#env_file) вычисляет список путей к файлам с переменными окружения.
+
+Под капотом, для каждого переданного файла, поиск происходит по следующим правилам, если передан относительный путь до файла:
+
+- Сначала файл ищется в главной директории проекта [root_dir](#root_dir). Если файл найден, то поиск завершается.
+- Если файл не найден в главной директории, то происходит поиск файла в базовой директории проекта [BASE_DIR](#BASE_DIR)
+
+> **Заметка**: При включённом режиме отладки [arfi_debug](../about/debug_mode.md) можно увидеть абсолютные пути до файлов в результатах вывода отладочной информации..
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, EnvConfigDict
+
+
+class AppConfig(ArFiSettings):
+    env_config = EnvConfigDict(
+        env_file = [
+            ".env",
+            ".env.prod",
+        ],
+    )
+
+
+config = AppConfig()
+print(config.env_path)
+#> [PosixPath('.env'), PosixPath('.env.prod')]
+```
+
+### mode_dir_path
+
+Тип: `#!python Path`
+
+Значение по умолчанию: `#!python Path("")`
+
+**Что делает**:
+
+Вычисляемое значение. Возвращает путь до поддиректории, в которой будет производиться поиск файлов конфигурации для данного класса.
+
+На основе этого пути строится полный путь до файлов конфигурации текущего класса по следующему принципу:
+
+[BASE_DIR](#BASE_DIR) / [conf_dir](#conf_dir) / [mode_dir_path](#mode_dir_path) / [conf_file](#conf_file)[.[conf_ext](#conf_ext)]
+
+> **Заметка**: В начало пути добавляется `BASE_DIR /` только в том случае, если `conf_dir` не является абсолютным путём.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings
+
+
+class Base(ArFiSettings):
+    mode_dir = "base"
+
+
+class BaseConfig(Base):
+    mode_dir = "base_config"
+
+
+class SubAppSettings(BaseConfig):
+    pass
+
+
+class AppSettings(ArFiSettings):
+    sub_app: SubAppSettings
+
+
+class AppConfig(ArFiSettings):
+    mode_dir = "dev"
+
+    app: AppSettings
+
+
+config = AppConfig()
+print(repr(config.app.sub_app.mode_dir_path))
+#> PosixPath('dev/app/base/base_config/sub_app')
+print(config.app.sub_app.conf_path)
+#> [PosixPath('config/dev/app/base/base_config/sub_app/config')]
+```
+
+
 ### computed_mode_dir
+
+Тип: `#!python str`
+
+Значение по умолчанию: `#!python ""`
+
+**Что делает**:
+
+Вычисляемое значение. Возвращает путь до поддиректории, в которой будет производиться поиск файлов конфигурации для данного класса.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings
+
+
+class Base(ArFiSettings):
+    mode_dir = "base"
+
+
+class BaseConfig(Base):
+    mode_dir = "base_config"
+
+
+class SubAppSettings(BaseConfig):
+    pass
+
+
+class AppSettings(ArFiSettings):
+    sub_app: SubAppSettings
+
+
+class AppConfig(ArFiSettings):
+    mode_dir = "dev"
+
+    app: AppSettings
+
+
+config = AppConfig()
+print(config.app.sub_app.computed_mode_dir)
+#> dev/app/base/base_config/sub_app
+print(config.app.sub_app.conf_path)
+#> [PosixPath('config/dev/app/base/base_config/sub_app/config')]
+```
+
+
+### parent_mode_dir
+
+Тип: `#!python str`
+
+Значение по умолчанию: `#!python ""`
+
+**Что делает**:
+
+Вычисляемое значение. Возвращает путь до поддиректории класса-родителя в концепции обратного наследования.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings
+
+
+class Base(ArFiSettings):
+    mode_dir = "base"
+
+
+class BaseConfig(Base):
+    mode_dir = "base_config"
+
+
+class SubAppSettings(BaseConfig):
+    pass
+
+
+class AppSettings(ArFiSettings):
+    sub_app: SubAppSettings
+
+
+class AppConfig(ArFiSettings):
+    mode_dir = "dev"
+
+    app: AppSettings
+
+
+config = AppConfig()
+print(config.app.sub_app.computed_mode_dir)
+#> dev/app/base/base_config/sub_app
+print(config.app.sub_app.parent_mode_dir)
+#> dev/app
+```
+
+### nested_mode_dir
+
+Тип: `#!python str`
+
+Значение по умолчанию: `#!python ""`
+
+**Что делает**:
+
+Вычисляемое значение. Возвращает путь до поддиректории класса, от которого наследуется в классической концепции наследования.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings
+
+
+class Base(ArFiSettings):
+    mode_dir = "base"
+
+
+class BaseConfig(Base):
+    mode_dir = "base_config"
+
+
+class SubAppSettings(BaseConfig):
+    pass
+
+
+class AppSettings(ArFiSettings):
+    sub_app: SubAppSettings
+
+
+class AppConfig(ArFiSettings):
+    mode_dir = "dev"
+
+    app: AppSettings
+
+
+config = AppConfig()
+print(config.app.sub_app.computed_mode_dir)
+#> dev/app/base/base_config/sub_app
+print(config.app.sub_app.nested_mode_dir)
+#> base/base_config
+```
+
+### source_mode_dir
+
+Тип: `#!python str`
+
+Значение по умолчанию: `#!python ""`
+
+**Что делает**:
+
+Вычисляемое значение. Возвращает путь до собственной поддиректории.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings
+
+
+class Base(ArFiSettings):
+    mode_dir = "base"
+
+
+class BaseConfig(Base):
+    mode_dir = "base_config"
+
+
+class SubAppSettings(BaseConfig):
+    pass
+
+
+class AppSettings(ArFiSettings):
+    sub_app: SubAppSettings
+
+
+class AppConfig(ArFiSettings):
+    mode_dir = "dev"
+
+    app: AppSettings
+
+
+config = AppConfig()
+print(config.app.sub_app.computed_mode_dir)
+#> dev/app/base/base_config/sub_app
+print(config.app.sub_app.source_mode_dir)
+#> sub_app
+```
+
+### pyproject_toml_path
+
+Тип: `#!python str | Path | None`
+
+Значение по умолчанию: `#!python None`
+
+**Что делает**:
+
+Вычисляемое значение. Возвращает путь файла `pyproject.toml`.
+
+**Использование**:
+
+```py title="~/my_awesome_project/main.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+print(config.pyproject_toml_path)
+#> /home/user/my_awesome_project/pyproject.toml    # (1)!
+```
+
+1. При условии, что файл `pyproject.toml` существует в корне проекта.
+
+
+### inherited_params
+
+Тип: `#!pythonn list[str]`
+
+Значение по умолчанию: `#!python []`
+
+**Что делает**:
+
+Отображает все собственные настройки, которые наследуются от класса-родителя в концепции обратного наследования.
+
+**Использование**:
+
+Все настройки, которые наследуются по умолчанию из `file_config` и `env_config` класса-родителя в концепции обратного наследования.
+```py
+import json
+from arfi_settings import ArFiSettings
+
+
+class AppSettings(ArFiSettings):
+    pass
+
+
+class AppConfig(ArFiSettings):
+    app: AppSettings
+
+
+config = AppConfig()
+print(json.dumps(config.app.inherited_params, indent=4))
+"""
+[
+    "conf_include_inherit_parent",
+    "conf_exclude_inherit_parent",
+    "env_include_inherit_parent",
+    "env_exclude_inherit_parent",
+    "conf_file",
+    "conf_dir",
+    "conf_ext",
+    "conf_file_encoding",
+    "conf_case_sensitive",
+    "conf_ignore_missing",
+    "conf_custom_ext_handler",
+    "env_file",
+    "env_prefix",
+    "env_prefix_as_mode_dir",
+    "env_prefix_as_nested_mode_dir",
+    "env_prefix_as_source_mode_dir",
+    "env_file_encoding",
+    "env_case_sensitive",
+    "env_nested_delimiter",
+    "env_ignore_missing"
+]
+"""
+```
+
+Отключаем наследование части настроек:
+
+```py
+import json
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+
+class AppSettings(ArFiSettings):
+    model_config = SettingsConfigDict(
+        include_inherit_parent=[
+            "conf_file",
+            "env_prefix",
+        ],
+        exclude_inherit_parent=[
+            "conf_include_inherit_parent",
+            "conf_exclude_inherit_parent",
+            "env_include_inherit_parent",
+            "env_exclude_inherit_parent",
+        ],
+    )
+
+
+class AppConfig(ArFiSettings):
+    app: AppSettings
+
+
+config = AppConfig()
+print(json.dumps(config.app.inherited_params, indent=4))
+"""
+[
+    "conf_file",
+    "env_prefix",
+]
+"""
+```
+
+
+### settings_config
+
+Тип: `#!python pidantic.BaseModel`
+
+Значение по умолчанию: `#!python arfi_settings.schemes.SettingsConfigSchema()`
+
+**Что делает**:
+
+Агрегирует все заданные собственные настройки, которые потом использует обработчик при чтении конфигурации.
+
+**Использование**:
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        conf_dir=None,
+        conf_file=[
+            "appconfig.toml",
+            "~/.config/myapp/config.toml",
+            "/var/run/secrets/config.toml",
+        ],
+        env_file="/var/run/secrets/.my_environment",
+        env_prefix="APP_",
+        secrets_dir="/var/run/secrets",
+        cli=True,
+    )
+
+
+config = AppConfig()
+print(config.settings_config.model_dump_json(indent=4))
+"""
+{
+    "env_file": "/var/run/secrets/.my_environment",
+    "env_prefix": "APP_",
+    "env_prefix_as_mode_dir": false,
+    "env_prefix_as_nested_mode_dir": false,
+    "env_prefix_as_source_mode_dir": false,
+    "env_file_encoding": null,
+    "env_case_sensitive": false,
+    "env_nested_delimiter": "",
+    "env_ignore_missing": true,
+    "env_include_inherit_parent": [],
+    "env_exclude_inherit_parent": [],
+    "conf_file": "['appconfig.toml', '~/.config/myapp/config.toml', '/var/run/secrets/config.toml']",
+    "conf_dir": null,
+    "conf_ext": [
+        "toml",
+        "yaml",
+        "yml",
+        "json"
+    ],
+    "conf_file_encoding": null,
+    "conf_case_sensitive": false,
+    "conf_ignore_missing": true,
+    "conf_custom_ext_handler": null,
+    "conf_include_inherit_parent": [],
+    "conf_exclude_inherit_parent": [],
+    "case_sensitive": false,
+    "ignore_missing": true,
+    "encoding": null,
+    "cli": true,
+    "secrets_dir": "/var/run/secrets",
+    "conf_path": [
+        "appconfig.toml",
+        "/home/user/.config/myapp/config.toml",
+        "/var/run/secrets/config.toml"
+    ],
+    "env_path": [
+        "/var/run/secrets/.my_environment"
+    ],
+    "include_inherit_parent": [],
+    "exclude_inherit_parent": []
+}
+"""
+```
