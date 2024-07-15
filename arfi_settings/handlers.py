@@ -399,6 +399,7 @@ class ArFiBaseHandler(ABC):
             "_handler_ordered_settings": _handler_ordered_settings,
             "_handler_parent_file_config": _handler_parent_file_config,
             "_handler_parent_env_config": _handler_parent_env_config,
+            "_handler_main_handler": self.settings_class._handler,
         }
         for field in self.fields_is_settings:
             if not self.data.get(field):

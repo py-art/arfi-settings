@@ -332,6 +332,7 @@ class ArFiSettings(BaseModel):
             "_handler_ordered_settings",
             "_handler_read_pyproject_toml_force",
             "_handler_search_base_dir",
+            "_handler_main_handler",
         ]
         for field in extra_fields:
             if field in value:
