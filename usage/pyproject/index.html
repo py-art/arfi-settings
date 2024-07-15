@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.28">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.29">
     
     
       
@@ -26,7 +26,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.6543a935.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.76a95c52.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
@@ -677,7 +677,29 @@
 
 
 <h1 id="pyprojecttoml">Настройки <code>pyproject.toml</code></h1>
-<p>Здесь указаны переменные, которые можно настроить в файле <code>pyproject.toml</code>.</p>
+<p>Здесь указаны переменные, которые можно настроить в файле <code>pyproject.toml</code>, глобально для всего проекта.</p>
+<p><strong>Пример использования</strong>:</p>
+<div class="language-toml highlight"><span class="filename">pyproject.toml</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">[tool.arfi_settings]</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">conf_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="s2">&quot;settings/config&quot;</span><span class="p">,</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="s2">&quot;~/.config/myapp&quot;</span><span class="p">,</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="s2">&quot;/var/run/secrets/config&quot;</span><span class="p">,</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">]</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">conf_ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;toml, json&quot;</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">env_config_inherit_parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">env_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">env_nested_delimiter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;__&quot;</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">encoding</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;cp1251&quot;</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">secrets_dir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;/var/run/secrets&quot;</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">ordered_settings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="s2">&quot;cli&quot;</span><span class="p">,</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="s2">&quot;secrets&quot;</span><span class="p">,</span>
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">  </span><span class="s2">&quot;init_kwargs&quot;</span><span class="p">,</span>
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">  </span><span class="s2">&quot;env&quot;</span><span class="p">,</span>
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="s2">&quot;conf_file&quot;</span><span class="p">,</span>
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">]</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="n">cli</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</span></code></pre></div>
 <p>Подробно описание этих переменных уже существует, по этому ниже будут указаны только ссылки.</p>
 <ul>
 <li><a href="../config/#mode_dir_inherit_nested">mode_dir_inherit_nested</a></li>
@@ -691,6 +713,30 @@
 <li><a href="../config/#conf_ignore_missing">conf_ignore_missing</a></li>
 <li><a href="../config/#conf_exclude_inherit_parent">conf_exclude_inherit_parent</a></li>
 <li><a href="../config/#conf_include_inherit_parent">conf_include_inherit_parent</a></li>
+<li><a href="../config/#env_file">env_file</a></li>
+<li><a href="../config/#env_prefix">env_prefix</a></li>
+<li><a href="../config/#env_prefix_as_mode_dir">env_prefix_as_mode_dir</a></li>
+<li><a href="../config/#env_prefix_as_nested_mode_dir">env_prefix_as_nested_mode_dir</a></li>
+<li><a href="../config/#env_prefix_as_source_mode_dir">env_prefix_as_source_mode_dir</a></li>
+<li><a href="../config/#env_nested_delimiter">env_nested_delimiter</a></li>
+<li><a href="../config/#env_file_encoding">env_file_encoding</a></li>
+<li><a href="../config/#env_case_sensitive">env_case_sensitive</a></li>
+<li><a href="../config/#env_ignore_missing">env_ignore_missing</a></li>
+<li><a href="../config/#env_exclude_inherit_parent">env_exclude_inherit_parent</a></li>
+<li><a href="../config/#env_include_inherit_parent">env_include_inherit_parent</a></li>
+<li><a href="../config/#case_sensitive">case_sensitive</a></li>
+<li><a href="../config/#ignore_missing">ignore_missing</a></li>
+<li><a href="../config/#encoding">encoding</a></li>
+<li><a href="../config/#cli">cli</a></li>
+<li><a href="../config/#secrets_dir">secrets_dir</a></li>
+<li><a href="../config/#exclude_inherit_parent">exclude_inherit_parent</a></li>
+<li><a href="../config/#include_inherit_parent">include_inherit_parent</a></li>
+<li><a href="../config/#file_config_inherit_parent">file_config_inherit_parent</a></li>
+<li><a href="../config/#env_config_inherit_parent">env_config_inherit_parent</a></li>
+<li><a href="../config/#handler">handler</a></li>
+<li><a href="../config/#handler_inherit_parent">handler_inherit_parent</a></li>
+<li><a href="../config/#ordered_settings">ordered_settings</a></li>
+<li><a href="../config/#ordered_settings_inherit_parent">ordered_settings_inherit_parent</a></li>
 <li><a href="../../about/debug_mode/#arfi_debug">arfi_debug</a></li>
 </ul>
 
