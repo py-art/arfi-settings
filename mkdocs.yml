@@ -22,6 +22,8 @@ theme:
     - navigation.sections
     - navigation.tabs
     - navigation.tabs.sticky
+    - search.suggest
+    - search.highlight
   palette:
     - media: '(prefers-color-scheme: dark)'
       scheme: default
@@ -53,6 +55,9 @@ nav:
   - Usage:
     - usage/config.md
     - usage/pyproject.md
+    - usage/handlers.md
+    - usage/readers.md
+    - usage/cli.md
   - Changelog: changelog.md
 
 plugins:
@@ -89,5 +94,7 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.tasklist:
       custom_checkbox: true
+  - toc:
+      permalink: true
 
 copyright: Copyright &copy; 2024 Artur Filin
