@@ -58,6 +58,10 @@ nav:
     - usage/handlers.md
     - usage/readers.md
     - usage/cli.md
+    - usage/connectors.md
+  - Examples:
+    - examples/custom_reader_and_handler.md
+    - examples/new_file_extentions.md
   - Changelog: changelog.md
 
 plugins:
@@ -77,6 +81,7 @@ plugins:
             Reverse inheritance: Обратное наследование
             Debug mode: Режим отладки
             Usage: Использование
+            Examples: Примеры
         - locale: en
           name: English
           build: true
