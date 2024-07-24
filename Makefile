@@ -84,6 +84,13 @@ tvc:
 docs: .pdm
 	pdm run mkdocs serve -a 127.0.0.1:8008
 
+.PHONY: build-library ## Build library
+build-library: .pdm
+	pdm build
+
+.PHONY: publish-library ## Publish library (no build)
+publish-library: .pdm
+	pdm publish --no-build
 
 .PHONY: help  ## Display this message
 help:
