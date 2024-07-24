@@ -43,9 +43,6 @@ coverage.lcov
 .pytest_cache/
 cover/
 
-# Sphinx documentation
-docs/_build/
-
 # mkdocs documentation
 /site
 
@@ -77,6 +74,4 @@ venv/
 .python-version
 
 # App
-certs/
-*.sqlite3
 .env
