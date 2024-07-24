@@ -209,7 +209,7 @@ class MyReader(ArFiReader):
 
 # setup global cli reader
 ArFiReader.setup_cli_reader(MyAwesomeCliReader())
-# setup local cli reader
+# setup custom cli reader
 MyReader.setup_cli_reader(my_awesome_cli_reader)
 
 
@@ -219,16 +219,22 @@ class MyHandler(ArFiHandler):
     reader_class = MyReader
 
 
+class ChildSettings(ArFiSettings):
+    cli_reader: str = Field(alias="name")
+    model_config = SettingsConfigDict(cli=True)
+
+
 class AppSettings(ArFiSettings):
     cli_reader: str = Field(alias="name")
+    child: ChildSettings
 
     handler_class = MyHandler
     model_config = SettingsConfigDict(cli=True)
 
 
 class AppConfig(ArFiSettings):
-    app: AppSettings
     cli_reader: str = Field(alias="name")
+    app: AppSettings
 
     model_config = SettingsConfigDict(cli=True)
 
@@ -244,9 +250,13 @@ print(f"{config.app.MODE = }")
 #> config.app.MODE = 'prod'
 print(f"{config.app.cli_reader = }")
 #> config.app.cli_reader = 'cli_reader_as_func'
+print(f"{config.app.child.MODE = }")
+#> config.app.child.MODE = 'prod'
+print(f"{config.app.child.cli_reader = }")
+#> config.app.child.cli_reader = 'CliReaderAsClass'
 ```
 
-Запуск в терминале:
+Запускаем в терминале:
 
 ```bash
 $ python settings.py --MODE prod
@@ -254,4 +264,117 @@ config.MODE = 'prod'
 config.cli_reader = 'CliReaderAsClass'
 config.app.MODE = 'prod'
 config.app.cli_reader = 'cli_reader_as_func'
+config.app.child.MODE = 'prod'
+config.app.child.cli_reader = 'CliReaderAsClass'
+```
+
+### Ещё один способ назначения
+
+При таком способе назначения, если читатель является функцией, которая не принимает ни одного именованного аргумента, то нужно задать первым позиционным аргументом `#!python self`, иначе поднимется исключение.
+
+```py title="settings.py"
+from typing import Any
+from arfi_settings import ArFiReader, ArFiSettings, SettingsConfigDict, ArFiHandler
+
+
+def parse_args(self) -> dict[str, Any]:
+    # Read command line params ...
+    return {"cli_reader": "cli_reader_as_parse_args"}
+
+
+def custom_cli_reader(self) -> dict[str, Any]:
+    # Read command line params ...
+    return {"cli_reader": "cli_reader_as_custom_cli_reader"}
+
+
+class CliReaderAsClass:
+    def __call__(self) -> dict[str, Any]:
+        # Read command line params ...
+        return {"cli_reader": "CliReaderAsClass"}
+
+
+class AaaReader(ArFiReader):
+    default_cli_reader = parse_args
+
+
+class BbbReader(ArFiReader):
+    default_cli_reader = custom_cli_reader
+
+
+class CccReader(ArFiReader):
+    default_cli_reader = CliReaderAsClass()
+
+
+class DddReader(ArFiReader):
+    pass
+
+
+DddReader.setup_cli_reader(parse_args)
+
+
+class AaaHandler(ArFiHandler):
+    reader_class = AaaReader
+
+
+class BbbHandler(ArFiHandler):
+    reader_class = BbbReader
+
+
+class CccHandler(ArFiHandler):
+    reader_class = CccReader
+
+
+class DddHandler(ArFiHandler):
+    reader_class = DddReader
+
+
+class Aaa(ArFiSettings):
+    cli_reader: str
+    handler_class = AaaHandler
+    model_config = SettingsConfigDict(cli=True)
+
+
+class Bbb(ArFiSettings):
+    cli_reader: str
+    handler_class = BbbHandler
+    model_config = SettingsConfigDict(cli=True)
+
+
+class Ccc(ArFiSettings):
+    cli_reader: str
+    handler_class = CccHandler
+    model_config = SettingsConfigDict(cli=True)
+
+
+class Ddd(ArFiSettings):
+    cli_reader: str
+    handler_class = DddHandler
+    model_config = SettingsConfigDict(cli=True)
+
+
+class AppConfig(ArFiSettings):
+    AAA: Aaa
+    BBB: Bbb
+    CCC: Ccc
+    DDD: Ddd
+
+
+config = AppConfig()
+print(f"{config.AAA.cli_reader = }")
+#> config.AAA.cli_reader = 'cli_reader_as_parse_args'
+print(f"{config.BBB.cli_reader = }")
+#> config.BBB.cli_reader = 'cli_reader_as_custom_cli_reader'
+print(f"{config.CCC.cli_reader = }")
+#> config.CCC.cli_reader = 'CliReaderAsClass'
+print(f"{config.DDD.cli_reader = }")
+#> config.DDD.cli_reader = 'cli_reader_as_parse_args'
+```
+
+Запускаем в терминале:
+
+```bash
+$ python settings.py
+config.AAA.cli_reader = 'cli_reader_as_parse_args'
+config.BBB.cli_reader = 'cli_reader_as_custom_cli_reader'
+config.CCC.cli_reader = 'CliReaderAsClass'
 ```
