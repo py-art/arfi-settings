@@ -852,6 +852,7 @@ class ArFiBaseHandler(ABC):
         """Handles settings from .toml file."""
 
         reader = self.reader_class(
+            reader="toml",
             file_path=file_path,
             file_encoding=self.config.conf_file_encoding,
             ignore_missing=self.config.conf_ignore_missing,
@@ -864,6 +865,7 @@ class ArFiBaseHandler(ABC):
         """Handles settings from .yaml file."""
 
         reader = self.reader_class(
+            reader="yaml",
             file_path=file_path,
             file_encoding=self.config.conf_file_encoding,
             ignore_missing=self.config.conf_ignore_missing,
@@ -876,6 +878,7 @@ class ArFiBaseHandler(ABC):
         """Handles settings from .yml file."""
 
         reader = self.reader_class(
+            reader="yaml",
             file_path=file_path,
             file_encoding=self.config.conf_file_encoding,
             ignore_missing=self.config.conf_ignore_missing,
@@ -888,6 +891,7 @@ class ArFiBaseHandler(ABC):
         """Handles settings from .json file."""
 
         reader = self.reader_class(
+            reader="json",
             file_path=file_path,
             file_encoding=self.config.conf_file_encoding,
             ignore_missing=self.config.conf_ignore_missing,
