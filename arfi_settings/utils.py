@@ -177,6 +177,10 @@ def validate_cli_reader(cli_reader: Callable) -> Callable:
             default=inspect.Parameter.empty,
         )
         new_params = [first_sels_params]
+        for param in params:
+            if param.name == "self":
+                new_params = []
+                break
         new_params.extend(params)
         sig = oldsig.replace(parameters=new_params)
 
@@ -184,7 +188,9 @@ def validate_cli_reader(cli_reader: Callable) -> Callable:
         def wrapper(*args, **kwargs):
             ba = sig.bind(*args, **kwargs)
             ba.apply_defaults()
-            if inspect.getfullargspec(cli_reader).args:
+            if curr_args := inspect.getfullargspec(cli_reader).args:
+                if curr_args[0] == "self":
+                    return cli_reader(*ba.args, **ba.kwargs)
                 return cli_reader(*ba.args[1:], **ba.kwargs)
             else:
                 return cli_reader(**ba.kwargs)
