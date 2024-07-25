@@ -19,10 +19,10 @@
       <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.30">
     
     
-      
-        <title>Introduction - ArFiSettings</title>
-      
     
+        <title>Introduction</title>
+    
+
     
       <link rel="stylesheet" href="../assets/stylesheets/main.3cba04c6.min.css">
       
@@ -53,6 +53,9 @@
     
     
     
+    <style>.md-content__button {display:none !important}; </style>
+    <style>.md-header__topic {font-weight:700 !important}</style>
+
   </head>
   
   
@@ -72,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#introduction" class="md-skip">
+        <a href="#advantages" class="md-skip">
           Skip to content
         </a>
       
@@ -412,8 +415,17 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -424,6 +436,32 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -483,7 +521,28 @@
         
   
   <span class="md-ellipsis">
-    Installation
+    Установка
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="about/app_configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application Configuration
   </span>
   
 
@@ -845,8 +904,23 @@
   
   
   
-    
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#advantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Advantages
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -858,7 +932,7 @@
             <div class="md-content" data-md-component="content">
               <article class="md-content__inner md-typeset">
                 
-                  
+    
 
   
     <a href="https://github.com/py-art/arfi-settings/blob/main/docs/en/index.md" title="Edit this page" class="md-content__button md-icon">
@@ -869,10 +943,51 @@
   
 
 
-<p><img alt="ArFiSettings" src="../assets/images/github-logo.png" /></p>
+  <!--h1>Introduction</h1-->
+
+<p align="center">
+  <a href="https://py-art.github.io/arfi-settings/en/">
+    <img src="https://github.com/py-art/arfi-settings/blob/main/docs/assets/images/github-logo.png?raw=true" alt="ArFiSettings">
+  </a>
+</p>
+<p align="center">
+  <i>ArFiSettings - flexible application settings management with Pydantic validation</i>
+</p>
+<p align="center">
+  <a href="https://codecov.io/github/py-art/arfi-settings" >
+    <img alt="Codecov" src="https://img.shields.io/codecov/c/github/py-art/arfi-settings?color=008080&logo=codecov&logoColor=008080">
+  </a>
+  <a href="https://pypi.org/project/arfi-settings" target="_blank">
+    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/v/arfi-settings?label=pipy%20package&color=008080" alt="Package version"/>
+  </a>
+  <a href="https://pypi.org/project/arfi-settings" target="_blank">
+    <img src="https://img.shields.io/pypi/pyversions/arfi-settings?color=008080" alt="Supported Python versions"/>
+  </a>
+</p>
 <hr />
-<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
+<p><strong>Documentation</strong>: <a href="https://py-art.github.io/arfi-settings">https://py-art.github.io/arfi-settings</a></p>
+<p><strong>Source code</strong>: <a href="https://github.com/py-art/arfi-settings">https://github.com/py-art/arfi-settings</a></p>
+<p><em>Logo courtesy of</em>: <a href="https://github.com/zalexstudios">Alex Zalevski</a></p>
+<blockquote>
 <p>At the moment, the documentation is only available in Russian. Any help on translation is welcome.</p>
+</blockquote>
+<h2 id="advantages">Advantages<a class="headerlink" href="#advantages" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Contains all the functionality of <a href="https://github.com/pydantic/pydantic-settings">pydantic-settings</a>, but with more accurate name resolving.</li>
+<li>Inheritance is used when reading from any source.</li>
+<li>Specifying <a href="usage/config/#ordered_settings">configuration sources</a> is individual for each class of settings.</li>
+<li>Possibility to switch all settings by changing just one <a href="usage/config/#MODE">MODE</a> parameter.</li>
+<li>Ability to switch between specific settings using the discriminator.</li>
+<li>Read configuration files with and without any extension.</li>
+<li>Configure reading <a href="usage/cli/">command line parameters</a> individually for the class and for the entire project.</li>
+<li>Flexible setting of absolutely all parameters.</li>
+<li>Clear configuration file structure out of the box with no need for pre-configuration. Flexible setting of absolutely all parameters.</li>
+<li>Easy creation of your own configuration read sources.</li>
+<li>Availability of <a href="usage/connectors/">connectors</a> to the most common databases</li>
+<li>Specify your own default library settings in the <code>pyproject.toml</code> file.</li>
+<li><a href="about/debug_mode/">Debug Mode</a>.</li>
+<li>And many other things ...</li>
+</ul>
 
 
 
@@ -880,12 +995,15 @@
 
 
 
+  
+  
 
 
 
 
 
-                
+
+
               </article>
             </div>
           

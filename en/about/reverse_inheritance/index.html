@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://py-art.github.io/arfi-settings/en/about/reverse_inheritance/">
       
       
-        <link rel="prev" href="../installation/">
+        <link rel="prev" href="../app_configuration/">
       
       
         <link rel="next" href="../debug_mode/">
@@ -475,7 +475,28 @@
         
   
   <span class="md-ellipsis">
-    Installation
+    Установка
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../app_configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application Configuration
   </span>
   
 
@@ -1130,6 +1151,7 @@
 Он наиболее полно описывает поведение при передаче собственных настроек конфигурации от одного класса другому.</p>
 <p>Причиной появления термина <code>Обратное наследование</code> стало решение изначально заложенных в данную библиотеку <a href="../library_goals/">целей и задач</a>.</p>
 <p>Смысл заключается в передаче собственных настроек от класса-родителя к классам-детям. Это как обычное наследование, только наоборот - отсюда и название.</p>
+<p>В данной документации термин <em>Обратное наследование</em> применяется только в контексте передачи собственной конфигурации, необходимой для чтения настроек из источников, от одного класса другому.</p>
 <h2 id="_2">Пример стандартного поведения<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <div class="language-py highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span><span class="p">,</span> <span class="n">SettingsConfigDict</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
@@ -1182,7 +1204,7 @@
 <ol>
 <li>Меняем настройки в родительском классе и они автоматически передаются и ребёнку и внуку</li>
 </ol>
-<p>При этом если мы создадим другой класс-родитель <code class="language-python highlight"><span class="n">OtherParent</span><span class="p">()</span></code> с аттрибутом <code>child</code> и переопределим в нём настройки, то эти настройки никак не повлияют на предыдущие настройки класса <code class="language-python highlight"><span class="n">Parent</span><span class="p">()</span></code></p>
+<p>При этом если мы создадим другой класс-родитель <code class="language-python highlight"><span class="n">OtherParent</span><span class="p">()</span></code> с атрибутом <code>child</code> и переопределим в нём настройки, то эти настройки никак не повлияют на предыдущие настройки класса <code class="language-python highlight"><span class="n">Parent</span><span class="p">()</span></code></p>
 <div class="language-py highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span> <span class="nc">OtherParent</span><span class="p">(</span><span class="n">ArFiSettings</span><span class="p">):</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">child</span><span class="p">:</span> <span class="n">Child</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">model_config</span> <span class="o">=</span> <span class="n">SettingsConfigDict</span><span class="p">(</span>
@@ -1418,7 +1440,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation">
+          <a href="../app_configuration/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Application Configuration">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
@@ -1428,7 +1450,7 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Installation
+                Application Configuration
               </div>
             </div>
           </a>

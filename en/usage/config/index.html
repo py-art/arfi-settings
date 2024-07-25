@@ -472,7 +472,28 @@
         
   
   <span class="md-ellipsis">
-    Installation
+    Установка
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/app_configuration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application Configuration
   </span>
   
 
@@ -2533,7 +2554,7 @@
 <p>Тип: <code class="language-python highlight"><span class="nb">bool</span></code></p>
 <p>Значение по умолчанию: <code class="language-python highlight"><span class="kc">False</span></code></p>
 <p><strong>Что делает</strong>:</p>
-<p>По умолчанию при чтении из файлов конфигурации параметры читаются как регистро-независимые. Но сначала ищется точное совпадение. Если точное совпадение не найдено, то возвращается найденное значение в нижнем регистре, если и оно не найдено, то возвращается первое найденное значение, приведённое к нижнему регистру.</p>
+<p>По умолчанию при чтении из файлов конфигурации параметры читаются как регистронезависимые. Но сначала ищется точное совпадение. Если точное совпадение не найдено, то возвращается найденное значение в нижнем регистре, если и оно не найдено, то возвращается первое найденное значение, приведённое к нижнему регистру.</p>
 <p><strong>Использование</strong>:</p>
 <ul>
 <li>Поведение по умолчанию</li>
@@ -4072,7 +4093,7 @@
 </span></code></pre></div>
 <h2 id="ordered_settings">ordered_settings<a class="headerlink" href="#ordered_settings" title="Permanent link">&para;</a></h2>
 <p>Тип: <code class="language-python highlight"><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code></p>
-<p>Значение по умолчанию: <code class="language-python highlight"><span class="p">[</span><span class="s2">&quot;cli&quot;</span><span class="p">,</span> <span class="n">init_kwargs</span><span class="s2">&quot;, &quot;</span><span class="n">env</span><span class="s2">&quot;, &quot;</span><span class="n">env_file</span><span class="s2">&quot;, &quot;</span><span class="n">secrets</span><span class="s2">&quot;, &quot;</span><span class="n">conf_file</span><span class="s2">&quot;]</span></code></p>
+<p>Значение по умолчанию: <code class="language-python highlight"><span class="p">[</span><span class="s2">&quot;cli&quot;</span><span class="p">,</span> <span class="s2">&quot;init_kwargs&quot;</span><span class="p">,</span> <span class="s2">&quot;env&quot;</span><span class="p">,</span> <span class="s2">&quot;env_file&quot;</span><span class="p">,</span> <span class="s2">&quot;secrets&quot;</span><span class="p">,</span> <span class="s2">&quot;conf_file&quot;</span><span class="p">]</span></code></p>
 <p><strong>Что делает</strong>:</p>
 <p>Указывает порядок источников чтения настроек. Первый источник в списке наиболее приоритетный.
 На самом деле в этом списке указываются имена обработчиков. Можно указать как короткое имя, как указано в значении по умолчанию, так и полное. Например:
@@ -4085,7 +4106,7 @@
 </span><span id="__span-127-7"><a id="__codelineno-127-7" name="__codelineno-127-7" href="#__codelineno-127-7"></a>  <span class="s2">&quot;conf_file_ordered_settings_handler&quot;</span><span class="p">,</span>
 </span><span id="__span-127-8"><a id="__codelineno-127-8" name="__codelineno-127-8" href="#__codelineno-127-8"></a><span class="p">]</span>
 </span></code></pre></div>
-Можно удалять, менять местами и добавлять собственные обработчики.</p>
+Можно удалять, менять местами и добавлять собственные обработчики просто изменяя список.</p>
 <p>Как создавать собственные обработчики написано <a href="../handlers/">здесь</a></p>
 <p><strong>Использование</strong>:</p>
 <div class="language-py highlight"><pre><span></span><code><span id="__span-128-1"><a id="__codelineno-128-1" name="__codelineno-128-1" href="#__codelineno-128-1"></a><span class="kn">from</span> <span class="nn">arfi_settings</span> <span class="kn">import</span> <span class="n">ArFiSettings</span>
