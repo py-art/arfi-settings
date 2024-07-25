@@ -49,7 +49,7 @@ nav:
     - Introduction: index.md
     - Why and what's next: about/why.md
     - Library Goals: about/library_goals.md
-    - Installation: about/installation.md
+    - about/installation.md
     - about/app_configuration.md
     - Reverse inheritance: about/reverse_inheritance.md
     - Debug mode: about/debug_mode.md
@@ -78,7 +78,6 @@ plugins:
             Introduction: Введение
             Why and what's next: Почему, зачем и что дальше
             Library Goals: Цели библиотеки
-            Installation: Установка
             Reverse inheritance: Обратное наследование
             Debug mode: Режим отладки
             Usage: Использование
