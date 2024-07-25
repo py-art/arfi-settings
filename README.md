@@ -1,51 +1,66 @@
-![ArFiSettings](docs/assets/images/github-logo.png)
+<p align="center">
+  <a href="https://py-art.github.io/arfi-settings/en/">
+    <img src="https://github.com/py-art/arfi-settings/blob/main/docs/assets/images/github-logo.png?raw=true" alt="ArFiSettings">
+  </a>
+</p>
+<p align="center">
+  <i>ArFiSettings - flexible application settings management with Pydantic validation</i>
+</p>
+<p align="center">
+  <a href="https://codecov.io/github/py-art/arfi-settings" >
+    <img alt="Codecov" src="https://img.shields.io/codecov/c/github/py-art/arfi-settings?color=008080&logo=codecov&logoColor=008080">
+  </a>
+  <a href="https://pypi.org/project/arfi-settings" target="_blank">
+    <img alt="PyPI - Python Version" src="https://img.shields.io/pypi/v/arfi-settings?label=pipy%20package&color=008080" alt="Package version"/>
+  </a>
+  <a href="https://pypi.org/project/arfi-settings" target="_blank">
+    <img src="https://img.shields.io/pypi/pyversions/arfi-settings?color=008080" alt="Supported Python versions"/>
+  </a>
+</p>
+<p align="center">
+  <a href="https://py-art.github.io/arfi-settings/en/">Documentation</a>  |  <a href="https://py-art.github.io/arfi-settings/">Документация</a>
+</p>
+
 # arfi-settings
 
-Flexible application settings management using [Pydantic](https://github.com/pydantic/pydantic).
-
-Required: Python >= 3.11. Earlier versions of Python have not been tested.
-
-Documentation: [https://py-art.github.io/arfi-settings](https://py-art.github.io/arfi-settings)
-
-
 <!--toc:start-->
-- [arfi-settings](#arfi-settings)
-  - [Installation](#installation)
-  - [Description](#description)
-  - [Features](#features)
-    - [Reverse inheritance](#reverse-inheritance)
-    - [model_config, file_config and env_config](#modelconfig-fileconfig-and-envconfig)
-    - [Users Readers and Handlers](#users-readers-and-handlers)
-    - [CLI](#cli)
-    - [MODE](#mode)
-    - [Reading order of settings](#reading-order-of-settings)
-    - [File `pyproject.toml`](#file-pyprojecttoml)
-  - [A Simple Example](#a-simple-example)
-  - [Roadmap](#roadmap)
-  - [Logo](#logo)
+- [Installation](#installation)
+- [Advantages](#advantages)
+- [Features](#features)
+  - [Reverse inheritance](#reverse-inheritance)
+  - [model_config, file_config and env_config](#modelconfig-fileconfig-and-envconfig)
+  - [Users Readers and Handlers](#users-readers-and-handlers)
+  - [CLI](#cli)
+  - [MODE](#mode)
+  - [Reading order of settings](#reading-order-of-settings)
+  - [File `pyproject.toml`](#file-pyprojecttoml)
+- [A Simple Example](#a-simple-example)
+- [Roadmap](#roadmap)
+- [Logo](#logo)
 <!--toc:end-->
+
 
 ## Installation
 
-Install using `pip install -U arfi-settings`
+```bash
+pip install -U arfi-settings
+```
 
-## Description
+## Advantages
 
-What's implemented:
-
-- Reverse Inheritance.
-- Specifies the mode for reading settings (`MODE`) from files such as `dev`, `prod`, `test`.
-- Automatic definition of the project base directory (`BASE_DIR`) with the possibility of overriding manually.
-- Define the basic `arfi_settings` settings in the `pyproject.toml` file. The path to the `pyproject.toml` file is determined automatically with the possibility of manual correction.
-- Define (override) your own handler and your own reader not only for each class, but also for each class instance.
-- Easily define the order of reading settings, remove and add your own handler for each instance of the class. All that is required is to override the default handler list. Globally configurable in the `pyproject.toml` file or in the main settings class. Individually configurable per class and per class instance. It is possible to disable inheritance.
-- Read settings from the command line (`CLI`). Requires you to set your own reader. Disabled by default. Enabled for each class individually or for all classes at once in `pyproject.toml` file.
-- Read settings from environment variables. Always enabled by default. It is possible to disable in a certain class. Fully disabled in all classes via `pyproject.toml` file.
-- Read settings from environment variables defined in one or more files. By default it is set to read from the `.env` file. If a relative path is specified for a file, the file is first searched in the root directory of the project (`root_dir`), where the `pyproject.toml` file is located. If the file is not found, it is searched in the base directory of the project (`BASE_DIR`).
-- Read settings from a secret directory. A secret directory must be specified. Set globally in `pyproject.toml`, or in the main settings class. Can be overridden for each class and for each class instance.
-- Read settings from files. By default, settings are read from the `./config` directory, the main settings file is `./config/config.toml`. The directory as well as the file can be overridden or disabled. By default, files with extension `json`, `yml`, `yaml` and `toml` are read. It is possible to read files without extension or read files with any other extension. To do this, you need to specify an existing reader or create a custom reader. Own readers can be defined both for a class and for each instance of the class.
-- A minimal set of connector settings for connecting to `PostgreSQL`, `MySQL` and `SQLite` databases. Feature: `DATABASE_URL` is determined automatically from the other settings, but if you specify `DATABASE_URL` explicitly, then the other settings are overridden, that is `DATABASE_URL` always has priority over the other settings. The set of connectors will be expanded in the future. It will include the most common connectors not only to databases, but also such as `Redis`, `RabbitMQ`, etc.
-- Debug mode. It is enabled in `pyproject.toml` file. At the moment the minimum features are implemented. In the future it is planned to expand the possibilities up to the creation of `web` interface, if it will be demanded.
+- Contains all the functionality of [pydantic-settings](https://github.com/pydantic/pydantic-settings), but with more accurate name resolving.
+- Inheritance is used when reading from any source.
+- Specifying configuration sources is individual for each class of settings.
+- Possibility to switch all settings by changing just one `MODE` parameter.
+- Ability to switch between specific settings using the discriminator.
+- Read configuration files with and without any extension.
+- Configure reading command line parameters individually for the class and for the entire project.
+- Clear configuration file structure out of the box with no need for pre-configuration. Flexible setting of absolutely all parameters.
+- Easy creation of your own configuration read sources.
+- Availability of connectors to the most common databases
+- Specify your own default library settings in the `pyproject.toml` file.
+- Debug Mode.
+- And many other things ...
 
 
 ## Features
