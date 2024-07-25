@@ -1,6 +1,13 @@
 # Change Log
 
 
+## [0.3.1] - (2024-07-25)
+
+### Docs
+
+- Add a description of the application configuration
+
+
 ## [0.3.0] - (2024-07-24)
 
 ### Fixes
@@ -13,7 +20,7 @@
 
 - Add a description of the handlers
 - Add a description of the readers
-- Add description about usage cli
+- Add a description about usage cli
 - Add a description of the connectors
 
 
@@ -52,3 +59,4 @@ Initial release
 [0.2.0]: https://github.com/py-art/arfi-settings/releases/tag/0.2.0
 [0.2.1]: https://github.com/py-art/arfi-settings/releases/tag/0.2.1
 [0.3.0]: https://github.com/py-art/arfi-settings/releases/tag/0.3.0
+[0.3.1]: https://github.com/py-art/arfi-settings/releases/tag/0.3.1
