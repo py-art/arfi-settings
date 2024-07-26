@@ -3,9 +3,18 @@
 
 ## Development ...
 
+
+## [0.3.1] - (2024-07-24) latest
+
+### Fixes
+
+- Fix read_pyproject
+
+
 ### Docs
 
 - Add a description of the application configuration
+- Update a description of the pyproject
 
 
 ## [0.3.0] - (2024-07-24) latest
@@ -59,3 +68,4 @@ Initial release
 [0.2.0]: https://github.com/py-art/arfi-settings/releases/tag/0.2.0
 [0.2.1]: https://github.com/py-art/arfi-settings/releases/tag/0.2.1
 [0.3.0]: https://github.com/py-art/arfi-settings/releases/tag/0.3.0
+[0.3.1]: https://github.com/py-art/arfi-settings/releases/tag/0.3.1
