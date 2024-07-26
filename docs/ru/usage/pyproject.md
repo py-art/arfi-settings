@@ -1,8 +1,45 @@
 # Настройки `pyproject.toml`
 
-Здесь указаны переменные, которые можно настроить в файле `pyproject.toml`, глобально для всего проекта.
+## Описание
 
-**Пример использования**:
+В файле `pyproject.toml` указываются ***настройки по умолчанию*** глобально для всего проекта.
+
+Как это работает:
+
+- При инициализации класса настроек, не инстанса класса, а именно при инициализации самого класса, сначала происходит поиск значений, указанных в этом классе.
+- Если в классе значение переменной не задано, то значение берётся из файла `pyproject.toml`.
+- Если значение переменной не задано в файле `pyproject.toml`, то берётся значение по умолчанию.
+
+Таким образом приоритет значений выглядит так, в порядке возрастания:
+
+- значение по умолчанию
+- значение из файла `pyproject.toml`
+- значение, заданное в классе
+- значение переданное при инициализации инстанса класса
+
+
+## Пример
+
+Рассмотрим порядок приоритета значений, на примере кодировки файлов - параметр [encoding](config.md#encoding).
+
+- Значение по умолчанию `None`, что при чтении файлов равносильно `utf-8`
+
+```py
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+print(config.settings_config.encoding)
+#> None
+```
+
+- Теперь создадим в корне проекта файл `pyproject.toml`
+
+В нём укажем кодировку `#!toml encoding="cp1251"`.
 
 ```toml title="pyproject.toml"
 [tool.arfi_settings]
@@ -27,8 +64,59 @@ ordered_settings = [
 cli = true
 ```
 
-Подробно описание этих переменных уже существует, по этому ниже будут указаны только ссылки.
+Выполним опять предыдущий код и увидим, что значение кодировки по умолчанию поменялось
 
+```py
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+print(config.settings_config.encoding)
+#> cp1251
+```
+
+- Теперь укажем кодировку непосредственно в самом классе настроек, оставив файл `pyproject.toml` каким он был на предыдущем шаге.
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        encoding="ISO-8859-1",
+    )
+
+
+config = AppConfig()
+print(config.settings_config.encoding)
+#> ISO-8859-1
+```
+
+- Теперь укажем кодировку при инициализации инстанса
+
+```py
+from arfi_settings import ArFiSettings, SettingsConfigDict
+
+
+class AppConfig(ArFiSettings):
+    model_config = SettingsConfigDict(
+        encoding="ISO-8859-1",
+    )
+
+
+config = AppConfig(_encoding="latin_1")
+print(config.settings_config.encoding)
+#> latin_1
+```
+
+
+## Переменные
+
+Подробно описание этих переменных уже существует, по этому ниже будут указаны только ссылки на те переменные, которые можно задать в файле `pyproject.toml`.
 
 - [mode_dir_inherit_nested](config.md#mode_dir_inherit_nested)
 - [mode_dir_inherit_parent](config.md#mode_dir_inherit_parent)
@@ -66,3 +154,308 @@ cli = true
 - [ordered_settings](config.md#ordered_settings)
 - [ordered_settings_inherit_parent](config.md#ordered_settings_inherit_parent)
 - [arfi_debug](../about/debug_mode.md#arfi_debug)
+
+
+## Поиск pyproject.toml
+
+Расположение файла `pyproject.toml` определяется автоматически. По умолчанию поиск осуществляется максимум на 3 каталога вверх от файла, в котором происходить инициализация инстанса класса настроек (подкласса `arfi_settings.ArFiSettings`).
+
+Если путь до файла `pyproject.toml` не определился автоматически, то можно вручную задать либо максимальную глубину поиска параметром `pyproject_toml_max_depth`, либо точную глубину параметром `pyproject_toml_depth`.
+
+> **Заметка**: Если указаны оба параметра `pyproject_toml_max_depth` и `pyproject_toml_depth`, то параметр `pyproject_toml_depth` будет иметь приоритет.
+
+Так же можно запретить поиск и чтение настроек по умолчанию из файла `pyproject.toml` индивидуально для класса или для экземпляра класса, установив параметр [read_pyproject_toml](config.md#read_pyproject_toml) в значение `False` или передав его при инициализации инстанса класса параметром `_read_pyproject_toml=False`.
+
+Посмотреть, какой путь до файла определился автоматически можно с помощью свойства [pyproject_toml_path](config.md#pyproject_toml_path).
+
+### По умолчанию
+
+Ниже приведены примеры использования и стандартное поведение библиотеки.
+
+- Самая простая структура проекта. Путь до файла определяется автоматически.
+
+```
+~/my_project/
+├── __init__.py
+├── main.py
+├── settings.py
+└── pyproject.toml
+```
+
+```py title="~/my_project/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+```
+
+```py title="~/my_project/main.py"
+from settings import config
+
+print(config.pyproject_toml_path)
+#> /home/user/my_project/pyproject.toml
+```
+
+Результат запуска в терминале:
+
+```bash
+$ pwd
+/home/user/my_project
+$ python main.py
+/home/user/my_project/pyproject.toml
+```
+
+- Стандартная структура проекта. Путь до файла определяется автоматически.
+
+```
+~/my_project/
+├── settings/
+│  ├── __init__.py
+│  └── settings.py
+├── __init__.py
+├── main.py
+└── pyproject.toml
+```
+
+```py title="~/my_project/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+```
+
+```py title="~/my_project/main.py"
+from settings.settings import config
+
+print(config.pyproject_toml_path)
+#> /home/user/my_project/pyproject.toml
+```
+
+Результат запуска в терминале:
+
+```bash
+$ pwd
+/home/user/my_project
+$ python main.py
+/home/user/my_project/pyproject.toml
+```
+
+- Ещё одна стандартная структура проекта. Путь до файла определяется автоматически.
+
+```
+~/my-project/
+├── my_project
+│   ├── settings
+│   │  ├── __init__.py
+│   │  └── settings.py
+│   ├── __init__.py
+│   └── main.py
+└── pyproject.toml
+```
+
+```py title="~/my-project/my_project/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+```
+
+```py title="~/my-project/my_project/main.py"
+from settings.settings import config
+
+print(config.pyproject_toml_path)
+#> /home/user/my-project/pyproject.toml
+```
+
+Результат запуска в терминале:
+
+```bash
+$ pwd
+/home/user/my-project
+$ python my_project/main.py
+/home/user/my-project/pyproject.toml
+```
+
+- Стандартная структура проекта, с наличием `src`. Путь до файла определяется автоматически.
+
+```
+~/my-project/
+├── src
+│  └── my_project
+│     ├── settings
+│     │  ├── __init__.py
+│     │  └── settings.py
+│     ├── __init__.py
+│     └── main.py
+└── pyproject.toml
+```
+
+```py title="~/my-project/src/my_project/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+```
+
+```py title="~/my-project/src/my_project/main.py"
+from settings.settings import config
+
+print(config.pyproject_toml_path)
+#> /home/user/my-project/pyproject.toml
+```
+
+Результат запуска в терминале:
+
+```bash
+$ pwd
+/home/user/my-project
+$ python src/my_project/main.py
+/home/user/my-project/pyproject.toml
+```
+
+- Сложная структура проекта. Путь до файла нужно указывать вручную
+
+```
+
+~/my-project/
+├── src
+│  └── my_project
+│     ├── core
+│     │  ├── settings
+│     │  │  ├── __init__.py
+│     │  │  └── settings.py
+│     │  └── __init__.py
+│     ├── __init__.py
+│     └── main.py
+└── pyproject.toml
+
+```
+
+```py title="~/my-project/src/my_project/core/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig()
+```
+
+```py title="~/my-project/src/my_project/main.py"
+from core.settings.settings import config
+
+print(config.pyproject_toml_path)  # (1)!
+#> None
+```
+
+1. Путь до файла НЕ определился автоматически
+
+Результат запуска в терминале:
+
+```bash
+$ pwd
+/home/user/my-project
+$ python src/my_project/main.py
+None
+```
+
+**Первый способ** (предпочтительный) с помощью встроенной команды `read_pyproject`:
+
+> **Важно**: Команду `arfi_settings.init_settings.read_pyproject` необходимо вызывать перед импортом всех классов настроек! Проще всего это сделать в файле `__init__.py` в пакете, в котором расположен модуль, содержащий классы настроек.
+
+- Меняем глубину поиска
+
+```py title="~/my-project/src/my_project/core/settings/__init__.py"
+from arfi_settings import init_settings
+
+init_settings.read_pyproject(
+    pyproject_toml_max_depth=10,  # (1)!
+)
+```
+
+1. В конкретном примере точная глубина расположения файла равна 5. Поиск остановится сам, как только файл `pyproject.toml` будет найден.
+
+- Или указываем точную глубину расположения файла `pyproject.toml`
+
+```py title="~/my-project/src/my_project/core/settings/__init__.py"
+from arfi_settings import init_settings
+
+init_settings.read_pyproject(
+    pyproject_toml_depth=5,
+)
+```
+
+Результат запуска в терминале при указании `pyproject_toml_max_depth` или `pyproject_toml_depth`  будет одинаковым:
+```bash
+$ pwd
+/home/user/my-project
+$ python src/my_project/main.py
+/home/user/my-project/pyproject.toml
+```
+
+**Второй способ** - с помощью передачи аргументов в момент инициализации инстанса настроек:
+
+- Меняем глубину поиска
+
+```py title="~/my-project/src/my_project/core/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig(
+    _pyproject_toml_max_depth=10,  # (1)!
+)
+```
+
+1. В конкретном примере точная глубина расположения файла равна 5. Поиск остановится сам, как только файл `pyproject.toml` будет найден.
+
+- Или указываем точную глубину расположения файла `pyproject.toml`
+
+```py title="~/my-project/src/my_project/core/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class AppConfig(ArFiSettings):
+    pass
+
+
+config = AppConfig(
+    _pyproject_toml_depth=5,
+)
+```
+
+### Частный случай
+
+Иногда при разработке мы можем устанавливать дополнительные библиотеки, расширения или плагины, в редактируемом режиме в корень нашего проекта с помощью команды `pip install -e my_plagin`. Назовём их все условно "Плагины".
+
+У каждого из этих плагинов может быть собственный файл `pyproject.toml`, содержащий настройки по умолчанию, а в корне нашего проекта - свой собственный файл `pyproject.toml`.
+
+Если в каком нибудь плагине содержится инициализация подкласса `arfi_settings.ArFiSettings`, например в поле модели установлено значение по умолчанию путём инициализации инстанса, то в момент инициализации этого инстанса будет автоматически запущен механизм поиска файла `pyproject.toml`. Этот поиск вернёт путь до файла `pyproject.toml`, принадлежащий именно этому плагину. И все настройки по умолчанию для этого инстанса будут прочитаны из файла плагина. Далее, мы импортируем класс с настройками из плагина и уже инициализируем наш собственный инстанс конфигурации. В этот момент снова запускается поиск файла `pyproject.toml`, который возвращает путь до файла `pyproject.toml` расположенного уже в корне нашего проекта и все настройки по умолчанию для класса, импортированного из плагина, перечитаются в соответствии с параметрами по умолчанию, указанными в файле `pyproject.toml` который расположен в корне нашего проекта.
+
+Так как это не стандартная ситуация, то будет выведено предупреждение, что обнаружено несколько файлов `pyproject.toml`. Так же в предупреждении будет отображено для какого именно инстанса перечитаны настройки по умолчанию и из какого именно файла `pyproject.toml` они прочитаны.
+
+**Пример**:
+
+Здесь плагин `my_plugin` установлен командой `pip install -e my_plugin`.
+
+Структура проекта:
