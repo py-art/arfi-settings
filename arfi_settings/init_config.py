@@ -201,7 +201,16 @@ class InitSettings(BaseModel):
         if Path(previous_dir / "__init__.py").is_file():
             base_dir = previous_dir
 
-        self.base_dir = base_dir.resolve()
+        source_base_dir_str = ""
+        if self.base_dir is not None:
+            source_base_dir_str = self.base_dir.as_posix()
+        find_base_dir_str = base_dir.resolve().as_posix()
+        if source_base_dir_str != find_base_dir_str:
+            if not find_base_dir_str.startswith(source_base_dir_str):
+                self.base_dir = base_dir.resolve()
+                return
+        if not self.base_dir:
+            self.base_dir = base_dir.resolve()
 
     def _search_base_dir_decorator(self, func):
         @functools.wraps(func)
