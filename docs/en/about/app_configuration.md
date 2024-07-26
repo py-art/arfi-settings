@@ -1,6 +1,6 @@
 # Application Configuration
 
-Most settings related to reading the configuration can be set via the [model_config](usage/config.md#model_config) variable.
+Most settings related to reading the configuration can be set via the [model_config](../usage/config.md#model_config) variable.
 
 But the settings for files and environment variables can be set separately in [file_config](../usage/config.md#file_config) and [env_config](../usage/config.md#env_config) respectively.
 The settings specified in `file_config` and `env_config` will take precedence and override the settings specified in `model_config`.
