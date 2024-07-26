@@ -459,3 +459,169 @@ config = AppConfig(
 Здесь плагин `my_plugin` установлен командой `pip install -e my_plugin`.
 
 Структура проекта:
+
+```
+~/my-project/
+├── my-plugin
+│  ├── src
+│  │  └── my_plugin
+│  │     ├── settings
+│  │     │  ├── config
+│  │     │  │  └── config.toml
+│  │     │  ├── __init__.py
+│  │     │  └── settings.py
+│  │     ├── __init__.py
+│  │     └── main.py
+│  └── pyproject.toml
+├── config
+│  └── config.toml
+├── settings
+│  ├── __init__.py
+│  └── settings.py
+├── __init__.py
+├── main.toml
+└── pyproject.py
+```
+
+Файлы плагина:
+
+```toml title="~/my-project/src/my_plugin/pyproject.toml"
+[tool.arfi_settings]
+conf_dir = "settings/config"
+```
+
+```toml title="~/my-project/src/my_plugin/settings/config/config.toml"
+[param]
+my_pluging_param = "param_from_PLUGIN"
+```
+
+```py title="~/my-project/src/my_plugin/settings/settings.py"
+from arfi_settings import ArFiSettings
+
+
+class ParamSettings(ArFiSettings):
+    my_pluging_param: str = "default_my_plugin_param"
+
+
+class MyPluginSettings(ArFiSettings):
+    param: ParamSettings = ParamSettings()
+
+
+config = MyPluginSettings()
+
+```
+
+Файлы проекта:
+
+```toml title="~/my-project/pyproject.toml"
+[tool.ruff.lint.per-file-ignores]
+"main.py" = ["E402"]  # (1)!
+
+[tool.arfi_settings]
+conf_dir = "config"
+```
+
+1. Чтоб линтер не ругался на порядок импортов в файле `main.py`
+
+```toml title="~/my-project/config/config.toml"
+[plugin.param]
+my_pluging_param = "param_from_PROJECT"
+```
+
+```py title="~/my-project/settings/settings.py"
+from arfi_settings import ArFiSettings
+from my_plugin import MyPluginSettings
+
+
+class AppConfig(ArFiSettings):
+    plugin: MyPluginSettings
+
+
+config = AppConfig()
+```
+
+В главном файле проекта Сначала читаем настройки по умолчанию из `pyproject.toml`, а только потом импортируем `config`. При этом передаём параметр `read_once=True`, чтоб не читать файл `pyproject.toml` при каждой инициализации инстанса класса `arfi_settings.ArFiSettings`.
+
+```py title="~/my-project/main.py"
+from arfi_settings.init_config import init_settings
+init_settings.read_pyproject(read_once=True)  # (1)!
+
+from settings.settings import config
+
+print(config.plugin.param.my_pluging_param)
+#> param_from_PROJECT
+```
+
+1. Сначала читаем настройки по умолчанию из `pyproject.toml`, а только потом импортируем `config`!!!
+
+**Важно**:
+
+Если сначала импортировать настройки, а только потом выполнить функцию `#!python init_settings.read_pyproject(read_once=True)`, то библиотека выдаст несколько предупреждений:
+
+> **Заметка**: Предупреждения нужны только для того, чтоб сообщить разработчику, что он делает что-то не так. Если плагин установить как обычную библиотек, а не в режиме редактирования, то предупреждения появляться не будут. Так же предупреждения появляться не будут, если в плагине нет инициализации инстансов класса `arfi_settings.ArFiSettings`, то есть только прописаны сами классы настроек, а все параметры передаются в источниках конфигурации.
+
+```py title="~/my-project/main.py"
+from arfi_settings.init_config import init_settings
+from settings.settings import config
+
+init_settings.read_pyproject(read_once=True)  # (1)!
+
+
+print(config.plugin.param.my_pluging_param)
+"""
+/home/user/my-project/settings/settings.py:9: Warning:
+Path to pyproject.toml has been changed !!!
+instance AppConfig()
+    previous path:
+/home/user/my-project/my-plugin/pyproject.toml
+    current path:
+/home/user/my-project/pyproject.toml
+Call once
+  from arfi_settings.init_config import init_settings
+  init_settings.read_pyproject(read_once=True)
+before import any instance or subclass `ArFiSettings` for fix it.
+  config = AppConfig()
+/home/user/my-project/settings/settings.py:9: Warning:
+Path to pyproject.toml has been changed !!!
+for instance ParamSettings()
+inside class AppConfig
+    previous path:
+/home/user/my-project/my-plugin/pyproject.toml
+    current path:
+/home/user/my-project/pyproject.toml
+Call once
+  from arfi_settings.init_config import init_settings
+  init_settings.read_pyproject(read_once=True)
+before import any instance or subclass `ArFiSettings` for fix it.
+  config = AppConfig()
+param_from_PROJECT
+"""
+```
+
+1. Не правильный порядок запуска функции!!!
+
+Но так же можно просто отключить отображение предупреждений.
+
+```py title="~/my-project/main.py"
+import warnings
+warnings.filterwarnings("ignore")
+
+from settings.settings import config
+
+print(config.plugin.param.my_pluging_param)
+#> param_from_PROJECT
+```
+
+> **Важно**: Если запустить `#!python init_settings.read_pyproject(read_once=True)` в самом плагине, то это может привести к некорректной работе данной библиотеки, так как настройки по умолчанию будут читаться из файла `pyproject.toml`, расположенного в плагине !!! Для того, чтобы этого избежать нужно передать в функцию `read_pyproject` дополнительный аргумент `read_force=True`:
+```py title="~/my-project/main.py"
+import warnings
+from arfi_settings.init_config import init_settings
+
+warnings.filterwarnings("ignore")
+init_settings.read_pyproject(read_once=True, read_force=True)
+
+from settings.settings import config
+
+print(config.plugin.param.my_pluging_param)
+#> param_from_PROJECT
+```
