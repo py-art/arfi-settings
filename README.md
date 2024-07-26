@@ -652,7 +652,8 @@ print(config.db.DATABASE)
 
 ## Roadmap
 
-- [ ] Create documentation
+- [x] Create documentation
+- [ ] Add missing connectors
 - [ ] Read settings from files without creating a model, but with the ability to use `MODE` as for the main settings class
 - [ ] Reading settings from `URL`
 - [ ] Reading encrypted settings with key specification
