@@ -108,12 +108,16 @@ class InitSettings(BaseModel):
         search_path = ["tool", "arfi_settings"]
         init_data = search_dict_for_path(search_path, pyproject_toml_data)
         if init_data is not PydanticUndefined:
-            if init_data and isinstance(init_data, dict):
+            if init_data:
                 try:
                     self.init_params = PyProjectSchema(**init_data)
                 except pydantic.ValidationError as e:
                     e.add_note(f"Source file: \033[32m{pyproject_toml_path.as_posix()}\033[0m")
                     raise e
+            else:
+                self.init_params = PyProjectSchema()
+        else:
+            self.init_params = PyProjectSchema()
 
     @staticmethod
     def _search_called_file() -> tuple[str, int]:
