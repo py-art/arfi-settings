@@ -3,8 +3,22 @@
 
 ## Development ...
 
+## [0.4.0] - (2024-07-26) latest
 
-## [0.3.1] - (2024-07-26) latest
+### Features
+
+- Add `read_force` argument to `arfi_settings.init_settings.read_pyproject` function
+
+### Fixes
+
+- Fix resolve BASE_DIR
+
+### Docs
+
+- Update a description of the pyproject
+
+
+## [0.3.1] - (2024-07-26)
 
 ### Fixes
 
@@ -17,7 +31,7 @@
 - Update a description of the pyproject
 
 
-## [0.3.0] - (2024-07-24) latest
+## [0.3.0] - (2024-07-24)
 
 ### Fixes
 
@@ -69,3 +83,4 @@ Initial release
 [0.2.1]: https://github.com/py-art/arfi-settings/releases/tag/0.2.1
 [0.3.0]: https://github.com/py-art/arfi-settings/releases/tag/0.3.0
 [0.3.1]: https://github.com/py-art/arfi-settings/releases/tag/0.3.1
+[0.4.0]: https://github.com/py-art/arfi-settings/releases/tag/0.4.0
