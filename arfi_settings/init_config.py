@@ -45,6 +45,7 @@ class InitSettings(BaseModel):
     def read_pyproject(
         self,
         read_once: bool = False,
+        read_force: bool = False,
         read_pyproject_toml: bool = True,
         pyproject_toml_depth: int | None = None,
         pyproject_toml_max_depth: int = PYPROJECT_TOML_MAX_DEPTH,
@@ -69,6 +70,8 @@ class InitSettings(BaseModel):
             return
         if read_once:
             self.read_pyproject_toml = False
+        if read_force:
+            self.read_pyproject_toml = True
         pyproject_toml_path = self._search_pyproject_toml(
             called_file,
             pyproject_toml_depth,
