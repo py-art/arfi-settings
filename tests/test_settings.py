@@ -1,4 +1,4 @@
-from pathlib import Path, WindowsPath
+from pathlib import Path
 
 import pytest
 
@@ -47,9 +47,7 @@ def test_base_dir(cwd_to_tmp, monkeypatch, platform_system):
 
     config = AppConfig()
     base_dir = Path("/settings")
-    if platform_system.lower() == "windows":
-        base_dir = WindowsPath("C:/settings")
-    assert config.BASE_DIR == base_dir
+    assert config.BASE_DIR == base_dir.expanduser().resolve()
 
     monkeypatch.setattr(arfi_settings.init_config, "InitSettings", PatchedInitSettings)
     init_settings = PatchedInitSettings()
@@ -61,7 +59,8 @@ def test_base_dir(cwd_to_tmp, monkeypatch, platform_system):
         BASE_DIR = "~/settings"
 
     config = AppConfig()
-    assert config.BASE_DIR == base_dir
+    base_dir = Path("~/settings")
+    assert config.BASE_DIR == base_dir.expanduser().resolve()
 
 
 # @pytest.mark.settings
