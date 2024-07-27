@@ -120,4 +120,6 @@ exclude_lines = [
 [tool.coverage.paths]
 source = [
     'arfi_settings/',
+    '*/arfi_settings',
+    '/Users/runner/work/arfi-settings/arfi-settings/arfi_settings/',
 ]
