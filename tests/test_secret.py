@@ -95,11 +95,7 @@ def test_simple_data_secrets_dir(simple_data_secret_path_config_file):
 # @pytest.mark.current
 @pytest.mark.case_sensitive
 @pytest.mark.secret
-def test_case_sensitive_secrets_dir(secrets_dir):
-    path_config_file = secrets_dir / "path_config_file"
-    path_config_file.touch(exist_ok=True)
-    path_config_file.write_text("secrets/path_config_file")
-
+def test_case_sensitive_secrets_dir(secrets_dir, platform_system):
     PATH_CONFIG_FILE = secrets_dir / "PATH_CONFIG_FILE"
     PATH_CONFIG_FILE.touch(exist_ok=True)
     PATH_CONFIG_FILE.write_text("secrets/PATH_CONFIG_FILE")
@@ -107,6 +103,10 @@ def test_case_sensitive_secrets_dir(secrets_dir):
     Path_Config_File = secrets_dir / "Path_Config_File"
     Path_Config_File.touch(exist_ok=True)
     Path_Config_File.write_text("secrets/Path_Config_File")
+
+    path_config_file = secrets_dir / "path_config_file"
+    path_config_file.touch(exist_ok=True)
+    path_config_file.write_text("secrets/path_config_file")
 
     class AppConfig(ArFiSettings):
         path_config_file: str
@@ -122,7 +122,10 @@ def test_case_sensitive_secrets_dir(secrets_dir):
 
     config = AppConfig()
     assert config.path_config_file == "secrets/path_config_file"
-    assert config.PATH_CONFIG_FILE == "secrets/PATH_CONFIG_FILE"
+    if platform_system.lower() == "linux":
+        assert config.PATH_CONFIG_FILE == "secrets/PATH_CONFIG_FILE"
+    else:
+        assert config.PATH_CONFIG_FILE == "secrets/Path_Config_File"
     assert config.Path_Config_File == "secrets/Path_Config_File"
 
     class AppConfig(ArFiSettings):
@@ -167,10 +170,6 @@ def test_case_sensitive_secrets_dir(secrets_dir):
 @pytest.mark.alias
 @pytest.mark.secret
 def test_alias_choices_secrets_dir(secrets_dir):
-    path_config_file = secrets_dir / "path_config_file"
-    path_config_file.touch(exist_ok=True)
-    path_config_file.write_text("secrets/path_config_file")
-
     PATH_CONFIG_FILE = secrets_dir / "PATH_CONFIG_FILE"
     PATH_CONFIG_FILE.touch(exist_ok=True)
     PATH_CONFIG_FILE.write_text("secrets/PATH_CONFIG_FILE")
@@ -178,6 +177,10 @@ def test_alias_choices_secrets_dir(secrets_dir):
     Path_Config_File = secrets_dir / "Path_Config_File"
     Path_Config_File.touch(exist_ok=True)
     Path_Config_File.write_text("secrets/Path_Config_File")
+
+    path_config_file = secrets_dir / "path_config_file"
+    path_config_file.touch(exist_ok=True)
+    path_config_file.write_text("secrets/path_config_file")
 
     class AppConfig(ArFiSettings):
         path: str = Field(alias="path_config_file")
