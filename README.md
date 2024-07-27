@@ -657,7 +657,6 @@ print(config.db.DATABASE)
 - [ ] Read settings from files without creating a model, but with the ability to use `MODE` as for the main settings class
 - [ ] Reading settings from `URL`
 - [ ] Reading encrypted settings with key specification
-- [ ] Extend the usability for python versions `3.8`, `3.9`, `3.10`
 - [ ] Expand debugging mode.
 
 
