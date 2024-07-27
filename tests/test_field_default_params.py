@@ -1,7 +1,8 @@
+from pathlib import PosixPath, WindowsPath
+
 import pytest
 
 from arfi_settings import ArFiSettings
-from pathlib import PosixPath
 
 
 # @pytest.mark.current
@@ -64,12 +65,8 @@ def test_read_config_default_params(simple_data_config_config_toml, path_base_di
 # @pytest.mark.current
 @pytest.mark.field_default_params
 @pytest.mark.mode_dir
-def test_mode_dir_default_params(cwd_to_tmp):
+def test_mode_dir_default_params(cwd_to_tmp, platform_system):
     """Test default params _mode_dir."""
-    # from pathlib import Path
-    #
-    # print()
-    # print(Path().cwd())
 
     class AppSettings(ArFiSettings):
         pass
@@ -79,22 +76,31 @@ def test_mode_dir_default_params(cwd_to_tmp):
         read_config_force = False
 
     config = AppConfig()
-    assert config.mode_dir == PosixPath(".")
+    # assert config.mode_dir == Path(".")
+    if platform_system.lower() == "windows":
+        assert config.mode_dir == WindowsPath(".")
+    else:
+        assert config.mode_dir == PosixPath(".")
     assert config.app.mode_dir == "app"
 
     class AppConfig(ArFiSettings):
         app: AppSettings = AppSettings()
 
     config = AppConfig()
-    assert config.mode_dir == PosixPath(".")
+    # assert config.mode_dir == Path(".")
+    if platform_system.lower() == "windows":
+        assert config.mode_dir == WindowsPath(".")
+    else:
+        assert config.mode_dir == PosixPath(".")
     assert config.app.mode_dir == "app"
 
     class AppConfig(ArFiSettings):
         app: AppSettings = AppSettings(_mode_dir="test_mode_dir")
 
     config = AppConfig()
-    assert config.mode_dir == PosixPath(".")
+    # assert config.mode_dir == Path(".")
+    if platform_system.lower() == "windows":
+        assert config.mode_dir == WindowsPath(".")
+    else:
+        assert config.mode_dir == PosixPath(".")
     assert config.app.mode_dir == "test_mode_dir"
-
-
-#

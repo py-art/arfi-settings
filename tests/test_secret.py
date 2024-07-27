@@ -1,4 +1,4 @@
-from pathlib import PosixPath
+from pathlib import Path
 
 import pydantic
 import pytest
@@ -23,7 +23,7 @@ def test_non_existing_secrets_dir(cwd_to_tmp):
         )
 
     config = AppConfig()
-    assert config.settings_config.secrets_dir == PosixPath("non_existing_secret_dir")
+    assert config.settings_config.secrets_dir == Path("non_existing_secret_dir")
 
     with pytest.raises(ArFiSettingsError) as excinfo:
 
@@ -53,7 +53,7 @@ def test_empty_secrets_dir(secrets_dir):
         )
 
     config = AppConfig()
-    assert config.settings_config.secrets_dir == PosixPath("secrets")
+    assert config.settings_config.secrets_dir == Path("secrets")
 
 
 # @pytest.mark.current
@@ -70,7 +70,7 @@ def test_empty_data_secrets_dir(empty_secret_path_config_file):
         )
 
     config = AppConfig()
-    assert config.settings_config.secrets_dir == PosixPath("secrets")
+    assert config.settings_config.secrets_dir == Path("secrets")
     assert config.path_config_file == ""
 
 
@@ -88,7 +88,7 @@ def test_simple_data_secrets_dir(simple_data_secret_path_config_file):
         )
 
     config = AppConfig()
-    assert config.settings_config.secrets_dir == PosixPath("secrets")
+    assert config.settings_config.secrets_dir == Path("secrets")
     assert config.path_config_file == "secrets/path_config_file"
 
 

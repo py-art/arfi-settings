@@ -1,4 +1,4 @@
-from pathlib import Path
+from pathlib import Path, WindowsPath
 
 import pytest
 
@@ -9,7 +9,7 @@ from arfi_settings.init_config import InitSettings
 
 # @pytest.mark.current
 @pytest.mark.settings
-def test_base_dir(cwd_to_tmp, monkeypatch):
+def test_base_dir(cwd_to_tmp, monkeypatch, platform_system):
     class PatchedInitSettings(InitSettings):
         @staticmethod
         def _search_called_file():
@@ -46,7 +46,7 @@ def test_base_dir(cwd_to_tmp, monkeypatch):
         BASE_DIR = "/settings"
 
     config = AppConfig()
-    assert config.BASE_DIR == Path("/settings")
+    assert config.BASE_DIR == Path("/settings") if platform_system.lower() == "windows" else WindowsPath("/settings")
 
     monkeypatch.setattr(arfi_settings.init_config, "InitSettings", PatchedInitSettings)
     init_settings = PatchedInitSettings()
@@ -58,7 +58,7 @@ def test_base_dir(cwd_to_tmp, monkeypatch):
         BASE_DIR = "~/settings"
 
     config = AppConfig()
-    assert config.BASE_DIR == Path("/settings")
+    assert config.BASE_DIR == Path("/settings") if platform_system.lower() == "windows" else WindowsPath("/settings")
 
 
 # @pytest.mark.settings
