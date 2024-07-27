@@ -1,4 +1,5 @@
 import os
+import platform
 
 import pytest
 
@@ -28,6 +29,11 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "cli")
     config.addinivalue_line("markers", "secret")
     config.addinivalue_line("markers", "pyproject")
+
+
+@pytest.fixture(scope="session")
+def platform_system():
+    yield platform.system()
 
 
 @pytest.fixture

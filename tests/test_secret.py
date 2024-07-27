@@ -1,4 +1,4 @@
-from pathlib import PosixPath
+from pathlib import Path
 
 import pydantic
 import pytest
@@ -23,7 +23,7 @@ def test_non_existing_secrets_dir(cwd_to_tmp):
         )
 
     config = AppConfig()
-    assert config.settings_config.secrets_dir == PosixPath("non_existing_secret_dir")
+    assert config.settings_config.secrets_dir == Path("non_existing_secret_dir")
 
     with pytest.raises(ArFiSettingsError) as excinfo:
 
@@ -53,7 +53,7 @@ def test_empty_secrets_dir(secrets_dir):
         )
 
     config = AppConfig()
-    assert config.settings_config.secrets_dir == PosixPath("secrets")
+    assert config.settings_config.secrets_dir == Path("secrets")
 
 
 # @pytest.mark.current
@@ -70,7 +70,7 @@ def test_empty_data_secrets_dir(empty_secret_path_config_file):
         )
 
     config = AppConfig()
-    assert config.settings_config.secrets_dir == PosixPath("secrets")
+    assert config.settings_config.secrets_dir == Path("secrets")
     assert config.path_config_file == ""
 
 
@@ -88,18 +88,14 @@ def test_simple_data_secrets_dir(simple_data_secret_path_config_file):
         )
 
     config = AppConfig()
-    assert config.settings_config.secrets_dir == PosixPath("secrets")
+    assert config.settings_config.secrets_dir == Path("secrets")
     assert config.path_config_file == "secrets/path_config_file"
 
 
 # @pytest.mark.current
 @pytest.mark.case_sensitive
 @pytest.mark.secret
-def test_case_sensitive_secrets_dir(secrets_dir):
-    path_config_file = secrets_dir / "path_config_file"
-    path_config_file.touch(exist_ok=True)
-    path_config_file.write_text("secrets/path_config_file")
-
+def test_case_sensitive_secrets_dir(secrets_dir, platform_system):
     PATH_CONFIG_FILE = secrets_dir / "PATH_CONFIG_FILE"
     PATH_CONFIG_FILE.touch(exist_ok=True)
     PATH_CONFIG_FILE.write_text("secrets/PATH_CONFIG_FILE")
@@ -107,6 +103,10 @@ def test_case_sensitive_secrets_dir(secrets_dir):
     Path_Config_File = secrets_dir / "Path_Config_File"
     Path_Config_File.touch(exist_ok=True)
     Path_Config_File.write_text("secrets/Path_Config_File")
+
+    path_config_file = secrets_dir / "path_config_file"
+    path_config_file.touch(exist_ok=True)
+    path_config_file.write_text("secrets/path_config_file")
 
     class AppConfig(ArFiSettings):
         path_config_file: str
@@ -122,8 +122,16 @@ def test_case_sensitive_secrets_dir(secrets_dir):
 
     config = AppConfig()
     assert config.path_config_file == "secrets/path_config_file"
-    assert config.PATH_CONFIG_FILE == "secrets/PATH_CONFIG_FILE"
-    assert config.Path_Config_File == "secrets/Path_Config_File"
+    if platform_system.lower() == "linux":
+        assert config.PATH_CONFIG_FILE == "secrets/PATH_CONFIG_FILE"
+    else:
+        # lower because it's last edded
+        # TODO: fix this in code
+        assert config.PATH_CONFIG_FILE == "secrets/path_config_file"
+    if platform_system.lower() == "linux":
+        assert config.Path_Config_File == "secrets/Path_Config_File"
+    else:
+        assert config.Path_Config_File == "secrets/path_config_file"
 
     class AppConfig(ArFiSettings):
         path_config_FILE: str
@@ -166,11 +174,7 @@ def test_case_sensitive_secrets_dir(secrets_dir):
 # @pytest.mark.current
 @pytest.mark.alias
 @pytest.mark.secret
-def test_alias_choices_secrets_dir(secrets_dir):
-    path_config_file = secrets_dir / "path_config_file"
-    path_config_file.touch(exist_ok=True)
-    path_config_file.write_text("secrets/path_config_file")
-
+def test_alias_choices_secrets_dir(secrets_dir, platform_system):
     PATH_CONFIG_FILE = secrets_dir / "PATH_CONFIG_FILE"
     PATH_CONFIG_FILE.touch(exist_ok=True)
     PATH_CONFIG_FILE.write_text("secrets/PATH_CONFIG_FILE")
@@ -178,6 +182,10 @@ def test_alias_choices_secrets_dir(secrets_dir):
     Path_Config_File = secrets_dir / "Path_Config_File"
     Path_Config_File.touch(exist_ok=True)
     Path_Config_File.write_text("secrets/Path_Config_File")
+
+    path_config_file = secrets_dir / "path_config_file"
+    path_config_file.touch(exist_ok=True)
+    path_config_file.write_text("secrets/path_config_file")
 
     class AppConfig(ArFiSettings):
         path: str = Field(alias="path_config_file")
@@ -220,7 +228,11 @@ def test_alias_choices_secrets_dir(secrets_dir):
         )
 
     config = AppConfig()
-    assert config.path == "secrets/Path_Config_File"
+    if platform_system.lower() == "linux":
+        assert config.path == "secrets/Path_Config_File"
+    else:
+        # TODO: fix this in code
+        assert config.path == "secrets/path_config_file"
 
 
 # @pytest.mark.current

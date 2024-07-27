@@ -1,7 +1,8 @@
+from pathlib import Path
+
 import pytest
 
-from arfi_settings.schemes import FileConfigSchema, SettingsParamsSchema, SettingsConfigSchema
-from pathlib import PosixPath
+from arfi_settings.schemes import FileConfigSchema, SettingsConfigSchema, SettingsParamsSchema
 
 
 # @pytest.mark.current
@@ -63,13 +64,15 @@ def test_settings_config_schema():
 
 # @pytest.mark.current
 @pytest.mark.schemes
-def test_settings_params_schema():
+def test_settings_params_schema(platform_system):
     result_dict = SettingsParamsSchema().default_param_dict
     assert isinstance(result_dict, dict)
+    default_path = Path(".")
+    assert result_dict["mode_dir"] == default_path
     assert result_dict == {
         "read_config": True,
         "read_config_force": False,
-        "mode_dir": PosixPath("."),
+        "mode_dir": default_path,
         "mode_dir_inherit_nested": True,
         "mode_dir_inherit_parent": True,
         "file_config_inherit_parent": True,
@@ -122,13 +125,13 @@ def test_settings_params_schema():
     assert _kwargs == {
         "_read_config": None,
         "_read_config_force": None,
-        "_mode_dir": PosixPath("."),
+        "_mode_dir": default_path,
         "_mode_dir_inherit_nested": None,
         "_mode_dir_inherit_parent": None,
         "_file_config_inherit_parent": None,
         "_env_config_inherit_parent": None,
-        "_conf_file": PosixPath("."),
-        "_conf_dir": PosixPath("."),
+        "_conf_file": default_path,
+        "_conf_dir": default_path,
         "_conf_ext": ["toml", "yaml", "json", "ini", "conf"],
         "_conf_file_encoding": "",
         "_conf_case_sensitive": None,
@@ -136,7 +139,7 @@ def test_settings_params_schema():
         "_conf_custom_ext_handler": "",
         "_conf_include_inherit_parent": None,
         "_conf_exclude_inherit_parent": None,
-        "_env_file": PosixPath("."),
+        "_env_file": default_path,
         "_env_prefix": None,
         "_env_prefix_as_mode_dir": None,
         "_env_prefix_as_nested_mode_dir": None,
@@ -151,7 +154,7 @@ def test_settings_params_schema():
         "_ignore_missing": None,
         "_encoding": "",
         "_cli": None,
-        "_secrets_dir": PosixPath("."),
+        "_secrets_dir": default_path,
         "_include_inherit_parent": None,
         "_exclude_inherit_parent": None,
         "_handler": "",

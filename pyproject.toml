@@ -62,7 +62,9 @@ docs = [
 ]
 dev = [
     "pre-commit>=2.21.0",
-    "ruff>=0.3.3",
+]
+linting = [
+    "ruff==0.5.0",
 ]
 testing = [
     "coverage[toml]",
@@ -118,4 +120,6 @@ exclude_lines = [
 [tool.coverage.paths]
 source = [
     'arfi_settings/',
+    '*/arfi_settings',
+    '/Users/runner/work/arfi-settings/arfi-settings/arfi_settings/',
 ]

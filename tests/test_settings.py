@@ -9,7 +9,7 @@ from arfi_settings.init_config import InitSettings
 
 # @pytest.mark.current
 @pytest.mark.settings
-def test_base_dir(cwd_to_tmp, monkeypatch):
+def test_base_dir(cwd_to_tmp, monkeypatch, platform_system):
     class PatchedInitSettings(InitSettings):
         @staticmethod
         def _search_called_file():
@@ -46,7 +46,8 @@ def test_base_dir(cwd_to_tmp, monkeypatch):
         BASE_DIR = "/settings"
 
     config = AppConfig()
-    assert config.BASE_DIR == Path("/settings")
+    base_dir = Path("/settings")
+    assert config.BASE_DIR == base_dir.expanduser().resolve()
 
     monkeypatch.setattr(arfi_settings.init_config, "InitSettings", PatchedInitSettings)
     init_settings = PatchedInitSettings()
@@ -58,7 +59,8 @@ def test_base_dir(cwd_to_tmp, monkeypatch):
         BASE_DIR = "~/settings"
 
     config = AppConfig()
-    assert config.BASE_DIR == Path("/settings")
+    base_dir = Path("~/settings")
+    assert config.BASE_DIR == base_dir.expanduser().resolve()
 
 
 # @pytest.mark.settings

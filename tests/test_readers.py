@@ -45,11 +45,6 @@ def test_import_tomllib(readers):
     assert readers.tomllib
     assert readers.tomli is None
 
-    # readers.tomli = "tomli_test"
-    # if readers.tomli is not None:
-    #     assert readers.import_toml() is None
-    #     assert readers.tomli
-
 
 # @pytest.mark.skipif(sys.version_info >= (3, 11), reason="not need to use tomli")
 @pytest.mark.readers
@@ -105,7 +100,7 @@ def test_yaml_not_installed(mocker: MockFixture):
     assert readers.yaml is None
     with pytest.raises(ArFiSettingsError) as excinfo:
         readers.import_yaml()
-    assert "PyYaml not installed" in str(excinfo.value)
+    assert "PyYaml is not installed" in str(excinfo.value)
 
 
 @pytest.mark.readers
@@ -215,7 +210,7 @@ def test_custom_reader_name_without_reader(simple_data_config_cnf):
     assert "`custom_reader` is not defined" in str(excinfo.value)
 
 
-# @pytest.mark.current
+@pytest.mark.current
 @pytest.mark.readers
 def test_ignore_missing(mocker: MockFixture):
     ArFiReader.BASE_DIR = None
@@ -233,25 +228,27 @@ def test_ignore_missing(mocker: MockFixture):
         _ = reader.toml_reader()
     assert "File not found" in str(excinfo.value)
 
-    mock_sys = mocker.patch("arfi_settings.readers.sys")
-    mock_sys.version_info = (3, 10)
-    reader = ArFiReader(
-        file_path="config.toml",
-        ignore_missing=True,
-    )
-    data = reader.toml_reader()
-    assert data == {}
-
-    with pytest.raises(ArFiSettingsError) as excinfo:
+    if tomli is not None:
+        mock_sys = mocker.patch("arfi_settings.readers.sys")
+        mock_sys.version_info = (3, 10)
         reader = ArFiReader(
             file_path="config.toml",
+            ignore_missing=True,
         )
-        _ = reader.toml_reader()
-    assert "File not found" in str(excinfo.value)
+        data = reader.toml_reader()
+        assert data == {}
+
+        with pytest.raises(ArFiSettingsError) as excinfo:
+            reader = ArFiReader(
+                file_path="config.toml",
+            )
+            _ = reader.toml_reader()
+        assert "File not found" in str(excinfo.value)
 
 
 # @pytest.mark.current
 @pytest.mark.readers
+@pytest.mark.skipif(yaml is None, reason="PyYaml not installed")
 def test_yaml_reader(simple_data_config_config_yaml):
     ArFiReader.BASE_DIR = None
     reader = ArFiReader(
@@ -264,6 +261,7 @@ def test_yaml_reader(simple_data_config_config_yaml):
 
 # @pytest.mark.current
 @pytest.mark.readers
+@pytest.mark.skipif(yaml is None, reason="PyYaml not installed")
 def test_non_exist_file_yaml_reader():
     with pytest.raises(ArFiSettingsError) as excinfo:
         reader = ArFiReader(
@@ -281,6 +279,7 @@ def test_non_exist_file_yaml_reader():
 
 
 @pytest.mark.readers
+@pytest.mark.skipif(yaml is None, reason="PyYaml not installed")
 def test_yml_reader(simple_data_config_config_yml):
     ArFiReader.BASE_DIR = None
     reader = ArFiReader(
@@ -292,6 +291,7 @@ def test_yml_reader(simple_data_config_config_yml):
 
 
 @pytest.mark.readers
+@pytest.mark.skipif(yaml is None, reason="PyYaml not installed")
 def test_non_exist_file_yml_reader():
     with pytest.raises(ArFiSettingsError) as excinfo:
         reader = ArFiReader(
