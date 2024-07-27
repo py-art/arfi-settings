@@ -12,6 +12,7 @@ sources = arfi_settings tests
 .PHONY: install  ## Install the package, dependencies, and pre-commit for local development
 install: .pdm .pre-commit
 	pdm info
+	pdm venv create --with-pip --force 3.11
 	pdm install --group :all
 	pdm run pre-commit install --install-hooks
 

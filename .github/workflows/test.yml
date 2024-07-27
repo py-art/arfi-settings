@@ -1,0 +1,164 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - main
+      - ci-test
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  schedule:
+    # cron every week on monday
+    - cron: "0 0 * * 1"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: lint ${{ matrix.python-version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.11', '3.12', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: true
+          allow-python-prereleases: true
+
+      - name: install
+        run: |
+          pdm venv create --with-pip --force $PYTHON
+          pdm install -G linting
+
+      - uses: pre-commit/action@v3.0.1
+        with:
+          extra_args: --all-files --verbose
+        env:
+          SKIP: no-commit-to-branch
+
+  test:
+    name: test ${{ matrix.os }} / ${{ matrix.python-version }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: ['3.11', '3.12', '3.13']
+
+    env:
+      OS: ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - uses: actions/checkout@v4
+
+      - uses: pdm-project/setup-pdm@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: true
+          allow-python-prereleases: true
+
+      - name: install deps
+        run: |
+          pdm venv create --with-pip --force $PYTHON
+          pdm install -G testing
+
+      - run: pdm info && pdm list
+
+      - run: 'pdm run python -c "import pydantic.version; print(pydantic.version.version_info())"'
+
+      - run: mkdir coverage
+
+      - name: test without deps
+        # speed up by skipping this step on pypy
+        if: "!startsWith(matrix.python-version, 'pypy')"
+        run: make test
+        env:
+          COVERAGE_FILE: coverage/.coverage.${{ runner.os }}-py${{ matrix.python-version }}-without-deps
+          CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}-without-deps
+
+      - name: install extra deps
+        run: pdm install -G yaml
+
+      - name: test with deps
+        run: make test
+        env:
+          COVERAGE_FILE: coverage/.coverage.${{ runner.os }}-py${{ matrix.python-version }}-with-deps
+          CONTEXT: ${{ runner.os }}-py${{ matrix.python-version }}-with-deps
+
+      - name: store coverage files
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.os }}-${{ matrix.python-version }}
+          path: coverage
+
+  coverage-combine:
+    needs:
+      - test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: get coverage files
+        uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+          pattern: coverage-*
+          path: coverage
+
+      - run: pip install coverage[toml]
+
+      - run: ls -la coverage
+      - run: coverage combine coverage
+      - run: coverage report
+      - run: coverage html --show-contexts --title "pydantic coverage for ${{ github.sha }}"
+
+      - name: Store coverage data
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-data
+          path: .coverage
+
+      - name: Store coverage html
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-html
+          path: htmlcov
+
+  check:  # This job does nothing and is only used for the branch protection
+    if: always()
+    needs:
+      - test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        id: all-green
+        with:
+          jobs: ${{ toJSON(needs) }}

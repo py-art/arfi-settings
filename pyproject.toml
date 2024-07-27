@@ -62,7 +62,9 @@ docs = [
 ]
 dev = [
     "pre-commit>=2.21.0",
-    "ruff>=0.3.3",
+]
+linting = [
+    "ruff==0.5.0",
 ]
 testing = [
     "coverage[toml]",
