@@ -132,7 +132,7 @@ jobs:
         with:
           merge-multiple: true
           pattern: coverage-*
-          patcoverage htmlh: coverage
+          path: coverage
 
       - run: ls -la
 
