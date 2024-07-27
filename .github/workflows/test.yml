@@ -55,7 +55,7 @@ jobs:
           # - "windows-latest"
         python-version:
           - "3.11"
-          # - "3.12"
+          - "3.12"
 
     env:
       OS: ${{ matrix.os }}
@@ -125,7 +125,7 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: get coverage files
         uses: actions/download-artifact@v4
@@ -136,6 +136,7 @@ jobs:
 
       - run: pip install coverage[toml]
 
+      - run: ls -la
       - run: ls -la coverage
       - run: coverage combine coverage
       - run: coverage report
