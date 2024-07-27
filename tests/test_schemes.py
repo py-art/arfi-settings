@@ -67,10 +67,14 @@ def test_settings_config_schema():
 def test_settings_params_schema(platform_system):
     result_dict = SettingsParamsSchema().default_param_dict
     assert isinstance(result_dict, dict)
+    default_path = PosixPath(".")
+    if platform_system.lower() == "windows":
+        default_path = WindowsPath(".")
+    assert result_dict["mode_dir"] == default_path
     assert result_dict == {
         "read_config": True,
         "read_config_force": False,
-        "mode_dir": PosixPath(".") if platform_system.lower() == "windows" else WindowsPath("."),
+        "mode_dir": default_path,
         "mode_dir_inherit_nested": True,
         "mode_dir_inherit_parent": True,
         "file_config_inherit_parent": True,
@@ -123,13 +127,13 @@ def test_settings_params_schema(platform_system):
     assert _kwargs == {
         "_read_config": None,
         "_read_config_force": None,
-        "_mode_dir": PosixPath(".") if platform_system.lower() == "windows" else WindowsPath("."),
+        "_mode_dir": default_path,
         "_mode_dir_inherit_nested": None,
         "_mode_dir_inherit_parent": None,
         "_file_config_inherit_parent": None,
         "_env_config_inherit_parent": None,
-        "_conf_file": PosixPath(".") if platform_system.lower() == "windows" else WindowsPath("."),
-        "_conf_dir": PosixPath(".") if platform_system.lower() == "windows" else WindowsPath("."),
+        "_conf_file": default_path,
+        "_conf_dir": default_path,
         "_conf_ext": ["toml", "yaml", "json", "ini", "conf"],
         "_conf_file_encoding": "",
         "_conf_case_sensitive": None,
@@ -137,7 +141,7 @@ def test_settings_params_schema(platform_system):
         "_conf_custom_ext_handler": "",
         "_conf_include_inherit_parent": None,
         "_conf_exclude_inherit_parent": None,
-        "_env_file": PosixPath(".") if platform_system.lower() == "windows" else WindowsPath("."),
+        "_env_file": default_path,
         "_env_prefix": None,
         "_env_prefix_as_mode_dir": None,
         "_env_prefix_as_nested_mode_dir": None,
@@ -152,7 +156,7 @@ def test_settings_params_schema(platform_system):
         "_ignore_missing": None,
         "_encoding": "",
         "_cli": None,
-        "_secrets_dir": PosixPath(".") if platform_system.lower() == "windows" else WindowsPath("."),
+        "_secrets_dir": default_path,
         "_include_inherit_parent": None,
         "_exclude_inherit_parent": None,
         "_handler": "",
