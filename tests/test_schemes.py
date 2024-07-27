@@ -1,4 +1,4 @@
-from pathlib import PosixPath, WindowsPath
+from pathlib import Path
 
 import pytest
 
@@ -67,9 +67,7 @@ def test_settings_config_schema():
 def test_settings_params_schema(platform_system):
     result_dict = SettingsParamsSchema().default_param_dict
     assert isinstance(result_dict, dict)
-    default_path = PosixPath(".")
-    if platform_system.lower() == "windows":
-        default_path = WindowsPath(".")
+    default_path = Path(".")
     assert result_dict["mode_dir"] == default_path
     assert result_dict == {
         "read_config": True,

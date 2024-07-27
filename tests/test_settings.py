@@ -48,7 +48,7 @@ def test_base_dir(cwd_to_tmp, monkeypatch, platform_system):
     config = AppConfig()
     base_dir = Path("/settings")
     if platform_system.lower() == "windows":
-        base_dir = WindowsPath("/settings")
+        base_dir = WindowsPath("C:/settings")
     assert config.BASE_DIR == base_dir
 
     monkeypatch.setattr(arfi_settings.init_config, "InitSettings", PatchedInitSettings)
