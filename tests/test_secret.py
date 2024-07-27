@@ -128,7 +128,10 @@ def test_case_sensitive_secrets_dir(secrets_dir, platform_system):
         # lower because it's last edded
         # TODO: fix this in code
         assert config.PATH_CONFIG_FILE == "secrets/path_config_file"
-    assert config.Path_Config_File == "secrets/Path_Config_File"
+    if platform_system.lower() == "linux":
+        assert config.Path_Config_File == "secrets/Path_Config_File"
+    else:
+        assert config.Path_Config_File == "secrets/path_config_file"
 
     class AppConfig(ArFiSettings):
         path_config_FILE: str
