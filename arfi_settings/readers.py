@@ -35,7 +35,7 @@ def import_yaml() -> None:
         return
     try:
         import yaml
-    except ImportError as e:
+    except (ModuleNotFoundError, ImportError) as e:
         raise ArFiSettingsError("PyYaml is not installed, run `pip install arfi-settings[yaml]`") from e
 
 
@@ -47,7 +47,7 @@ def import_toml() -> None:
             return
         try:
             import tomli
-        except ImportError as e:
+        except (ModuleNotFoundError, ImportError) as e:
             raise ArFiSettingsError("tomli is not installed, run `pip install arfi-settings[toml]`") from e
     else:
         if tomllib is not None:

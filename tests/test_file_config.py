@@ -7,6 +7,12 @@ from arfi_settings import ArFiSettings, FileConfigDict, SettingsConfigDict
 from arfi_settings.errors import ArFiSettingsError
 
 
+try:
+    import yaml
+except ImportError:
+    yaml = None
+
+
 @pytest.mark.file_config
 def test_default_value_file_config():
     class AppConfig(ArFiSettings):
@@ -52,6 +58,7 @@ def test_conf_file_disable_conf_dir(config_dir):
 
 # @pytest.mark.current
 @pytest.mark.file_config
+@pytest.mark.skipif(yaml is None, reason="PyYaml not installed")
 def test_conf_file_file_config():
     class AppConfig(ArFiSettings):
         file_config = FileConfigDict(

@@ -10,6 +10,12 @@ from arfi_settings import ArFiReader, ArFiSettings, EnvConfigDict, SettingsConfi
 from arfi_settings.init_config import InitSettings
 
 
+try:
+    import yaml
+except ImportError:
+    yaml = None
+
+
 # @pytest.mark.current
 @pytest.mark.pyproject
 def test_init_settings_with_pyproject_toml(
@@ -58,6 +64,7 @@ def test_init_settings_with_pyproject_toml(
 
 
 # @pytest.mark.current
+@pytest.mark.skipif(yaml is None, reason="PyYaml not installed")
 @pytest.mark.pyproject
 def test_pyproject_toml_class_vars(
     cwd_to_tmp,
