@@ -11,7 +11,7 @@ template: home.html
   <i>ArFiSettings - гибкое управление настройками приложения с валидацией на основе Pydantic</i>
 </p>
 <p align="center">
-  <a href="https://codecov.io/github/py-art/arfi-settings" >
+  <a href="https://codecov.io/github/py-art/arfi-settings" target="_blank">
     <img alt="Codecov" src="https://img.shields.io/codecov/c/github/py-art/arfi-settings?color=008080&logo=codecov&logoColor=008080">
   </a>
   <a href="https://pypi.org/project/arfi-settings" target="_blank">
@@ -74,5 +74,4 @@ ___
 - [ ] Чтение настроек из файлов без создания модели, но с возможностью использовать `MODE`, как для основного класса настроек
 - [ ] Чтение настроек по `URL`
 - [ ] Чтение зашифрованных настроек с указанием ключа
-- [ ] Расширение использования для версий python `3.8`, `3.9`, `3.10`, если будет востребовано
 - [ ] Расширение дебаг-режима
