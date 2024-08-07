@@ -192,6 +192,8 @@ class SQLite(BaseDatabase):
                     database_url = cls.Dsn(database_url)
                     if database_url.host:
                         raise ValueError(error_message)
+                    if not database_url.path:
+                        data["DATABASE"] = ":memory:"
                 data["DATABASE_URL"] = database_url
                 if issubclass(type(database_url), Url):
                     if "+" in database_url.scheme:
@@ -207,8 +209,6 @@ class SQLite(BaseDatabase):
     def create_database_url_after(self) -> Self:
         if not self.DATABASE_URL:
             self.DATABASE_URL = self.Dsn(self.database_uri)
-        if not self.DATABASE_URL.path or not self.DATABASE_URL.path[1:]:
-            self.DATABASE_URL.path = "/:memory:"
         return self
 
 
