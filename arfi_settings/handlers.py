@@ -220,7 +220,8 @@ class ArFiBaseHandler(ABC):
         if not _handler_value:
             for field_name, field_value in self.init_kwargs.items():
                 if field_name in self.fields_is_settings and field_value:
-                    self.init_kwargs[field_name]["_init_value"] = field_value
+                    if isinstance(field_value, dict):
+                        self.init_kwargs[field_name]["_init_value"] = field_value
         else:
             self.data = copy.deepcopy(self.init_kwargs)
             self.init_kwargs = dict()
@@ -404,6 +405,8 @@ class ArFiBaseHandler(ABC):
         for field in self.fields_is_settings:
             if not self.data.get(field):
                 self.data[field] = {}
+            if not isinstance(self.data[field], dict):
+                continue
             self.data[field].update(read_config_data)
             self.data[field]["_handler_mode_dir_attr"] = field
             if self.config.env_case_sensitive:
