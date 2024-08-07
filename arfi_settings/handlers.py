@@ -555,7 +555,7 @@ class ArFiBaseHandler(ABC):
                     self.pydantic_aliases_info[field_name] = list_pydantic_aliases_info
 
             if field_name not in self.fields_is_pydantic:
-                if allow_json_parse_failure(field):
+                if allow_json_parse_failure(field, field_name):
                     self.allowed_json_parse_failure_fields.add(field_name)
 
     def _search_field_keys_info(
