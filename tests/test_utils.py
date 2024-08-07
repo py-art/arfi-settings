@@ -179,7 +179,7 @@ def test_clean_value(platform_system):
         "path": "/config",
         "common_path": "/settings",
         "my_dict": {"val": [1, 2, 3]},
-        "os_path": "/config",
+        "os_path": os.path.join(common_path, path),
         "pure_path": "config\\settings",
     }
 
