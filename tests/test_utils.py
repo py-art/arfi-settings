@@ -200,14 +200,9 @@ def test_clean_value(platform_system):
     ]
 
 
-# @pytest.mark.skip
-@pytest.mark.current
+# @pytest.mark.current
 @pytest.mark.utils
 def test_allow_json_parse_failure():
-    # print()
-    # print(type(Literal["foo", "bar"]))
-    # print()
-
     class PidanticModel(BaseModel):
         asd: str = "asd"
 
