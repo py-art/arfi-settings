@@ -1,7 +1,7 @@
 import functools
 import inspect
 import os
-from pathli import Path
+from pathlib import Path
 from typing import Any, Callable, Literal
 
 from pydantic._internal._typing_extra import origin_is_union
