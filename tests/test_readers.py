@@ -210,7 +210,7 @@ def test_custom_reader_name_without_reader(simple_data_config_cnf):
     assert "`custom_reader` is not defined" in str(excinfo.value)
 
 
-@pytest.mark.current
+# @pytest.mark.current
 @pytest.mark.readers
 def test_ignore_missing(mocker: MockFixture):
     ArFiReader.BASE_DIR = None
