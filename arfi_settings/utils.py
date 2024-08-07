@@ -1,11 +1,10 @@
-import os
 import functools
 import inspect
-import typing
-from pathlib import Path
-from typing import Any, Callable
+import os
+from pathli import Path
+from typing import Any, Callable, Literal
 
-from pydantic._internal._typing_extra import NONE_TYPES, origin_is_union
+from pydantic._internal._typing_extra import origin_is_union
 from pydantic._internal._utils import (
     IMMUTABLE_NON_COLLECTIONS_TYPES,
     is_model_class,
@@ -140,24 +139,23 @@ def allow_json_parse_failure(field, field_name: str | None = None) -> bool:
 
     origin_type = get_origin(field.annotation)
     if not origin_is_union(origin_type):
-        if type(field.annotation) in IMMUTABLE_NON_COLLECTIONS_TYPES:
+        arg_type = field.annotation
+        if origin_type is Literal:
             return True
-        if type(field.annotation) in NONE_TYPES:
+        if arg_type is Any:
             return True
-        if isinstance(type(field.annotation), type(typing._LiteralGenericAlias)):
-            return True
-        if field.annotation is Any:
+        if arg_type in IMMUTABLE_NON_COLLECTIONS_TYPES:
             return True
     else:
         args_types = get_args(field.annotation)
-        if any([type(arg) in IMMUTABLE_NON_COLLECTIONS_TYPES for arg in args_types]):
-            return True
-        if any([type(arg) in NONE_TYPES for arg in args_types]):
-            return True
-        if any([isinstance(type(arg), type(typing._LiteralGenericAlias)) for arg in args_types]):
-            return True
-        if Any in args_types:
-            return True
+        for arg_type in args_types:
+            origin_type = get_origin(arg_type)
+            if origin_type is Literal:
+                return True
+            if arg_type is Any:
+                return True
+            if arg_type in IMMUTABLE_NON_COLLECTIONS_TYPES:
+                return True
     return False
 
 
@@ -202,6 +200,8 @@ def validate_cli_reader(cli_reader: Callable) -> Callable:
 
 
 def clean_value(data: dict[str, Any] | list[Any]) -> dict[str, Any]:
+    """Remove private params and convert PathLike to string."""
+
     new_data = dict()
     if isinstance(data, (list, set, tuple)):
         new_iterable = []
@@ -219,7 +219,7 @@ def clean_value(data: dict[str, Any] | list[Any]) -> dict[str, Any]:
             v = v.as_posix()
         elif isinstance(v, dict):
             v = clean_value(v)
-        elif isinstance(data, os.PathLike):
+        elif isinstance(v, os.PathLike):
             v = str(v)
         new_data[k] = v
     return new_data
