@@ -29,6 +29,7 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "cli")
     config.addinivalue_line("markers", "secret")
     config.addinivalue_line("markers", "pyproject")
+    config.addinivalue_line("markers", "connectors")
 
 
 @pytest.fixture(scope="session")
