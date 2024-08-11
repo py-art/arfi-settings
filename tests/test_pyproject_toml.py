@@ -266,3 +266,34 @@ def test_pyproject_toml_class_vars(
     assert config.app.MODE == "test"
     assert config.app.path_config_file == "env_path_config_file"
     assert config.app.database_dialect == "sqlite"
+
+
+# @pytest.mark.current
+@pytest.mark.pyproject
+def test_disable_read_pyproject_toml(
+    cwd_to_tmp,
+    path_base_dir,
+    empty_pyproject_toml_file,
+):
+    empty_pyproject_toml_file.write_text(
+        """
+        [tool.arfi_settings]
+        encoding='cp1251'
+        """
+    )
+
+    class AppConfig(ArFiSettings):
+        pass
+
+    config = AppConfig()
+    assert config.pyproject_toml_path == empty_pyproject_toml_file
+    assert config.settings_config.encoding == "cp1251"
+
+    config = AppConfig(_read_pyproject_toml=False)
+    assert config.pyproject_toml_path == empty_pyproject_toml_file
+    assert config.settings_config.encoding is None
+    assert config.read_pyproject_toml is False
+
+    config = AppConfig()
+    assert config.pyproject_toml_path == empty_pyproject_toml_file
+    assert config.settings_config.encoding == "cp1251"
