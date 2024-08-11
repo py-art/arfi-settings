@@ -274,7 +274,7 @@ def test_postgres_defaul_param(cwd_to_tmp, path_base_dir):
     assert config.db.database_uri == "postgresql://root:password@127.0.0.1:5432/database"
 
 
-@pytest.mark.current
+# @pytest.mark.current
 @pytest.mark.connectors
 def test_postgres_database_url(cwd_to_tmp, path_base_dir):
     class DatabaseConfig(ArFiSettings):

@@ -20,6 +20,7 @@ from .schemes import (
     INCLUDE_EXLUDE_PARAMS,
     EnvConfigSchema,
     FileConfigSchema,
+    PyProjectSchema,
     SettingsConfigSchema,
     SettingsParamsSchema,
 )
@@ -95,6 +96,7 @@ class InstanceConfig(BaseModel):
     modified_class_vars: set[str] = set()
     inherited_params: list[str] = []
     search_base_dir: bool = True
+    init_params: PyProjectSchema = PyProjectSchema()
 
     _class_vars: ClassVar[set[str]] = {
         "instance",
@@ -109,6 +111,7 @@ class InstanceConfig(BaseModel):
         "env_config",
         "global_config",
         "read_pyproject_toml_force",
+        "init_params",
     }
     model_config = ConfigDict(
         extra="ignore",
@@ -222,6 +225,9 @@ class InstanceConfig(BaseModel):
                 class_name=instance.__class__.__name__,
                 search_base_dir=self.search_base_dir,
             )
+        if _read_pyproject_toml is not False:
+            self.init_params = init_settings.init_params
+
         if self.pyproject_toml_path != init_settings.pyproject_toml_path:
             if self.pyproject_toml_path is not None:
                 warnings.warn_explicit(
@@ -331,7 +337,7 @@ class InstanceConfig(BaseModel):
     def _setup_class_vars_from_pyproject_toml_or_by_default(self) -> None:
         """Re-reads variables depending on the current path of the pyproject.toml file."""
 
-        pyproject_or_default_fields = init_settings.init_params.model_fields
+        pyproject_or_default_fields = self.init_params.model_fields
         # Fields explicitly set by the user in the class
         modified_class_vars = self.instance._modified_class_vars
         # for field_name in self.model_fields.keys():
@@ -340,7 +346,7 @@ class InstanceConfig(BaseModel):
                 instance_field_name = f"_{field_name}"
                 if hasattr(self.instance, instance_field_name):
                     if field_name not in modified_class_vars:
-                        field_value = getattr(init_settings.init_params, field_name)
+                        field_value = getattr(self.init_params, field_name)
                     else:
                         field_value = getattr(self.instance, instance_field_name)
                     if field_name == "handler":
@@ -372,28 +378,28 @@ class InstanceConfig(BaseModel):
             if key in file_config_keys:
                 value = self.file_config.get(key, PydanticUndefined)
                 if value is PydanticUndefined:
-                    value = self.global_config.get(key, getattr(init_settings.init_params, key))
+                    value = self.global_config.get(key, getattr(self.init_params, key))
                 setattr(self.class_file_config, key, value)
                 setattr(self.class_settings_config, key, value)
             elif key in env_config_keys:
                 value = self.env_config.get(key, PydanticUndefined)
                 if value is PydanticUndefined:
-                    value = self.global_config.get(key, getattr(init_settings.init_params, key))
+                    value = self.global_config.get(key, getattr(self.init_params, key))
                 setattr(self.class_env_config, key, value)
                 setattr(self.class_settings_config, key, value)
             else:
-                value = self.global_config.get(key, getattr(init_settings.init_params, key))
+                value = self.global_config.get(key, getattr(self.init_params, key))
                 setattr(self.class_settings_config, key, value)
 
         # SETUP COMMON VALUES
         # ENCODING
-        encoding = self.global_config.get(model.ENCODING, init_settings.init_params.encoding)
+        encoding = self.global_config.get(model.ENCODING, self.init_params.encoding)
         self.class_settings_config.encoding = encoding
         conf_file_encoding = self.file_config.get(conf.FILE_ENCODING, PydanticUndefined)
         if conf_file_encoding is PydanticUndefined:
             conf_file_encoding = self.global_config.get(conf.FILE_ENCODING, PydanticUndefined)
         if conf_file_encoding is PydanticUndefined:
-            conf_file_encoding = init_settings.init_params.conf_file_encoding or encoding
+            conf_file_encoding = self.init_params.conf_file_encoding or encoding
         self.class_file_config.conf_file_encoding = conf_file_encoding
         self.class_settings_config.conf_file_encoding = conf_file_encoding
 
@@ -401,18 +407,18 @@ class InstanceConfig(BaseModel):
         if env_file_encoding is PydanticUndefined:
             env_file_encoding = self.global_config.get(env.FILE_ENCODING, PydanticUndefined)
         if env_file_encoding is PydanticUndefined:
-            env_file_encoding = init_settings.init_params.env_file_encoding or encoding
+            env_file_encoding = self.init_params.env_file_encoding or encoding
         self.class_env_config.env_file_encoding = env_file_encoding
         self.class_settings_config.env_file_encoding = env_file_encoding
 
         # CASE SENSITIVE
-        case_sensitive = self.global_config.get(model.CASE_SENSITIVE, init_settings.init_params.case_sensitive)
+        case_sensitive = self.global_config.get(model.CASE_SENSITIVE, self.init_params.case_sensitive)
         self.class_settings_config.case_sensitive = case_sensitive
         conf_case_sensitive = self.file_config.get(conf.CASE_SENSITIVE, PydanticUndefined)
         if conf_case_sensitive is PydanticUndefined:
             conf_case_sensitive = self.global_config.get(conf.CASE_SENSITIVE, PydanticUndefined)
         if conf_case_sensitive is PydanticUndefined:
-            conf_case_sensitive = init_settings.init_params.conf_case_sensitive
+            conf_case_sensitive = self.init_params.conf_case_sensitive
         if conf_case_sensitive is None:
             conf_case_sensitive = case_sensitive
         self.class_file_config.conf_case_sensitive = conf_case_sensitive
@@ -422,20 +428,20 @@ class InstanceConfig(BaseModel):
         if env_case_sensitive is PydanticUndefined:
             env_case_sensitive = self.global_config.get(env.CASE_SENSITIVE, PydanticUndefined)
         if env_case_sensitive is PydanticUndefined:
-            env_case_sensitive = init_settings.init_params.env_case_sensitive
+            env_case_sensitive = self.init_params.env_case_sensitive
         if env_case_sensitive is None:
             env_case_sensitive = case_sensitive
         self.class_env_config.env_case_sensitive = env_case_sensitive
         self.class_settings_config.env_case_sensitive = env_case_sensitive
 
         # IGNORE MISSING
-        ignore_missing = self.global_config.get(model.IGNORE_MISSING, init_settings.init_params.ignore_missing)
+        ignore_missing = self.global_config.get(model.IGNORE_MISSING, self.init_params.ignore_missing)
         self.class_settings_config.ignore_missing = ignore_missing
         conf_ignore_missing = self.file_config.get(conf.IGNORE_MISSING, PydanticUndefined)
         if conf_ignore_missing is PydanticUndefined:
             conf_ignore_missing = self.global_config.get(conf.IGNORE_MISSING, PydanticUndefined)
         if conf_ignore_missing is PydanticUndefined:
-            conf_ignore_missing = init_settings.init_params.conf_ignore_missing
+            conf_ignore_missing = self.init_params.conf_ignore_missing
         if conf_ignore_missing is None:
             conf_ignore_missing = ignore_missing
         self.class_file_config.conf_ignore_missing = conf_ignore_missing
@@ -445,7 +451,7 @@ class InstanceConfig(BaseModel):
         if env_ignore_missing is PydanticUndefined:
             env_ignore_missing = self.global_config.get(env.IGNORE_MISSING, PydanticUndefined)
         if env_ignore_missing is PydanticUndefined:
-            env_ignore_missing = init_settings.init_params.env_ignore_missing
+            env_ignore_missing = self.init_params.env_ignore_missing
         if env_ignore_missing is None:
             env_ignore_missing = ignore_missing
         self.class_env_config.env_ignore_missing = env_ignore_missing
