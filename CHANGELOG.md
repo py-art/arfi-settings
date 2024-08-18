@@ -3,6 +3,15 @@
 
 ## Development ...
 
+### Fixes
+
+- Fix allow_json_parse_failure
+- Fix not valid value in init kwargs for field_is_settings
+- Fix sqlite connector
+- Fix behavior _read_pyproject_toml param
+- Fix inherit instance_id and ordered_settings params
+
+
 ## [0.4.0] - (2024-07-26) latest
 
 ### Features

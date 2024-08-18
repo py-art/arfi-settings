@@ -418,7 +418,12 @@ class ArFiBaseHandler(ABC):
             self.data[field]["_handler_tree"] = product_tree
 
             if field in self.fields_defaults:
-                instance_id = self.fields_defaults[field]
+                instance_id = None
+                if init_field := self.init_kwargs.get(field):
+                    if isinstance(init_field, dict):
+                        instance_id = init_field.get("_instance_id")
+                if instance_id is None:
+                    instance_id = self.fields_defaults[field]
                 self.data[field]["_instance_id"] = instance_id
 
             # Resolve default discriminator

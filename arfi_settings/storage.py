@@ -179,6 +179,12 @@ class InstanceConfig(BaseModel):
         values = kwargs.get("values", {})
         self._setup_instance_and_default_value(instance, **values)
 
+        _kwargs: dict = locals()
+        _kwargs.pop("self")
+        self.settings_init_params.update_exclude_default(**_kwargs)
+        if not self.init_kwargs:
+            self.init_kwargs = self.settings_init_params.model_dump(exclude_defaults=True)
+
         self._setup_params_from_handler(
             values,
             _mode_dir_inherit_parent,
@@ -191,11 +197,7 @@ class InstanceConfig(BaseModel):
             if self.mode_dir_attr and self.mode_dir_attr != DEFAULT_PATH_SENTINEL:
                 self.mode_dir = self.mode_dir_attr
         self.source_mode_dir = self.instance_source_mode_dir
-        _kwargs: dict = locals()
-        _kwargs.pop("self")
-        self.settings_init_params.update_exclude_default(**_kwargs)
-        if not self.init_kwargs:
-            self.init_kwargs = self.settings_init_params.model_dump(exclude_defaults=True)
+
         _kwargs = self.settings_init_params.get_param_dict()
         _read_config = _kwargs.get("_read_config", _read_config)
         _read_config_force = _kwargs.get("_read_config_force", _read_config_force)
@@ -317,7 +319,12 @@ class InstanceConfig(BaseModel):
             self.parent_mode_dir = parent_mode_dir or DEFAULT_PATH_SENTINEL
         if _handler_ordered_settings := values.get("_handler_ordered_settings"):
             if self.ordered_settings_inherit_parent and _ordered_settings_inherit_parent is not False:
-                self.ordered_settings = _handler_ordered_settings
+                _init_ordered_settings_inherit_parent = self.init_kwargs.get("ordered_settings_inherit_parent")
+                if _init_ordered_settings_inherit_parent is not False:
+                    self.ordered_settings = [
+                        handler_name.replace("_ordered_settings_handler", "")
+                        for handler_name in _handler_ordered_settings
+                    ]
         if _handler_parent_file_config := values.get("_handler_parent_file_config"):
             if self.file_config_inherit_parent and _file_config_inherit_parent is not False:
                 self.parent_file_config = _handler_parent_file_config
@@ -352,6 +359,9 @@ class InstanceConfig(BaseModel):
                     if field_name == "handler":
                         if field_value != self.handler and self.handler != "default_main_handler":
                             field_value = self.handler
+                    if field_name == "ordered_settings":
+                        if field_value != self.ordered_settings and self.ordered_settings != ORDERED_SETTINGS:
+                            field_value = self.ordered_settings
                     setattr(self, field_name, field_value)
 
         self.base_dir = init_settings.base_dir
@@ -628,10 +638,15 @@ class InstanceConfig(BaseModel):
             self.env_config_inherit_parent = _env_config_inherit_parent
         if _handler_inherit_parent is not None:
             self.handler_inherit_parent = _handler_inherit_parent
-        if _ordered_settings != LIST_STR_SENTINEL:
-            self.ordered_settings = _ordered_settings
+        # ORDERED_SETTINGS
         if _ordered_settings_inherit_parent is not None:
             self.ordered_settings_inherit_parent = _ordered_settings_inherit_parent
+        _init_ordered_settings_inherit_parent = self.init_kwargs.get("ordered_settings_inherit_parent")
+        if _init_ordered_settings_inherit_parent is not None:
+            self.ordered_settings_inherit_parent = _init_ordered_settings_inherit_parent
+        if self.ordered_settings_inherit_parent is False:
+            if _ordered_settings != LIST_STR_SENTINEL:
+                self.ordered_settings = _ordered_settings
 
         if _case_sensitive is not None:
             if _conf_case_sensitive is None:
